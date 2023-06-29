@@ -12,10 +12,10 @@ const projectRootDir = resolve(__dirname);
 export default () => {
   return defineConfig({
     plugins: [react()],
-    resolve: {
-      alias: {
-        "@": resolve(projectRootDir, "src"),
-      },
-    },
+    // resolve: {
+    //   alias: {
+    //     "@": resolve(projectRootDir, "src"),
+    //   },
+    // },
   });
 };

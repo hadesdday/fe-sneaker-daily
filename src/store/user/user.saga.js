@@ -6,7 +6,7 @@ import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
   signOutUser,
-} from "@/utils/firebase/firebase.utils";
+} from "../../utils/firebase/firebase.utils";
 import {
   logOutFailed,
   logOutSuccess,
