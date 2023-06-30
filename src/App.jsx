@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Header from "./parts/Header";
-import ProductList from "./pages/ProductList";
 import "./App.css";
-import Footer from "./parts/Footer";
+import { ROUTE_LIST } from "./constants/routes";
 import AppContainer from "./layouts/Container";
+import Home from "./pages/Home";
+import { Box } from "@mui/material";
 
 function App() {
 
@@ -15,13 +14,27 @@ function App() {
 
   // const currentUser = useSelector(selectCurrentUser);
   // console.log("user", currentUser)
+
   return (
     <>
       <AppContainer>
         <Routes>
-          <Route path="/" >
+          <Route path="/">
             <Route index element={<Home />} />
-            <Route path="product-list" element={<ProductList />} />
+            {
+              ROUTE_LIST.map((route) => {
+                const Page = route.component;
+                return (
+                  <Route path={route.path} key={route.path} element={
+                    <Box component={"section"}>
+                      <Page />
+                    </Box>
+                  }
+                  />
+                )
+              }
+              )
+            }
           </Route>
         </Routes>
       </AppContainer>

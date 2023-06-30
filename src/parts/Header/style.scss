@@ -1,0 +1,10 @@
+.parent-box {
+  &:hover {
+    + .child-box {
+      display: flex;
+      position: absolute;
+      top: 17%;
+      left: 0;
+    }
+  }
+}

@@ -1,14 +1,15 @@
 import React from 'react';
 import Header from '../../parts/Header';
 import Footer from '../../parts/Footer';
+import { Box } from '@mui/material';
 
 function AppContainer({ children }) {
     return (
         <>
             <Header />
-            <main style={{ minHeight: "100vh" }}>
+            <Box component={"main"} sx={{ minHeight: "100vh" }}>
                 {children}
-            </main>
+            </Box>
             <Footer />
         </>
     );

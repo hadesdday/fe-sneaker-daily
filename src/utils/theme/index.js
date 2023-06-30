@@ -1,7 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
-// Create a theme instance.
 let theme = createTheme({
   palette: {
     primary: {
@@ -9,6 +8,7 @@ let theme = createTheme({
     },
     secondary: {
       main: "#303030",
+      light: "#f5f5f5",
     },
     error: {
       main: red.A400,
@@ -58,6 +58,16 @@ let theme = createTheme({
           props: { variant: "body2", about: "firstHeaderLink" },
           style: {
             color: "white",
+            transition: "all 0.2s ease",
+            "&:hover": {
+              color: "#f15e2c",
+            },
+          },
+        },
+        {
+          props: { about: "secondHeaderLink" },
+          style: {
+            color: "black",
             transition: "all 0.2s ease",
             "&:hover": {
               color: "#f15e2c",
