@@ -74,7 +74,7 @@ function Header(props) {
                     </Box>
                 ))}
             </Stack>
-            <Stack direction={"row"} justifyContent={"space-between"} py={2} flexGrow={1}>
+            <Stack direction={"row"} justifyContent={"space-between"} py={2} flexGrow={1} display={{ xs: "none", md: "flex" }}>
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
                         <Stack direction={"row"} justifyContent={"end"}>
