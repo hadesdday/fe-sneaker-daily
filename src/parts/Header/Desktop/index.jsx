@@ -73,14 +73,14 @@ function HeaderDesktop(props) {
             </Stack>
             <Stack direction={"row"} justifyContent={"space-between"} py={2} flexGrow={1} display={{ xs: "none", md: "flex" }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={2}>
+                    <Grid item md={2}>
                         <Stack direction={"row"} justifyContent={"end"}>
                             <Link to={'/'}>
                                 <Box component={"img"} src={Logo} alt={"Logo"} />
                             </Link>
                         </Stack>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item md={7}>
                         <Stack direction={"row"} justifyContent={"center"} textAlign={"center"}>
                             <Link to={"/product-list"} className='parent-box'>
                                 <Box sx={{
@@ -290,7 +290,7 @@ function HeaderDesktop(props) {
                             >
                                 <Container>
                                     <Grid container columnSpacing={10}>
-                                        <Grid item xs={4} borderRight={"2px dashed"} borderColor={"secondary.300"}>
+                                        <Grid item md={4} borderRight={"2px dashed"} borderColor={"secondary.300"}>
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
@@ -343,7 +343,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                             </Stack>
                                         </Grid>
-                                        <Grid item xs={3}>
+                                        <Grid item md={3}>
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
@@ -404,7 +404,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                             </Stack>
                                         </Grid>
-                                        <Grid item xs={5}>
+                                        <Grid item md={5}>
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
@@ -517,7 +517,7 @@ function HeaderDesktop(props) {
                             >
                                 <Container>
                                     <Grid container columnSpacing={10}>
-                                        <Grid item xs={4} borderRight={"2px dashed"} borderColor={"secondary.300"}>
+                                        <Grid item md={4} borderRight={"2px dashed"} borderColor={"secondary.300"}>
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
@@ -570,7 +570,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                             </Stack>
                                         </Grid>
-                                        <Grid item xs={3}>
+                                        <Grid item md={3}>
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
@@ -631,7 +631,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                             </Stack>
                                         </Grid>
-                                        <Grid item xs={5}>
+                                        <Grid item md={5}>
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
@@ -683,7 +683,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="product-list?gender=men&category=top,bottom,accessories&attribute="
+                                                        to="product-list?gender=women&category=top,bottom,accessories&attribute="
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -698,7 +698,7 @@ function HeaderDesktop(props) {
                             {/* end new dropdown box */}
                         </Stack>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item md={3}>
                         <OutlinedInput
                             placeholder="Tìm kiếm"
                             endAdornment={
