@@ -9,6 +9,9 @@ let theme = createTheme({
     secondary: {
       main: "#303030",
       light: "#f5f5f5",
+      100: "#4c4c4c",
+      200: "#c5c9c5",
+      300: "#cccccc",
     },
     error: {
       main: red.A400,

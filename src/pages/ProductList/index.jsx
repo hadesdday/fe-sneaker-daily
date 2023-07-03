@@ -3,11 +3,15 @@ import { useSearchParams } from 'react-router-dom';
 
 function ProductList(props) {
     let [searchParams, setSearchParams] = useSearchParams();
-    console.log("params gender", searchParams.get("gender"));
-    console.log("params category", searchParams.get("category"));
+    const params = {
+        gender: searchParams.get("gender"),
+        category: searchParams.get("category"),
+        attribute: searchParams.get("attribute"),
+    }
     return (
         <div>
             product list
+            {JSON.stringify(params)}
         </div>
     );
 }
