@@ -1,15 +1,47 @@
-import { Box, Grid, Stack, TableContainer, Typography } from '@mui/material';
-import React from 'react';
-import TogglerMenu from '../../../components/toggler-menu';
-import Logo from "../../../assets/logo.svg"
-import { Link } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import CartIcon from "../../../assets/icon/mb_cart.png"
+import { Box, Dialog, DialogTitle, Grid, IconButton, InputAdornment, OutlinedInput, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { Link, redirect, useNavigate } from 'react-router-dom';
+import CartIcon from "../../../assets/icon/mb_cart.png";
+import Logo from "../../../assets/logo.svg";
+import TogglerMenu from '../../../components/toggler-menu';
 
 function HeaderMobile(props) {
     const cartItems = [];
+    const navigate = useNavigate();
+
+    const [showSearchDialog, setShowSearchDialog] = useState(false);
+
+    function onToggleSearchDialog() {
+        setShowSearchDialog(!showSearchDialog);
+    }
+
+    function onSearchHandle() {
+        console.log("triggered toggle search dialog");
+        onToggleSearchDialog();
+        navigate("search-results/?key=giay");
+    }
+
+
     return (
         <Box sx={{ display: { xs: "block", md: "none" }, width: "100%" }}>
+            <Dialog onClose={onToggleSearchDialog} open={showSearchDialog} fullWidth>
+                <OutlinedInput
+                    sx={{ m: 2 }}
+                    placeholder='Tìm kiếm'
+                    endAdornment={
+                        <InputAdornment position="start">
+                            <IconButton
+                                onClick={onSearchHandle}
+                                edge="end"
+                                sx={{ bgcolor: "primary.main" }}
+                            >
+                                <SearchIcon sx={{ color: "white" }} />
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                />
+            </Dialog>
             <Grid container spacing={2}>
                 <Grid item xs={3} textAlign={"center"} borderRight={"1px solid"} borderColor={"secondary.light"}>
                     <Box component={Link} to="/">
@@ -18,14 +50,14 @@ function HeaderMobile(props) {
                 </Grid>
                 <Grid item xs={7}>
                     <Stack direction={"row"} justifyContent={"end"} spacing={4} m={4}>
-                        <Stack direction={"row"} alignItems={"flex-end"}>
+                        <Stack direction={"row"} alignItems={"flex-end"} onClick={onToggleSearchDialog}>
                             <SearchIcon sx={{ fontSize: "47px" }} />
                         </Stack>
                         <Stack direction={"row"} alignItems={"flex-end"}>
-                            <Box component={"img"} src={CartIcon} alt="Cart"></Box>
-                            <Typography variant="h4">
+                            <Box component={Link} to="/cart">
+                                <Box component={"img"} src={CartIcon} alt="Cart"></Box>
                                 ({cartItems.length})
-                            </Typography>
+                            </Box>
                         </Stack>
                     </Stack>
                 </Grid>
@@ -33,7 +65,7 @@ function HeaderMobile(props) {
                     <TogglerMenu />
                 </Grid>
             </Grid>
-        </Box>
+        </Box >
     );
 }
 
