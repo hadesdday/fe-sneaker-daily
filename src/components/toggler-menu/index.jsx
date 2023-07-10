@@ -2,14 +2,9 @@ import React from 'react';
 import "./style.scss";
 
 function TogglerMenu(props) {
-
-  function toggleOpen() {
-    document.getElementById("toggle-menu").classList.toggle("open");
-  }
-
   return (
     <>
-      <div id="toggle-menu" onClick={toggleOpen}>
+      <div id="toggle-menu" {...props}>
         <span></span>
         <span></span>
         <span></span>

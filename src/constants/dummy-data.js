@@ -234,6 +234,25 @@ const WOMEN_ACCESSORIES = [
   },
 ];
 
+const PRODUCTS_MOBILE = [
+  {
+    path: "product-list?gender=men",
+    title: "CHO NAM",
+  },
+  {
+    path: "product-list?gender=women",
+    title: "CHO NỮ",
+  },
+  {
+    path: "promotion/clearance-sale/",
+    title: "OUTLET SALE",
+  },
+  {
+    path: "product-list?gender=men,women&category=top,bottom,accessories&attribute=",
+    title: "THỜI TRANG & PHỤ KIỆN",
+  },
+];
+
 export {
   HIGHLIGHTS,
   PRODUCTS_PACK,
@@ -247,4 +266,5 @@ export {
   WOMEN_STYLE,
   WOMEN_TOP_ACCESSORIES,
   WOMEN_ACCESSORIES,
+  PRODUCTS_MOBILE,
 };
