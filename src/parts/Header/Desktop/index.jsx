@@ -13,9 +13,8 @@ import LoveIcon from "../../../assets/icon/love.svg";
 import ProfileIcon from "../../../assets/icon/profile.svg";
 import TrackingOrderIcon from "../../../assets/icon/tracking-order.svg";
 import Logo from "../../../assets/logo.svg";
-
-import "../style.scss";
 import { ACCESSORIES, CATEGORIES, HIGHLIGHTS, PRODUCTS_PACK, STYLE, TOP_ACCESSORIES, WOMEN_ACCESSORIES, WOMEN_CATEGORIES, WOMEN_HIGHLIGHTS, WOMEN_PRODUCTS_PACK, WOMEN_STYLE, WOMEN_TOP_ACCESSORIES } from '../../../constants/dummy-data';
+import "../style.scss";
 
 function HeaderDesktop(props) {
 
