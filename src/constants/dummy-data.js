@@ -1,3 +1,4 @@
+const GENERAL_CATEGORY = ["Nổi bật", "Giày", "Thời trang & phụ kiện"];
 const HIGHLIGHTS = [
   {
     path: "/product-list?gender=men&category=&attribute=best-seller",
@@ -267,4 +268,5 @@ export {
   WOMEN_TOP_ACCESSORIES,
   WOMEN_ACCESSORIES,
   PRODUCTS_MOBILE,
+  GENERAL_CATEGORY,
 };
