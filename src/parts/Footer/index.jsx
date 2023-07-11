@@ -1,10 +1,11 @@
+import { Box } from '@mui/material';
 import React from 'react';
 
 function Footer(props) {
     return (
-        <div>
+        <Box border={"1px solid"}>
             Footer
-        </div>
+        </Box>
     );
 }
 
