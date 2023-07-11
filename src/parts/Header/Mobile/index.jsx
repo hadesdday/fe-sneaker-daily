@@ -188,8 +188,8 @@ function HeaderMobile() {
                         </Stack>
                     </Stack>
                 </Grid>
-                <Grid item xs={2} bgcolor={"secondary.100"}>
-                    <TogglerMenu onClick={toggleOpenHeaderList} />
+                <Grid item xs={2} bgcolor={"secondary.100"} onClick={toggleOpenHeaderList} >
+                    <TogglerMenu />
                 </Grid>
             </Grid>
 
