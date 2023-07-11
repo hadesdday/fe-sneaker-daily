@@ -58,30 +58,32 @@ function HeaderMobile(props) {
     function handleShowLinksByGender(index, gender) {
         switch (index) {
             case 0:
-                console.log("highlights");
                 setShowHighlights({
                     gender,
                     isShow: !(showHighlights.isShow)
                 });
                 break;
             case 1:
-                console.log("shoes");
                 setShowShoes({
                     gender,
                     isShow: !(showShoes.isShow)
                 });
                 break;
             case 2:
-                console.log("accessories");
                 setShowAccessories({
                     gender,
                     isShow: !(showAccessories.isShow)
                 });
                 break;
             default:
-                console.log("none was found");
+                console.log(gender + "None was found !");
                 break;
         }
+    }
+
+    const [showWomenItem, setShowWomenItem] = useState(false);
+    function toggleShowWomenItem() {
+        setShowWomenItem(!showWomenItem);
     }
 
     function getDataByGender(gender) {
@@ -294,7 +296,7 @@ function HeaderMobile(props) {
                                     >
                                         <Slide
                                             direction='left'
-                                            in={showHighlights.isShow}
+                                            in={showHighlights.gender === "men" && showHighlights.isShow}
                                             orientation='horizontal'
                                             mountOnEnter
                                             unmountOnExit
@@ -353,7 +355,7 @@ function HeaderMobile(props) {
                                                         Bộ sản phẩm
                                                     </Typography>
                                                 </Box>
-                                                {PRODUCTS_PACK.map(item =>
+                                                {getDataByGender("men").productsPack.map(item =>
                                                     <Box component={Link}
                                                         to={item.path}
                                                         color={"white"}
@@ -376,7 +378,7 @@ function HeaderMobile(props) {
 
                                         <Slide
                                             direction='left'
-                                            in={showShoes.isShow}
+                                            in={showShoes.gender === "men" && showShoes.isShow}
                                             orientation='horizontal'
                                             mountOnEnter
                                             unmountOnExit
@@ -469,7 +471,7 @@ function HeaderMobile(props) {
 
                                         <Slide
                                             direction='left'
-                                            in={showAccessories.isShow}
+                                            in={showAccessories.gender === "men" && showAccessories.isShow}
                                             orientation='horizontal'
                                             mountOnEnter
                                             unmountOnExit
@@ -540,6 +542,350 @@ function HeaderMobile(props) {
                                                     </Typography>
                                                 </Box>
                                                 {getDataByGender("men").accessories.map(item =>
+                                                    <Box component={Link}
+                                                        to={item.path}
+                                                        color={"white"}
+                                                        key={item.path}
+                                                        onClick={toggleOpenHeader}
+                                                    >
+                                                        <Typography variant='h3'
+                                                            p={3}
+                                                            sx={{
+                                                                borderBottom: "1px dashed",
+                                                                borderColor: "whitesmoke"
+                                                            }}
+                                                        >
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+                                            </Box>
+                                        </Slide>
+
+                                    </Box>
+                                </Box>
+                            </Slide>
+                        </Box>
+                    </Box>
+                    {/* end link  item */}
+
+                    {/* start link item */}
+                    <Box>
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"space-between"}
+                            p={3}
+                            borderBottom={"1px dashed"}
+                            borderColor={"secondary.200"}
+                            onClick={toggleShowWomenItem}>
+                            <Typography variant='h3' fontWeight={"bold"}>NỮ</Typography>
+                            <NavigateNextIcon sx={{ fontSize: "3em" }} />
+                        </Stack>
+                        <Box
+                            sx={{
+                                bgcolor: "secondary.100",
+                                color: "white",
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                right: 0
+                            }}
+                        >
+                            {/* men slide in childs items */}
+                            <Slide
+                                direction='left'
+                                in={showWomenItem}
+                                orientation='horizontal'
+                                mountOnEnter
+                                unmountOnExit
+                                timeout={450}>
+                                <Box>
+                                    <Stack
+                                        direction={"row"}
+                                        p={3}
+                                        borderBottom={"3px solid white"}
+                                        onClick={toggleShowWomenItem}
+
+                                    >
+                                        <ArrowBackIosIcon sx={{ fontSize: "3em" }} />
+                                        <Box textAlign={"center"} width={"100%"}>
+                                            <Typography variant='h3' fontWeight={"bold"}>NỮ</Typography>
+                                        </Box>
+                                    </Stack>
+                                    {/* women links ( noi bat,...) */}
+                                    {GENERAL_CATEGORY.map((item, index) =>
+                                        <Stack
+                                            direction={"row"}
+                                            justifyContent={"space-between"}
+                                            p={3}
+                                            borderBottom={"1px dashed"}
+                                            borderColor={"secondary.200"}
+                                            onClick={() => handleShowLinksByGender(index, "women")}
+                                            key={index}
+                                        >
+                                            <Typography variant='h3' textTransform={"uppercase"}>{item}</Typography>
+                                            <NavigateNextIcon sx={{ fontSize: "3em" }} />
+                                        </Stack>
+                                    )}
+                                    {/* last childs box ( deepest level item ) */}
+                                    <Box
+                                        sx={{
+                                            bgcolor: "secondary.100",
+                                            color: "white",
+                                            position: "absolute",
+                                            top: 0,
+                                            left: 0,
+                                            right: 0
+                                        }}
+                                    >
+                                        <Slide
+                                            direction='left'
+                                            in={showHighlights.gender === "women" && showHighlights.isShow}
+                                            orientation='horizontal'
+                                            mountOnEnter
+                                            unmountOnExit
+                                            timeout={450}>
+                                            <Box>
+                                                <Stack
+                                                    direction={"row"}
+                                                    p={3}
+                                                    borderBottom={"3px solid white"}
+                                                    onClick={() => handleShowLinksByGender(0, "women")}
+                                                >
+                                                    <Box>
+                                                        <ArrowBackIosIcon sx={{ fontSize: "3em" }} />
+                                                    </Box>
+                                                    <Stack direction={"row"} spacing={2} justifyContent={"center"} width={"100%"}>
+                                                        <Typography
+                                                            variant='h3'
+                                                            fontWeight={"bold"}
+                                                            sx={{ opacity: 0.5, textTransform: "uppercase" }}>
+                                                            {getDataByGender("women").title}
+                                                        </Typography>
+                                                        <Box borderRight={"1px solid white"}></Box>
+                                                        <Typography variant='h3' fontWeight={"bold"}>NỔI BẬT</Typography>
+                                                    </Stack>
+                                                </Stack>
+                                                {getDataByGender("women").highlights.map(item =>
+                                                    <Box component={Link}
+                                                        to={item.path}
+                                                        color={"white"}
+                                                        key={item.path}
+                                                        onClick={toggleOpenHeader}
+                                                    >
+                                                        <Typography variant='h3'
+                                                            p={3}
+                                                            sx={{
+                                                                borderBottom: "1px dashed",
+                                                                borderColor: "whitesmoke"
+                                                            }}
+                                                        >
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+                                                <Box
+                                                    color={"white"}
+                                                    key={"bst"}
+                                                >
+                                                    <Typography variant='h3'
+                                                        p={3}
+                                                        sx={{
+                                                            borderBottom: "1px dashed",
+                                                            borderColor: "whitesmoke",
+                                                            opacity: 0.5
+                                                        }}
+                                                    >
+                                                        Bộ sản phẩm
+                                                    </Typography>
+                                                </Box>
+                                                {getDataByGender("women").productsPack.map(item =>
+                                                    <Box component={Link}
+                                                        to={item.path}
+                                                        color={"white"}
+                                                        key={item.path}
+                                                        onClick={toggleOpenHeader}
+                                                    >
+                                                        <Typography variant='h3'
+                                                            p={3}
+                                                            sx={{
+                                                                borderBottom: "1px dashed",
+                                                                borderColor: "whitesmoke"
+                                                            }}
+                                                        >
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+                                            </Box>
+                                        </Slide>
+
+                                        <Slide
+                                            direction='left'
+                                            in={showShoes.gender === "women" && showShoes.isShow}
+                                            orientation='horizontal'
+                                            mountOnEnter
+                                            unmountOnExit
+                                            timeout={450}>
+                                            <Box>
+                                                <Stack
+                                                    direction={"row"}
+                                                    p={3}
+                                                    borderBottom={"3px solid white"}
+                                                    onClick={() => handleShowLinksByGender(1, "women")}
+                                                >
+                                                    <Box>
+                                                        <ArrowBackIosIcon sx={{ fontSize: "3em" }} />
+                                                    </Box>
+                                                    <Stack direction={"row"} spacing={2} justifyContent={"center"} width={"100%"}>
+                                                        <Typography
+                                                            variant='h3'
+                                                            fontWeight={"bold"}
+                                                            sx={{ opacity: 0.5, textTransform: "uppercase" }}>
+                                                            {getDataByGender("women").title}
+                                                        </Typography>
+                                                        <Box borderRight={"1px solid white"}></Box>
+                                                        <Typography variant='h3' fontWeight={"bold"}>GIÀY</Typography>
+                                                    </Stack>
+                                                </Stack>
+
+                                                <Box>
+                                                    <Typography variant='h3'
+                                                        p={3}
+                                                        sx={{
+                                                            borderBottom: "1px dashed",
+                                                            borderColor: "whitesmoke",
+                                                            opacity: 0.5
+                                                        }}
+                                                    >
+                                                        Dòng sản phẩm
+                                                    </Typography>
+                                                </Box>
+                                                {getDataByGender("women").categories.map(item =>
+                                                    <Box component={Link}
+                                                        to={item.path}
+                                                        color={"white"}
+                                                        key={item.path}
+                                                        onClick={toggleOpenHeader}
+                                                    >
+                                                        <Typography variant='h3'
+                                                            p={3}
+                                                            sx={{
+                                                                borderBottom: "1px dashed",
+                                                                borderColor: "whitesmoke"
+                                                            }}
+                                                        >
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+
+                                                <Box>
+                                                    <Typography variant='h3'
+                                                        p={3}
+                                                        sx={{
+                                                            borderBottom: "1px dashed",
+                                                            borderColor: "whitesmoke",
+                                                            opacity: 0.5
+                                                        }}
+                                                    >
+                                                        Style
+                                                    </Typography>
+                                                </Box>
+                                                {getDataByGender("women").style.map(item =>
+                                                    <Box component={Link}
+                                                        to={item.path}
+                                                        color={"white"}
+                                                        key={item.path}
+                                                        onClick={toggleOpenHeader}
+                                                    >
+                                                        <Typography variant='h3'
+                                                            p={3}
+                                                            sx={{
+                                                                borderBottom: "1px dashed",
+                                                                borderColor: "whitesmoke"
+                                                            }}
+                                                        >
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+                                            </Box>
+                                        </Slide>
+
+                                        <Slide
+                                            direction='left'
+                                            in={showAccessories.gender === "women" && showAccessories.isShow}
+                                            orientation='horizontal'
+                                            mountOnEnter
+                                            unmountOnExit
+                                            timeout={450}>
+                                            <Box>
+                                                <Stack
+                                                    direction={"row"}
+                                                    p={3}
+                                                    borderBottom={"3px solid white"}
+                                                    onClick={() => handleShowLinksByGender(2, "women")}
+                                                >
+                                                    <Box>
+                                                        <ArrowBackIosIcon sx={{ fontSize: "3em" }} />
+                                                    </Box>
+                                                    <Stack direction={"row"} spacing={2} justifyContent={"center"} width={"100%"}>
+                                                        <Typography
+                                                            variant='h3'
+                                                            fontWeight={"bold"}
+                                                            sx={{ opacity: 0.5, textTransform: "uppercase" }}>
+                                                            {getDataByGender("women").title}
+                                                        </Typography>
+                                                        <Box borderRight={"1px solid white"}></Box>
+                                                        <Typography variant='h3' fontWeight={"bold"}>THỜI TRANG & PHỤ KIỆN</Typography>
+                                                    </Stack>
+                                                </Stack>
+
+                                                <Box>
+                                                    <Typography variant='h3'
+                                                        p={3}
+                                                        sx={{
+                                                            borderBottom: "1px dashed",
+                                                            borderColor: "whitesmoke",
+                                                            opacity: 0.5
+                                                        }}
+                                                    >
+                                                        Nửa trên
+                                                    </Typography>
+                                                </Box>
+                                                {getDataByGender("women").topAccessories.map(item =>
+                                                    <Box component={Link}
+                                                        to={item.path}
+                                                        color={"white"}
+                                                        key={item.path}
+                                                        onClick={toggleOpenHeader}
+                                                    >
+                                                        <Typography variant='h3'
+                                                            p={3}
+                                                            sx={{
+                                                                borderBottom: "1px dashed",
+                                                                borderColor: "whitesmoke"
+                                                            }}
+                                                        >
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+
+                                                <Box>
+                                                    <Typography variant='h3'
+                                                        p={3}
+                                                        sx={{
+                                                            borderBottom: "1px dashed",
+                                                            borderColor: "whitesmoke",
+                                                            opacity: 0.5
+                                                        }}
+                                                    >
+                                                        Phụ kiện
+                                                    </Typography>
+                                                </Box>
+                                                {getDataByGender("women").accessories.map(item =>
                                                     <Box component={Link}
                                                         to={item.path}
                                                         color={"white"}
