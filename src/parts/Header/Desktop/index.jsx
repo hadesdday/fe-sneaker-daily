@@ -123,7 +123,8 @@ function HeaderDesktop(props) {
                                         position: "absolute",
                                         top: "17%",
                                         left: "0",
-                                    }
+                                    },
+                                    zIndex: 2
                                 }}
                                 className='child-box'
                                 ref={ref}
@@ -282,7 +283,8 @@ function HeaderDesktop(props) {
                                         position: "absolute",
                                         top: "17%",
                                         left: "0",
-                                    }
+                                    },
+                                    zIndex: 2
                                 }}
                                 className='child-box'
                                 ref={menRef}
@@ -509,7 +511,8 @@ function HeaderDesktop(props) {
                                         position: "absolute",
                                         top: "17%",
                                         left: "0",
-                                    }
+                                    },
+                                    zIndex: 2
                                 }}
                                 className='child-box'
                                 ref={womenRef}

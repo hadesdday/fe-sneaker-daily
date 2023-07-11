@@ -254,6 +254,25 @@ const PRODUCTS_MOBILE = [
   },
 ];
 
+const HOME_CAROUSEL_ITEMS = [
+  {
+    path: "/faqs",
+    title: "BUY 2 GET 10% OFF - ÁP DỤNG VỚI TẤT CẢ BASIC TEE",
+  },
+  {
+    path: "/faqs",
+    title: "BUY MORE PAY LESS - ÁP DỤNG KHI MUA PHỤ KIỆN",
+  },
+  {
+    path: "/faqs",
+    title: "FREE SHIPPING VỚI HÓA ĐƠN TỪ 800K",
+  },
+  {
+    path: "/policy",
+    title: "HÀNG HAI TUẦN NHẬN ĐỔI - GIÀY NỬA NĂM BẢO HÀNH",
+  },
+];
+
 export {
   HIGHLIGHTS,
   PRODUCTS_PACK,
@@ -269,4 +288,5 @@ export {
   WOMEN_ACCESSORIES,
   PRODUCTS_MOBILE,
   GENERAL_CATEGORY,
+  HOME_CAROUSEL_ITEMS,
 };

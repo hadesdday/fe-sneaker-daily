@@ -202,7 +202,7 @@ function HeaderMobile() {
                 right: 0,
                 transition: "all 0.2s ease-in-out",
                 opacity: showMenuItems ? 1 : 0,
-                zIndex: showMenuItems ? 1 : -1
+                zIndex: showMenuItems ? 2 : -1
             }}>
                 {/* start link item */}
                 <Box>
