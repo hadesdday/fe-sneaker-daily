@@ -1,11 +1,14 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { HOME_CAROUSEL_ITEMS } from "../../constants/dummy-data";
 import { Link } from "react-router-dom";
+import 'swiper/css/pagination';
+import Promo1Banner from "../../assets/promotion/promo-1.jpg";
+import Promo2Banner from "../../assets/promotion/promo-2.jpg";
 
 function Home() {
   return (
@@ -17,6 +20,14 @@ function Home() {
         sx={{
           "& .swiper-button-prev,.swiper-button-next": {
             color: "secondary.200",
+            transition: "all 0.2s ease-in-out",
+            ":after": {
+              fontSize: "15px",
+              fontWeight: "bold"
+            },
+            ":hover": {
+              color: "black"
+            }
           },
         }}
       >
@@ -32,7 +43,7 @@ function Home() {
             },
           }}
           autoplay={{
-            delay: 2000,
+            delay: 3000,
             disableOnInteraction: false
           }}
           loop={true}
@@ -59,8 +70,47 @@ function Home() {
           )}
         </Swiper>
       </Stack>
-      <Box>
-        Home
+      <Box
+        sx={{
+          "& .swiper-pagination-bullet": {
+            width: "50px",
+            height: "5px",
+            opacity: 1,
+            bgcolor: "secondary.200",
+            borderRadius: 0
+          },
+          "& .swiper-pagination-bullet-active": {
+            color: "white",
+            bgcolor: "primary.main"
+          }
+        }}
+      >
+        <Swiper
+          pagination={{
+            clickable: true,
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '">' + '</span>';
+            },
+          }}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false
+          }}
+          slidesPerView={1}
+          modules={[Pagination, Autoplay]}
+        >
+          <SwiperSlide>
+            <Box component={Link} to={"/product-list?gender=&category=&attribute=mule"}>
+              <Box component={"img"} src={Promo1Banner} width={"100%"} sx={{ objectFit: "cover" }}></Box>
+            </Box>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Box component={Link} to={"promotion/clearance-sale/"}>
+              <Box component={"img"} src={Promo2Banner} width={"100%"} sx={{ objectFit: "cover" }}></Box>
+            </Box>
+          </SwiperSlide>
+        </Swiper>
       </Box>
     </Box >
   );
