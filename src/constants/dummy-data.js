@@ -273,6 +273,65 @@ const HOME_CAROUSEL_ITEMS = [
   },
 ];
 
+const HOME_CATEGORIES_MEN = [
+  {
+    path: "product-list?gender=men",
+    title: "Giày nam",
+  },
+  {
+    path: "product-list?gender=men&category=shoes&attribute=new-arrival",
+    title: "New Arrivals",
+  },
+  {
+    path: "product-list?gender=men&category=shoes&attribute=best-seller",
+    title: "Best Seller",
+  },
+  {
+    path: "product-list?gender=men&category=shoes&attribute=sale-off",
+    title: "Sale-off",
+  },
+];
+const HOME_CATEGORIES_WOMEN = [
+  {
+    path: "product-list?gender=women",
+    title: "Giày nam",
+  },
+  {
+    path: "product-list?gender=women&category=shoes&attribute=new-arrival",
+    title: "New Arrivals",
+  },
+  {
+    path: "product-list?gender=women&category=shoes&attribute=best-seller",
+    title: "Best Seller",
+  },
+  {
+    path: "product-list?gender=women&category=shoes&attribute=sale-off",
+    title: "Sale-off",
+  },
+];
+const HOME_CATEGORIES_PACKS = [
+  {
+    path: "",
+    title: "Dòng sản phẩm",
+  },
+  {
+    path: "product-list??gender=&category=&attribute=basas",
+    title: "Basas",
+  },
+  {
+    path: "product-list?gender=&category=&attribute=vintas",
+    title: "Vintas",
+  },
+  {
+    path: "product-list?gender=&category=&attribute=urbas",
+    title: "Urbas",
+  },
+  {
+    path: "product-list?gender=&category=&attribute=pattas",
+    title: "Pattas",
+  },
+];
+
 export {
   HIGHLIGHTS,
   PRODUCTS_PACK,
@@ -289,4 +348,7 @@ export {
   PRODUCTS_MOBILE,
   GENERAL_CATEGORY,
   HOME_CAROUSEL_ITEMS,
+  HOME_CATEGORIES_MEN,
+  HOME_CATEGORIES_WOMEN,
+  HOME_CATEGORIES_PACKS,
 };

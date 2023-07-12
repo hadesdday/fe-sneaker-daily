@@ -8,7 +8,7 @@ import Promo2Banner from "../../assets/promotion/promo-2.jpg";
 import Promo3Banner from "../../assets/promotion/promo-3.jpg";
 import Promo4Banner from "../../assets/promotion/promo-4.jpg";
 import { HomeCategories, HomePromotion, HomeSales, HomeTips } from "../../compositions";
-import { HOME_CAROUSEL_ITEMS } from "../../constants/dummy-data";
+import { HOME_CAROUSEL_ITEMS, HOME_CATEGORIES_MEN, HOME_CATEGORIES_PACKS, HOME_CATEGORIES_WOMEN } from "../../constants/dummy-data";
 
 function Home() {
   const promotions = [
@@ -37,12 +37,14 @@ function Home() {
     },
   ]
 
+  const categories = [HOME_CATEGORIES_MEN, HOME_CATEGORIES_WOMEN, HOME_CATEGORIES_PACKS];
+
   return (
     <Box>
       <HomeTips carousels={HOME_CAROUSEL_ITEMS} />
       <HomeSales sales={sales} />
       <HomePromotion promotions={promotions} />
-      <HomeCategories />
+      <HomeCategories categories={categories} />
     </Box>
   );
 }
