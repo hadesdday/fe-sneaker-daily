@@ -5,7 +5,7 @@ import HomeCategoriesMobile from './Mobile';
 
 function HomeCategories({ categories }) {
     return (
-        <Box>
+        <Box pb={10}>
             <Typography
                 variant='h4'
                 fontWeight={"bold"}

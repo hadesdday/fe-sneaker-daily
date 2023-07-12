@@ -9,6 +9,8 @@ import Promo3Banner from "../../assets/promotion/promo-3.jpg";
 import Promo4Banner from "../../assets/promotion/promo-4.jpg";
 import { HomeCategories, HomePromotion, HomeSales, HomeTips } from "../../compositions";
 import { HOME_CAROUSEL_ITEMS, HOME_CATEGORIES_MEN, HOME_CATEGORIES_PACKS, HOME_CATEGORIES_WOMEN } from "../../constants/dummy-data";
+import ClothingBanner from "../../assets/banner/Banner_Clothing.jpg";
+import { Link } from "react-router-dom";
 
 function Home() {
   const promotions = [
@@ -45,6 +47,9 @@ function Home() {
       <HomeSales sales={sales} />
       <HomePromotion promotions={promotions} />
       <HomeCategories categories={categories} />
+      <Box component={Link} to="product-list?gender=men,women&category=top,accessories&attribute=">
+        <Box component={"img"} src={ClothingBanner} width={"100%"} />
+      </Box>
     </Box>
   );
 }
