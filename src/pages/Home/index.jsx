@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -9,8 +9,27 @@ import { Link } from "react-router-dom";
 import 'swiper/css/pagination';
 import Promo1Banner from "../../assets/promotion/promo-1.jpg";
 import Promo2Banner from "../../assets/promotion/promo-2.jpg";
+import Promo3Banner from "../../assets/promotion/promo-3.jpg";
+import Promo4Banner from "../../assets/promotion/promo-4.jpg";
+import HomePromotion from "../../compositions/home-promotion";
 
 function Home() {
+  const promotions = [
+    {
+      image: Promo3Banner,
+      title: "All black in black",
+      description: "Mặc dù được ứng dụng rất nhiều, nhưng sắc đen lúc nào cũng toát lên một vẻ huyền bí không nhàm chán",
+      path: "/product-list?gender=&category=&attribute=black"
+    },
+    {
+      image: Promo4Banner,
+      title: "Outlet sale",
+      description: `Danh mục những sản phẩm bán tại "giá tốt hơn" chỉ được bán kênh online - Online Only, chúng đã từng làm mưa làm gió một thời gian và hiện đang rơi vào tình trạng bể size, bể số.`,
+      path: "/promotion/clearance-sale/"
+    },
+  ];
+
+
   return (
     <Box>
       <Stack direction={"row"}
@@ -112,7 +131,8 @@ function Home() {
           </SwiperSlide>
         </Swiper>
       </Box>
-    </Box >
+      <HomePromotion promotions={promotions} />
+    </Box>
   );
 }
 
