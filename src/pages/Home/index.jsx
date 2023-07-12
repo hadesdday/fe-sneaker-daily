@@ -7,7 +7,7 @@ import Promo1Banner from "../../assets/promotion/promo-1.jpg";
 import Promo2Banner from "../../assets/promotion/promo-2.jpg";
 import Promo3Banner from "../../assets/promotion/promo-3.jpg";
 import Promo4Banner from "../../assets/promotion/promo-4.jpg";
-import { HomePromotion, HomeSales, HomeTips } from "../../compositions";
+import { HomeCategories, HomePromotion, HomeSales, HomeTips } from "../../compositions";
 import { HOME_CAROUSEL_ITEMS } from "../../constants/dummy-data";
 
 function Home() {
@@ -42,6 +42,7 @@ function Home() {
       <HomeTips carousels={HOME_CAROUSEL_ITEMS} />
       <HomeSales sales={sales} />
       <HomePromotion promotions={promotions} />
+      <HomeCategories />
     </Box>
   );
 }

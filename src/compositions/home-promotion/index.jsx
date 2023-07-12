@@ -11,12 +11,20 @@ function HomePromotion({ promotions }) {
                         <Box component={"img"} src={item.image}
                             width={"100%"}
                             height={"100%"}
+                            mb={2}
                             sx={{ objectFit: "cover", maxHeight: { xs: "90px", sm: "190px", md: "320px" } }}></Box>
                         <Typography
                             fontSize={{ xs: "4vw", sm: "30px" }}
                             textTransform={"uppercase"}
                             fontWeight={"bold"}
-                            py={2}>{item.title}</Typography>
+                            py={1}
+                            sx={{
+                                transition: "all 0.2s ease-in-out",
+                                ":hover": {
+                                    color: "primary.main"
+                                }
+                            }}
+                        >{item.title}</Typography>
                         <Typography variant='body1'>{item.description}</Typography>
                     </Box>
                 </Grid>
