@@ -25,4 +25,4 @@ function HomePromotion({ promotions }) {
     );
 }
 
-export default HomePromotion;
+export { HomePromotion };
