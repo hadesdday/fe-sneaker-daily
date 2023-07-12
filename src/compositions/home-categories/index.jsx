@@ -12,11 +12,12 @@ function HomeCategories({ categories }) {
                 textTransform={"uppercase"}
                 textAlign={"center"}
                 pb={5}
+                display={{ xs: "none", md: "inherit" }}
             >
                 danh mục mua hàng
             </Typography>
             <HomeCategoriesDesktop categories={categories} />
-            <HomeCategoriesMobile />
+            <HomeCategoriesMobile categories={categories} />
         </Box>
     );
 }

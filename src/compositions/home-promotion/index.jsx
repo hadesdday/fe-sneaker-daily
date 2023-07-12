@@ -6,7 +6,7 @@ function HomePromotion({ promotions }) {
     return (
         <Grid container
             p={{ xs: 2, md: 20 }}
-            pb={{ xs: 10, sm: 10, lg: 15 }}
+            pb={{ sm: 15 }}
             spacing={{ xs: 2, md: 5 }}
         >
             {promotions.map(item =>
