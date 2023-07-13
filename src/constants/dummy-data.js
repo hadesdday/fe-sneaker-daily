@@ -294,7 +294,7 @@ const HOME_CATEGORIES_MEN = [
 const HOME_CATEGORIES_WOMEN = [
   {
     path: "product-list?gender=women",
-    title: "Giày nam",
+    title: "Giày nữ",
   },
   {
     path: "product-list?gender=women&category=shoes&attribute=new-arrival",
