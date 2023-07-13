@@ -1,16 +1,16 @@
 import { Box } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import ClothingBanner from "../../assets/banner/Banner_Clothing.jpg";
 import Promo1Banner from "../../assets/promotion/promo-1.jpg";
 import Promo2Banner from "../../assets/promotion/promo-2.jpg";
 import Promo3Banner from "../../assets/promotion/promo-3.jpg";
 import Promo4Banner from "../../assets/promotion/promo-4.jpg";
-import { HomeCategories, HomePromotion, HomeSales, HomeTips } from "../../compositions";
-import { HOME_CAROUSEL_ITEMS, HOME_CATEGORIES_MEN, HOME_CATEGORIES_PACKS, HOME_CATEGORIES_WOMEN } from "../../constants/dummy-data";
-import ClothingBanner from "../../assets/banner/Banner_Clothing.jpg";
-import { Link } from "react-router-dom";
+import { HomeCategories, HomePromotion, HomeSales } from "../../compositions";
+import { HOME_CATEGORIES_MEN, HOME_CATEGORIES_PACKS, HOME_CATEGORIES_WOMEN } from "../../constants/dummy-data";
 
 function Home() {
   const promotions = [
@@ -43,7 +43,6 @@ function Home() {
 
   return (
     <Box>
-      <HomeTips carousels={HOME_CAROUSEL_ITEMS} />
       <HomeSales sales={sales} />
       <HomePromotion promotions={promotions} />
       <HomeCategories categories={categories} />

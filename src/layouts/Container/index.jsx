@@ -5,6 +5,8 @@ import ScrollToTop from '../../components/scroll-to-top';
 import Footer from '../../parts/Footer';
 import HeaderDesktop from '../../parts/Header/Desktop';
 import HeaderMobile from '../../parts/Header/Mobile';
+import { HomeTips } from '../../compositions';
+import { HOME_CAROUSEL_ITEMS } from '../../constants/dummy-data';
 
 function AppContainer({ children }) {
     const [{ x, y }, scrollTo] = useWindowScroll();
@@ -17,6 +19,8 @@ function AppContainer({ children }) {
         <>
             <HeaderDesktop />
             <HeaderMobile />
+            <HomeTips carousels={HOME_CAROUSEL_ITEMS} />
+
             <Box component={"main"} sx={{ minHeight: "100vh" }}>
                 {children}
             </Box>
