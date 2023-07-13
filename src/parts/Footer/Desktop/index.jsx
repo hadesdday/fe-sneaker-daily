@@ -77,7 +77,8 @@ function FooterDesktop(props) {
             direction={"row"}
             spacing={8}
             p={6}
-            display={{ xs: "none", md: "flex" }}>
+            display={{ xs: "none", lg: "flex" }}
+        >
             <Stack direction={"column"}>
                 <Box component={"img"} src={StoreImage}></Box>
                 <Button
