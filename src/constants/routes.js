@@ -1,6 +1,7 @@
 import SigninPage from "../pages/Authentication/Signin";
 import SignupPage from "../pages/Authentication/Signup";
 import CartPage from "../pages/Cart";
+import ProductDetailPage from "../pages/ProductDetail";
 import ProductList from "../pages/ProductList";
 import SaleOffPage from "../pages/SaleOff";
 import TrackingOrder from "../pages/TrackingOrder";
@@ -36,5 +37,9 @@ export const ROUTE_LIST = [
   {
     path: "/promotion/clearance-sale/",
     component: SaleOffPage,
+  },
+  {
+    path: "/product-detail/:id",
+    component: ProductDetailPage,
   },
 ];

@@ -1,12 +1,19 @@
 import ClearIcon from '@mui/icons-material/Clear';
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { getMoneyFormat } from '../../../../utils';
+import DesktopProductListBanner from "../../../assets/banner/desktop_productlist.jpg";
+import ProductImage1 from "../../../assets/product/product-1.jpeg";
+import ProductImage2 from "../../../assets/product/product-2.jpeg";
 import ProductListFilter from '../../../compositions/product-list-filter';
 
 function ProductListDesktop({ products, options }) {
     const gender = [
         {
-            value: "",
+            value: "all",
             label: "Tất cả"
         },
         {
@@ -447,10 +454,23 @@ function ProductListDesktop({ products, options }) {
         return options[key].includes(option);
     }
 
+    function handleBuyNow() {
+        alert("clicked buy now")
+    }
+
+    function handleAddToWishlist() {
+        alert("clicked add to wishlist")
+    }
+
     return (
-        <Grid container px={20}>
-            <Grid item md={3} pt={10}>
-                <Stack direction={"row"} spacing={2} borderBottom={"2px solid"} py={3} justifyContent={"center"}>
+        <Grid container px={{ sm: 2, lg: 20 }}>
+            <Grid item sm={3} pt={10}>
+                <Stack
+                    direction={"row"}
+                    spacing={2}
+                    borderBottom={"2px solid"}
+                    py={3}
+                    justifyContent={"center"}>
                     {gender.map((item, index) =>
                         <Typography variant='h5'
                             textTransform={"uppercase"}
@@ -586,7 +606,124 @@ function ProductListDesktop({ products, options }) {
                     </Grid>
                 </Stack>
             </Grid >
-            <Grid item md={9}>b</Grid>
+            <Grid item sm={9} p={4}>
+                <Box component={"img"} src={DesktopProductListBanner} width={"100%"} />
+                <Grid container mt={3} spacing={2}>
+                    {products.map((item, index) =>
+                        <Grid item md={4} key={index}>
+                            <Box sx={{
+                                my: 3,
+                                ":hover": {
+                                    "& img:nth-of-type(2)": {
+                                        display: "block"
+                                    },
+                                    "& img:nth-of-type(1)": {
+                                        display: "none"
+                                    },
+                                    "& #btn-buy,#btn-wishlist": {
+                                        opacity: 1,
+                                    }
+                                }
+                            }}>
+                                {/* images box */}
+                                <Stack direction={"column"} alignItems={"center"}>
+                                    <Box sx={{ position: "relative" }}>
+                                        <Box component={Link} to={`/product-detail/${item.id}`}>
+                                            <Box component={"img"} src={item.images[0]} width={"100%"} display={"block"} loading='lazy'/>
+                                            <Box component={"img"} src={item.images[1]} width={"100%"} display={"none"} loading='lazy'/>
+                                        </Box>
+                                        <Box
+                                            className="btn-product__actions"
+                                            sx={{
+                                                position: "absolute",
+                                                bottom: 0,
+                                                left: "15%",
+                                            }}
+                                        >
+                                            <Button variant='contained'
+                                                sx={{
+                                                    transition: "all 0.3s",
+                                                    px: 3,
+                                                    fontSize: "1.4rem",
+                                                    fontWeight: "bold",
+                                                    borderRadius: 0,
+                                                    textTransform: "uppercase",
+                                                    opacity: 0
+                                                }}
+                                                id="btn-buy"
+                                                onClick={handleBuyNow}
+                                            >
+                                                mua ngay
+                                            </Button>
+                                            <IconButton
+                                                id="btn-wishlist"
+                                                sx={{ transition: "all 0.3s", opacity: 0 }}
+                                                onClick={handleAddToWishlist}>
+                                                {item.liked ? <FavoriteIcon sx={{ color: 'primary.main' }} /> :
+                                                    <FavoriteBorderIcon sx={{ color: 'primary.main' }} />}
+                                            </IconButton>
+                                        </Box>
+                                        {item.saleOff > 0 &&
+                                            <Box
+                                                sx={{
+                                                    position: "absolute",
+                                                    left: 0,
+                                                    width: "45%",
+                                                    top: "10%",
+                                                    bgcolor: "secondary.100",
+                                                    color: "white",
+                                                    textAlign: "center",
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                Sale off
+                                            </Box>
+                                        }
+                                    </Box>
+                                    <Box
+                                        width={"100%"}
+                                        textAlign={"center"}
+                                        color={"black"}>
+                                        <Box component={Link} to={`/product-detail/${item.id}`}>
+                                            <Typography
+                                                variant='body1'
+                                                fontWeight={"bold"}
+                                                about="typographyLink"
+                                            >
+                                                {item.name}
+                                            </Typography>
+                                        </Box>
+                                        <Typography variant='body1' py={"5px"}>{item.color}</Typography>
+                                        {
+                                            item.saleOff > 0 ?
+                                                <Stack
+                                                    direction={"row"}
+                                                    justifyContent={"center"}
+                                                    spacing={3}
+                                                >
+                                                    <Typography
+                                                        variant='body1'
+                                                        fontWeight={"bold"}>
+                                                        {getMoneyFormat(item.price - (item.price * item.saleOff))} VND
+                                                    </Typography>
+                                                    <Typography
+                                                        variant='body1'
+                                                        sx={{
+                                                            textDecoration: "line-through",
+                                                            color: "secondary.400",
+                                                        }}>
+                                                        {getMoneyFormat(item.price)} VND
+                                                    </Typography>
+                                                </Stack> :
+                                                <Typography variant='body1' fontWeight={"bold"}>{getMoneyFormat(item.price)} VND</Typography>
+                                        }
+                                    </Box>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                    )}
+                </Grid>
+            </Grid >
         </Grid >
     );
 }

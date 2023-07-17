@@ -78,6 +78,16 @@ let theme = createTheme({
             },
           },
         },
+        {
+          props: { about: "typographyLink" },
+          style: {
+            color: "black",
+            transition: "all 0.2s ease",
+            "&:hover": {
+              color: "#f15e2c",
+            },
+          },
+        },
       ],
     },
   },

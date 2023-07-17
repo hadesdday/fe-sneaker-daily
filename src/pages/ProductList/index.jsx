@@ -18,42 +18,59 @@ function ProductList(props) {
             name: "Shoes 1",
             color: "Navy Blue",
             price: 1190000,
-            imageUrl: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"
+            images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
+            liked: true,
+            saleOff: 0
         },
         {
             id: 2,
             name: "Shoes 2",
             color: "Navy Blue",
             price: 1190000,
-            imageUrl: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"
+            images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
+            liked: false,
+            saleOff: 0.5
+
         },
         {
             id: 3,
             name: "Shoes 3",
             color: "Navy Blue",
             price: 1190000,
-            imageUrl: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"
+            images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
+            liked: true,
+            saleOff: 0
+
         },
         {
             id: 4,
             name: "Shoes 4",
             color: "Navy Blue",
             price: 1190000,
-            imageUrl: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"
+            images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
+            liked: false,
+            saleOff: 0.2
+
         },
         {
             id: 5,
             name: "Shoes 5",
             color: "Navy Blue",
             price: 1190000,
-            imageUrl: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"
+            images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
+            liked: true,
+            saleOff: 0.3
+
         },
         {
             id: 2,
             name: "Shoes 2",
             color: "Navy Blue",
             price: 1190000,
-            imageUrl: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"
+            images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
+            liked: true,
+            saleOff: 0
+
         },
     ]
 
