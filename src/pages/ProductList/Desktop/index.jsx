@@ -463,7 +463,7 @@ function ProductListDesktop({ products, options }) {
     }
 
     return (
-        <Grid container px={{ sm: 2, lg: 20 }}>
+        <Grid container px={{ sm: 2, lg: 20 }} sx={{ display: { xs: "none", md: "flex" } }}>
             <Grid item sm={3} pt={10}>
                 <Stack
                     direction={"row"}
@@ -472,7 +472,7 @@ function ProductListDesktop({ products, options }) {
                     py={3}
                     justifyContent={"center"}>
                     {gender.map((item, index) =>
-                        <Typography variant='h5'
+                        <Typography
                             textTransform={"uppercase"}
                             fontWeight={"bold"}
                             sx={{
@@ -480,6 +480,7 @@ function ProductListDesktop({ products, options }) {
                                 borderRight: "1px solid #000",
                                 pr: 2,
                                 cursor: "pointer",
+                                fontSize: { sm: "18px", lg: "20px" },
                                 color: "black",
                                 opacity: isHaveOption("gender", item.value) ? 1 : 0.5,
                                 ":hover": {
