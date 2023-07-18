@@ -629,26 +629,28 @@ function ProductListDesktop({ products, options }) {
                                 <Stack direction={"column"} alignItems={"center"}>
                                     <Box sx={{ position: "relative" }}>
                                         <Box component={Link} to={`/product-detail/${item.id}`}>
-                                            <Box component={"img"} src={item.images[0]} width={"100%"} display={"block"} loading='lazy'/>
-                                            <Box component={"img"} src={item.images[1]} width={"100%"} display={"none"} loading='lazy'/>
+                                            <Box component={"img"} src={item.images[0]} width={"100%"} display={"block"} loading='lazy' />
+                                            <Box component={"img"} src={item.images[1]} width={"100%"} display={"none"} loading='lazy' />
                                         </Box>
-                                        <Box
+                                        <Stack direction={"row"}
                                             className="btn-product__actions"
                                             sx={{
-                                                position: "absolute",
+                                                position: "relative",
                                                 bottom: 0,
-                                                left: "15%",
+                                                justifyContent: "center",
+                                                top: { sm: "-40px", lg: "-52px" },
+                                                left: "15px"
                                             }}
                                         >
                                             <Button variant='contained'
                                                 sx={{
                                                     transition: "all 0.3s",
-                                                    px: 3,
-                                                    fontSize: "1.4rem",
+                                                    px: 1,
+                                                    fontSize: { sm: "1rem", lg: "1.4rem" },
                                                     fontWeight: "bold",
                                                     borderRadius: 0,
                                                     textTransform: "uppercase",
-                                                    opacity: 0
+                                                    opacity: 0,
                                                 }}
                                                 id="btn-buy"
                                                 onClick={handleBuyNow}
@@ -662,14 +664,14 @@ function ProductListDesktop({ products, options }) {
                                                 {item.liked ? <FavoriteIcon sx={{ color: 'primary.main' }} /> :
                                                     <FavoriteBorderIcon sx={{ color: 'primary.main' }} />}
                                             </IconButton>
-                                        </Box>
+                                        </Stack>
                                         {item.saleOff > 0 &&
                                             <Box
                                                 sx={{
                                                     position: "absolute",
                                                     left: 0,
                                                     width: "45%",
-                                                    top: "10%",
+                                                    top: "8%",
                                                     bgcolor: "secondary.100",
                                                     color: "white",
                                                     textAlign: "center",
