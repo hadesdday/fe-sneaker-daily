@@ -3,6 +3,9 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductListDesktop from './Desktop';
 import ProductListMobile from './Mobile';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentFilterOptions } from '../../store/filter-product-list/filter.selector';
+import { setFilterOptions } from '../../store/filter-product-list/filter.action';
 
 function ProductList(props) {
     let [searchParams, setSearchParams] = useSearchParams();
@@ -74,22 +77,53 @@ function ProductList(props) {
         },
     ]
 
-    const filterOptions = {
-        gender: ["all"],
-        category: ["accessories", "shoes"],
-        status: ["limited-edition", "online-only"],
-        style: ["low-top", "slip-on"],
-        productLine: ["basas", "vintas"],
-        price: ["500-599", ">600"],
-        collection: ["ananas-puppet-club", "track-6-2-blues"],
-        material: ["canvas", "cotton"],
-        color: ["white", "pink"]
-    };
+    //demo data only
+    // const filterOptions = {
+    //     gender: ["all"],
+    //     category: ["accessories", "shoes"],
+    //     status: ["limited-edition", "online-only"],
+    //     style: ["low-top", "slip-on"],
+    //     productLine: ["basas", "vintas"],
+    //     price: ["500-599", ">600"],
+    //     collection: ["ananas-puppet-club", "track-6-2-blues"],
+    //     material: ["canvas", "cotton"],
+    //     color: ["white", "pink"]
+    // };
+
+    const dispatch = useDispatch();
+    const currentFilterOptions = useSelector(
+        selectCurrentFilterOptions
+    );
+
+    function handleChangeFilterOptions(key, newValue) {
+        const foundValue = currentFilterOptions[key].find(item => item === newValue);
+        if (!foundValue) {
+            currentFilterOptions[key].push(newValue);
+            dispatch(setFilterOptions(key, currentFilterOptions[key]));
+        } else {
+            currentFilterOptions[key] = currentFilterOptions[key].filter(item => item !== newValue);
+            dispatch(setFilterOptions(key, currentFilterOptions[key]));
+        }
+    }
+
+    function handleChangeGenderOptions(newValue) {
+        const foundValue = currentFilterOptions["gender"].find(item => item === newValue);
+        if (!foundValue)
+            dispatch(setFilterOptions("gender", [newValue]));
+    }
 
     return (
         <Box>
-            <ProductListDesktop products={fakeProducts} options={filterOptions} />
-            <ProductListMobile products={fakeProducts} options={filterOptions} />
+            <ProductListDesktop products={fakeProducts}
+                options={currentFilterOptions}
+                handleChangeFilterOptions={handleChangeFilterOptions}
+                handleChangeGenderOptions={handleChangeGenderOptions}
+            />
+            <ProductListMobile products={fakeProducts}
+                options={currentFilterOptions}
+                handleChangeFilterOptions={handleChangeFilterOptions}
+                handleChangeGenderOptions={handleChangeGenderOptions}
+            />
         </Box>
     );
 }

@@ -1,0 +1,3 @@
+export const FILTER_ACTION_TYPES = {
+  SET_FILTER_OPTIONS: "filter/SET_FILTER_OPTIONS",
+};

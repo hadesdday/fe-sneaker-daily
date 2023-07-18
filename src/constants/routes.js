@@ -42,4 +42,8 @@ export const ROUTE_LIST = [
     path: "/product-detail/:id",
     component: ProductDetailPage,
   },
+  // {
+  //   path: "/test",
+  //   component: TestComponent,
+  // },
 ];
