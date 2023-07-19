@@ -5,16 +5,57 @@ import ProductListDesktop from './Desktop';
 import ProductListMobile from './Mobile';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentFilterOptions } from '../../store/filter-product-list/filter.selector';
-import { setFilterOptions } from '../../store/filter-product-list/filter.action';
+import { setFilterAllOptions, setFilterOptions } from '../../store/filter-product-list/filter.action';
+import { useEffect } from 'react';
 
-function ProductList(props) {
+function ProductList() {
     let [searchParams, setSearchParams] = useSearchParams();
+
+    //convert search params from string to array
+    function processValueFromUrl(key) {
+        const value = searchParams.get(key);
+        if (value) {
+            return value.split(",");
+        }
+        return [];
+    }
+    //search params in array
     const params = {
-        gender: searchParams.get("gender"),
-        category: searchParams.get("category"),
-        attribute: searchParams.get("attribute"),
+        gender: [searchParams.get("gender")] || ["all"],
+        category: processValueFromUrl("category"),
+        status: processValueFromUrl("status"),
+        style: processValueFromUrl("style"),
+        productLine: processValueFromUrl("productLine"),
+        price: processValueFromUrl("price"),
+        collection: processValueFromUrl("collection"),
+        material: processValueFromUrl("material"),
+        color: processValueFromUrl("color")
+    }
+    //search params in string
+    const paramsInString = {
+        gender: params["gender"].join(",") || "all",
+        category: params["category"].join(",") || "",
+        status: params["status"].join(",") || "",
+        style: params["style"].join(",") || "",
+        productLine: params["productLine"].join(",") || "",
+        price: params["price"].join(",") || "",
+        collection: params["collection"].join(",") || "",
+        material: params["material"].join(",") || "",
+        color: params["color"].join(",") || ""
     }
 
+    //change  search params by key name
+    function setSearchParamsByKey(key, newArrayValue) {
+        paramsInString[key] = newArrayValue.join(",");
+        setSearchParams(paramsInString);
+    }
+
+    //set store data from parsed data from url at first load
+    useEffect(() => {
+        dispatch(setFilterAllOptions(params));
+    }, []);
+
+    //demo data only
     const fakeProducts = [
         {
             id: 1,
@@ -106,26 +147,32 @@ function ProductList(props) {
         if (!foundValue) {
             currentFilterOptions[key].push(newValue);
             dispatch(setFilterOptions(key, currentFilterOptions[key]));
+            setSearchParamsByKey(key, currentFilterOptions[key]); //set search params in url by changes in store
         } else {
             currentFilterOptions[key] = currentFilterOptions[key].filter(item => item !== newValue);
             dispatch(setFilterOptions(key, currentFilterOptions[key]));
+            setSearchParamsByKey(key, currentFilterOptions[key]); //set search params in url by changes in store
         }
     }
 
     function handleChangeGenderOptions(newValue) {
         const foundValue = currentFilterOptions["gender"].find(item => item === newValue);
-        if (!foundValue)
+        if (!foundValue) {
             dispatch(setFilterOptions("gender", [newValue]));
+            setSearchParamsByKey("gender", [newValue]);
+        }
     }
 
     return (
         <Box>
-            <ProductListDesktop products={fakeProducts}
+            <ProductListDesktop
+                products={fakeProducts}
                 options={currentFilterOptions}
                 handleChangeFilterOptions={handleChangeFilterOptions}
                 handleChangeGenderOptions={handleChangeGenderOptions}
             />
-            <ProductListMobile products={fakeProducts}
+            <ProductListMobile
+                products={fakeProducts}
                 options={currentFilterOptions}
             />
         </Box>

@@ -3,7 +3,11 @@ import { FILTER_ACTION_TYPES } from "./filter.types";
 
 export function* filterOptions({ payload: { valueKey, newValue } }) {
   //call api here when have backend then put data to store (try catch also)
-  console.log("filterOptions", valueKey, newValue);
+  console.log(
+    "calling action perform call api with filterOptions",
+    valueKey,
+    newValue
+  );
 }
 
 export function* onFilterOptions() {

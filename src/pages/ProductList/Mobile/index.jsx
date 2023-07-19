@@ -1,13 +1,13 @@
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, Collapse, Grid, IconButton, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import DesktopProductListBanner from "../../../assets/banner/desktop_productlist.jpg";
 import ProductListFilterMobile from '../../../compositions/product-list-filter/Mobile';
 import { setFilterAllOptions } from '../../../store/filter-product-list/filter.action';
 import { categories, collections, fixedColors, gender, materials, prices, productLines, statuses } from '../fixed-data';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { getMoneyFormat } from '../../../utils';
@@ -15,7 +15,49 @@ import { getMoneyFormat } from '../../../utils';
 function ProductListMobile({ products, options }) {
     //options: selected options
     const dispatch = useDispatch();
-    const [preselected, setPreselected] = useState(options);
+
+    let [searchParams, setSearchParams] = useSearchParams();
+
+    //convert search params from string to array
+    function processValueFromUrl(key) {
+        const value = searchParams.get(key);
+        if (value) {
+            return value.split(",");
+        }
+        return [];
+    }
+    //search params in array
+    const params = {
+        gender: [searchParams.get("gender")] || ["all"],
+        category: processValueFromUrl("category"),
+        status: processValueFromUrl("status"),
+        style: processValueFromUrl("style"),
+        productLine: processValueFromUrl("productLine"),
+        price: processValueFromUrl("price"),
+        collection: processValueFromUrl("collection"),
+        material: processValueFromUrl("material"),
+        color: processValueFromUrl("color")
+    }
+    //search params in string
+    const paramsInString = {
+        gender: params["gender"].join(",") || "all",
+        category: params["category"].join(",") || "",
+        status: params["status"].join(",") || "",
+        style: params["style"].join(",") || "",
+        productLine: params["productLine"].join(",") || "",
+        price: params["price"].join(",") || "",
+        collection: params["collection"].join(",") || "",
+        material: params["material"].join(",") || "",
+        color: params["color"].join(",") || ""
+    }
+
+    //change  search params by key name
+    function setSearchParamsByKey(key, newArrayValue) {
+        paramsInString[key] = newArrayValue.join(",");
+        setSearchParams(paramsInString);
+    }
+
+    const [preselected, setPreselected] = useState(params);
     function isHaveOption(key, option) {
         return preselected[key].includes(option);
     }
@@ -26,9 +68,19 @@ function ProductListMobile({ products, options }) {
         toggleShowFooter();
     }
 
-
     function handleFilterOptions() {
         dispatch(setFilterAllOptions(preselected));
+        setSearchParams({
+            gender: preselected["gender"].join(",") || "all",
+            category: preselected["category"].join(",") || "",
+            status: preselected["status"].join(",") || "",
+            style: preselected["style"].join(",") || "",
+            productLine: preselected["productLine"].join(",") || "",
+            price: preselected["price"].join(",") || "",
+            collection: preselected["collection"].join(",") || "",
+            material: preselected["material"].join(",") || "",
+            color: preselected["color"].join(",") || ""
+        });
         toggleFilterOptions();
     }
 
@@ -55,6 +107,7 @@ function ProductListMobile({ products, options }) {
                 }
             })(preselected);
             setPreselected(newPreselected);
+            paramsInString[key] = preselected[key].join(",");
         } else {
             const newPreselected = await (async (prev) => {
                 return {
@@ -63,6 +116,7 @@ function ProductListMobile({ products, options }) {
                 }
             })(preselected);
             setPreselected(newPreselected);
+            paramsInString[key] = preselected[key].join(",");
         }
         console.log(`new value for ${key}`, preselected[key]);
     }
@@ -76,6 +130,7 @@ function ProductListMobile({ products, options }) {
         })(preselected);
         setPreselected(newPreselected);
         dispatch(setFilterAllOptions(newPreselected));
+        setSearchParamsByKey("gender", newPreselected["gender"]);
     }
 
     async function handleSelectCategoryOption(option) {
@@ -90,6 +145,7 @@ function ProductListMobile({ products, options }) {
             })(preselected);
             setPreselected(newPreselected);
             dispatch(setFilterAllOptions(newPreselected));
+            setSearchParamsByKey("category", newPreselected["category"]);
         } else {
             const newPreselected = await (async (prev) => {
                 return {
@@ -99,6 +155,7 @@ function ProductListMobile({ products, options }) {
             })(preselected);
             setPreselected(newPreselected);
             dispatch(setFilterAllOptions(newPreselected));
+            setSearchParamsByKey("category", newPreselected["category"]);
         }
     }
 

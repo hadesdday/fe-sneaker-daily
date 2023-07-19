@@ -1,3 +1,4 @@
+import TestComponent from "../compositions/test-component";
 import SigninPage from "../pages/Authentication/Signin";
 import SignupPage from "../pages/Authentication/Signup";
 import CartPage from "../pages/Cart";
@@ -42,8 +43,8 @@ export const ROUTE_LIST = [
     path: "/product-detail/:id",
     component: ProductDetailPage,
   },
-  // {
-  //   path: "/test",
-  //   component: TestComponent,
-  // },
+  {
+    path: "/test",
+    component: TestComponent,
+  },
 ];
