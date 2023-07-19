@@ -23,7 +23,8 @@ function ProductList(props) {
             price: 1190000,
             images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
             liked: true,
-            saleOff: 0
+            saleOff: 0,
+            newArrival: true
         },
         {
             id: 2,
@@ -32,7 +33,8 @@ function ProductList(props) {
             price: 1190000,
             images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
             liked: false,
-            saleOff: 0.5
+            saleOff: 0.5,
+            newArrival: false
 
         },
         {
@@ -42,7 +44,8 @@ function ProductList(props) {
             price: 1190000,
             images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
             liked: true,
-            saleOff: 0
+            saleOff: 0,
+            newArrival: false
 
         },
         {
@@ -52,7 +55,8 @@ function ProductList(props) {
             price: 1190000,
             images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
             liked: false,
-            saleOff: 0.2
+            saleOff: 0.2,
+            newArrival: true
 
         },
         {
@@ -62,7 +66,8 @@ function ProductList(props) {
             price: 1190000,
             images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
             liked: true,
-            saleOff: 0.3
+            saleOff: 0.3,
+            newArrival: true
 
         },
         {
@@ -72,7 +77,8 @@ function ProductList(props) {
             price: 1190000,
             images: ["https://ananas.vn/wp-content/uploads/Pro_A6T014_1-500x500.jpeg", "https://ananas.vn/wp-content/uploads/Pro_A6T014_2-500x500.jpeg"],
             liked: true,
-            saleOff: 0
+            saleOff: 0,
+            newArrival: false
 
         },
     ]
@@ -121,8 +127,6 @@ function ProductList(props) {
             />
             <ProductListMobile products={fakeProducts}
                 options={currentFilterOptions}
-                handleChangeFilterOptions={handleChangeFilterOptions}
-                handleChangeGenderOptions={handleChangeGenderOptions}
             />
         </Box>
     );

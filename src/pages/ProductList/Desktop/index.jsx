@@ -240,12 +240,12 @@ function ProductListDesktop({ products, options, handleChangeFilterOptions, hand
                                                     <FavoriteBorderIcon sx={{ color: 'primary.main' }} />}
                                             </IconButton>
                                         </Stack>
-                                        {item.saleOff > 0 &&
+                                        {item.saleOff > 0 ?
                                             <Box
                                                 sx={{
                                                     position: "absolute",
                                                     left: 0,
-                                                    width: "45%",
+                                                    width: "50%",
                                                     top: "8%",
                                                     bgcolor: "secondary.100",
                                                     color: "white",
@@ -254,6 +254,20 @@ function ProductListDesktop({ products, options, handleChangeFilterOptions, hand
                                                 }}
                                             >
                                                 Sale off
+                                            </Box> :
+                                            item.newArrival && <Box
+                                                sx={{
+                                                    position: "absolute",
+                                                    left: 0,
+                                                    width: "50%",
+                                                    top: "8%",
+                                                    bgcolor: "secondary.100",
+                                                    color: "white",
+                                                    textAlign: "center",
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                New Arrival
                                             </Box>
                                         }
                                     </Box>

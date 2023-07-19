@@ -2,14 +2,19 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, Collapse, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import DesktopProductListBanner from "../../../assets/banner/desktop_productlist.jpg";
 import ProductListFilterMobile from '../../../compositions/product-list-filter/Mobile';
-import { categories, collections, fixedColors, gender, materials, prices, productLines, statuses } from '../fixed-data';
-import { useDispatch } from 'react-redux';
 import { setFilterAllOptions } from '../../../store/filter-product-list/filter.action';
+import { categories, collections, fixedColors, gender, materials, prices, productLines, statuses } from '../fixed-data';
+import { Link } from 'react-router-dom';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { getMoneyFormat } from '../../../utils';
 
 function ProductListMobile({ products, options }) {
     //options: selected options
+    const dispatch = useDispatch();
     const [preselected, setPreselected] = useState(options);
     function isHaveOption(key, option) {
         return preselected[key].includes(option);
@@ -21,6 +26,11 @@ function ProductListMobile({ products, options }) {
         toggleShowFooter();
     }
 
+
+    function handleFilterOptions() {
+        dispatch(setFilterAllOptions(preselected));
+        toggleFilterOptions();
+    }
 
     function toggleShowFooter() {
         //hide footer  when toggle show filter options
@@ -34,34 +44,62 @@ function ProductListMobile({ products, options }) {
         }, 500)
     }
 
-    function handleClickOption(key, option) {
+    async function handleClickOption(key, option) {
         const foundValue = preselected[key].find(item => item === option);
         if (!foundValue) {
-            setPreselected(prev => {
+            const newPreselected = await (async (prev) => {
                 const newValue = [...prev[key], option];
                 return {
                     ...prev,
                     [key]: newValue
                 }
-            });
+            })(preselected);
+            setPreselected(newPreselected);
         } else {
-            setPreselected(prev => {
+            const newPreselected = await (async (prev) => {
                 return {
                     ...prev,
                     [key]: preselected[key].filter(item => item !== option)
                 }
-            });
+            })(preselected);
+            setPreselected(newPreselected);
         }
         console.log(`new value for ${key}`, preselected[key]);
     }
 
-    function handleClickGenderOption(option) {
-        setPreselected(prev => {
+    async function handleClickGenderOption(option) {
+        const newPreselected = await (async (prev) => {
             return {
                 ...prev,
                 gender: [option]
-            }
-        })
+            };
+        })(preselected);
+        setPreselected(newPreselected);
+        dispatch(setFilterAllOptions(newPreselected));
+    }
+
+    async function handleSelectCategoryOption(option) {
+        const foundValue = preselected["category"].find(item => item === option);
+        if (!foundValue) {
+            const newPreselected = await (async (prev) => {
+                const newValue = [...prev["category"], option];
+                return {
+                    ...prev,
+                    category: newValue
+                }
+            })(preselected);
+            setPreselected(newPreselected);
+            dispatch(setFilterAllOptions(newPreselected));
+        } else {
+            const newPreselected = await (async (prev) => {
+                return {
+                    ...prev,
+                    category: preselected["category"].filter(item => item !== option)
+                }
+            })(preselected);
+            setPreselected(newPreselected);
+            dispatch(setFilterAllOptions(newPreselected));
+        }
     }
 
     function handleResetOptions() {
@@ -78,13 +116,9 @@ function ProductListMobile({ products, options }) {
         })
     }
 
-    const dispatch = useDispatch();
-
-    function handleFilterOptions() {
-        dispatch(setFilterAllOptions(preselected));
-        toggleFilterOptions();
+    function handleAddToWishlist() {
+        alert("add to wishlist");
     }
-
     return (
         <Box sx={{ display: { xs: "block", md: "none" } }}>
             <Box component={"img"} src={DesktopProductListBanner} width={"100%"} />
@@ -151,7 +185,7 @@ function ProductListMobile({ products, options }) {
                                     borderBottom: "solid 4px black"
                                 }
                             }}
-                            onClick={() => handleClickOption("category", item.value)}
+                            onClick={() => handleSelectCategoryOption(item.value)}
                         >
                             {item.label}
                         </Typography>
@@ -289,7 +323,6 @@ function ProductListMobile({ products, options }) {
                     </Stack>
                 </Stack>
             </Collapse>
-
             {/* expanded filter options */}
             {showFilterOptions &&
                 <Stack
@@ -340,7 +373,99 @@ function ProductListMobile({ products, options }) {
                     </Box>
                 </Stack>
             }
-        </Box >
+            <Grid container spacing={2} px={1}>
+                {products.map((item, index) =>
+                    <Grid item xs={6} key={index}>
+                        <Box sx={{ position: "relative" }}>
+                            <Box component={Link} to={`/product-detail/${item.id}`}>
+                                <Box component={"img"} src={item.images[0]} width={"100%"} />
+                            </Box>
+                            {item.liked ?
+                                <FavoriteIcon
+                                    onClick={handleAddToWishlist}
+                                    sx={{
+                                        position: "absolute",
+                                        right: 10,
+                                        bottom: 20,
+                                        fontSize: "35px",
+                                        color: "primary.main"
+                                    }} /> :
+                                <FavoriteBorderIcon
+                                    onClick={handleAddToWishlist}
+                                    sx={{
+                                        position: "absolute",
+                                        right: 10,
+                                        bottom: 20,
+                                        fontSize: "35px",
+                                        color: "primary.main"
+                                    }} />
+                            }
+                            {
+                                item.saleOff > 0 ?
+                                    <Box sx={{
+                                        position: "absolute",
+                                        left: 0,
+                                        top: "8%",
+                                        width: "50%",
+                                        color: "white",
+                                        fontStyle: "italic",
+                                        fontWeight: "bold",
+                                        textAlign: "center",
+                                        bgcolor: "secondary.main",
+                                        py: "3px",
+                                    }}>
+                                        Sale Off
+                                    </Box>
+                                    : item.newArrival
+                                    &&
+                                    <Box sx={{
+                                        position: "absolute",
+                                        left: 0,
+                                        top: "8%",
+                                        width: "50%",
+                                        color: "white",
+                                        fontStyle: "italic",
+                                        fontWeight: "bold",
+                                        textAlign: "center",
+                                        bgcolor: "secondary.main",
+                                        py: "3px",
+                                    }}>
+                                        New Arrival
+                                    </Box>
+                            }
+                        </Box>
+                        <Box textAlign={"center"}>
+                            <Box
+                                component={Link}
+                                to={`/product-detail/${item.id}`}
+                                color={"black"}
+                                fontWeight={"bold"}
+                                sx={{
+                                    ":hover": {
+                                        color: "primary.main"
+                                    }
+                                }}
+                            >
+                                {item.name}
+                            </Box>
+                            <Typography py={1}>{item.color}</Typography>
+                            <Typography fontWeight={"bold"}>
+                                {item.saleOff > 0 ? getMoneyFormat(item.price * item.saleOff) : getMoneyFormat(item.price)} VND
+                            </Typography>
+                            {item.saleOff > 0 &&
+                                <Typography
+                                    sx={{
+                                        textDecoration: "line-through",
+                                        color: "secondary.400"
+                                    }}>
+                                    {getMoneyFormat(item.price)} VND
+                                </Typography>
+                            }
+                        </Box>
+                    </Grid>
+                )}
+            </Grid>
+        </Box>
     );
 }
 
