@@ -16,7 +16,7 @@ export function* onFilterOptions() {
 
 export function* filterAllOptions({ payload: { options } }) {
   //call api here when have backend then put data to store (try catch also)
-  console.log("filterAllOptions", options);
+  console.log("calling action perform call api with filterAllOptions", options);
 }
 
 export function* onFilterAllOptions() {

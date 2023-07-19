@@ -168,12 +168,16 @@ function ProductList() {
             <ProductListDesktop
                 products={fakeProducts}
                 options={currentFilterOptions}
-                handleChangeFilterOptions={handleChangeFilterOptions}
-                handleChangeGenderOptions={handleChangeGenderOptions}
+                handleChangeFilterOptions={handleChangeFilterOptions} //change params (data) from store (also in the url) immediately
+                handleChangeGenderOptions={handleChangeGenderOptions} //change params (data) from store (also in the url) immediately
             />
             <ProductListMobile
                 products={fakeProducts}
                 options={currentFilterOptions}
+                params={params}
+                paramsInString={paramsInString}
+                setSearchParams={setSearchParams}
+                setSearchParamsByKey={setSearchParamsByKey}
             />
         </Box>
     );

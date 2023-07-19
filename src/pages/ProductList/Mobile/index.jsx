@@ -1,61 +1,20 @@
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Box, Collapse, Grid, IconButton, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import DesktopProductListBanner from "../../../assets/banner/desktop_productlist.jpg";
 import ProductListFilterMobile from '../../../compositions/product-list-filter/Mobile';
 import { setFilterAllOptions } from '../../../store/filter-product-list/filter.action';
-import { categories, collections, fixedColors, gender, materials, prices, productLines, statuses } from '../fixed-data';
-import { Link, useSearchParams } from 'react-router-dom';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { getMoneyFormat } from '../../../utils';
+import { categories, collections, fixedColors, gender, materials, prices, productLines, statuses } from '../fixed-data';
 
-function ProductListMobile({ products, options }) {
+function ProductListMobile({ products, params, paramsInString, setSearchParams, setSearchParamsByKey }) {
     //options: selected options
     const dispatch = useDispatch();
-
-    let [searchParams, setSearchParams] = useSearchParams();
-
-    //convert search params from string to array
-    function processValueFromUrl(key) {
-        const value = searchParams.get(key);
-        if (value) {
-            return value.split(",");
-        }
-        return [];
-    }
-    //search params in array
-    const params = {
-        gender: [searchParams.get("gender")] || ["all"],
-        category: processValueFromUrl("category"),
-        status: processValueFromUrl("status"),
-        style: processValueFromUrl("style"),
-        productLine: processValueFromUrl("productLine"),
-        price: processValueFromUrl("price"),
-        collection: processValueFromUrl("collection"),
-        material: processValueFromUrl("material"),
-        color: processValueFromUrl("color")
-    }
-    //search params in string
-    const paramsInString = {
-        gender: params["gender"].join(",") || "all",
-        category: params["category"].join(",") || "",
-        status: params["status"].join(",") || "",
-        style: params["style"].join(",") || "",
-        productLine: params["productLine"].join(",") || "",
-        price: params["price"].join(",") || "",
-        collection: params["collection"].join(",") || "",
-        material: params["material"].join(",") || "",
-        color: params["color"].join(",") || ""
-    }
-
-    //change  search params by key name
-    function setSearchParamsByKey(key, newArrayValue) {
-        paramsInString[key] = newArrayValue.join(",");
-        setSearchParams(paramsInString);
-    }
 
     const [preselected, setPreselected] = useState(params);
     function isHaveOption(key, option) {
