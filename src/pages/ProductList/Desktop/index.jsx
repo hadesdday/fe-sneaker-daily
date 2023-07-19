@@ -4,10 +4,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getMoneyFormat } from '../../../../utils';
 import DesktopProductListBanner from "../../../assets/banner/desktop_productlist.jpg";
 import ProductListFilter from '../../../compositions/product-list-filter/Desktop';
 import { gender, categories, statuses, styles, productLines, prices, collections, materials, fixedColors } from '../fixed-data';
+import { getMoneyFormat } from '../../../utils';
 
 function ProductListDesktop({ products, options, handleChangeFilterOptions, handleChangeGenderOptions }) {
     //options: selected options
