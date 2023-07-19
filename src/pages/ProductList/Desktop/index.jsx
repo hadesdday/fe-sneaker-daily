@@ -163,10 +163,7 @@ function ProductListDesktop({ products, options, handleChangeFilterOptions, hand
                                     border: isHaveOption("color", item.value) && '2px solid',
                                     p: "2px",
                                     transition: "all 0.2s",
-                                    ":hover": {
-                                        boxShadow: "0 1px 6px 3px rgba(0, 0, 0, 0.3)",
-                                        opacity: 0.5
-                                    }
+                                    boxShadow: isHaveOption("color", item.value) && "0 1px 6px 3px rgba(0, 0, 0, 0.3)",
                                 }}
                                 key={index}
                                 onClick={() => handleChangeFilterOptions("color", item.value)}

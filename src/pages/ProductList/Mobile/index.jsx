@@ -1,22 +1,89 @@
-import { Box, Collapse, IconButton, Slide, Stack, Typography } from '@mui/material';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Collapse, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import DesktopProductListBanner from "../../../assets/banner/desktop_productlist.jpg";
-import { gender, categories, statuses, styles, productLines, prices, collections, materials, fixedColors } from '../fixed-data';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ProductListFilterMobile from '../../../compositions/product-list-filter/Mobile';
+import { categories, collections, fixedColors, gender, materials, prices, productLines, statuses } from '../fixed-data';
+import { useDispatch } from 'react-redux';
+import { setFilterAllOptions } from '../../../store/filter-product-list/filter.action';
 
 function ProductListMobile({ products, options }) {
     //options: selected options
+    const [preselected, setPreselected] = useState(options);
     function isHaveOption(key, option) {
-        return options[key].includes(option);
+        return preselected[key].includes(option);
     }
 
-    const [showFilterOptions, setShowFilterOptions] = useState(true);
+    const [showFilterOptions, setShowFilterOptions] = useState(false);
     function toggleFilterOptions() {
         setShowFilterOptions(!showFilterOptions);
+        toggleShowFooter();
     }
 
+
+    function toggleShowFooter() {
+        //hide footer  when toggle show filter options
+        setTimeout(() => {
+            if (!showFilterOptions) {
+                document.getElementById("footer-mobile").style.display = "none";
+            }
+            else {
+                document.getElementById("footer-mobile").style.display = "flex";
+            }
+        }, 500)
+    }
+
+    function handleClickOption(key, option) {
+        const foundValue = preselected[key].find(item => item === option);
+        if (!foundValue) {
+            setPreselected(prev => {
+                const newValue = [...prev[key], option];
+                return {
+                    ...prev,
+                    [key]: newValue
+                }
+            });
+        } else {
+            setPreselected(prev => {
+                return {
+                    ...prev,
+                    [key]: preselected[key].filter(item => item !== option)
+                }
+            });
+        }
+        console.log(`new value for ${key}`, preselected[key]);
+    }
+
+    function handleClickGenderOption(option) {
+        setPreselected(prev => {
+            return {
+                ...prev,
+                gender: [option]
+            }
+        })
+    }
+
+    function handleResetOptions() {
+        setPreselected({
+            gender: ["all"],
+            category: [],
+            status: [],
+            style: [],
+            productLine: [],
+            price: [],
+            collection: [],
+            material: [],
+            color: [],
+        })
+    }
+
+    const dispatch = useDispatch();
+
+    function handleFilterOptions() {
+        dispatch(setFilterAllOptions(preselected));
+        toggleFilterOptions();
+    }
 
     return (
         <Box sx={{ display: { xs: "block", md: "none" } }}>
@@ -44,6 +111,7 @@ function ProductListMobile({ products, options }) {
                                     opacity: 1
                                 }
                             }}
+                            onClick={() => handleClickGenderOption(item.value)}
                             key={item.label}
                         >
                             {item.label}
@@ -81,14 +149,9 @@ function ProductListMobile({ products, options }) {
                                     transition: "transform 250ms ease-in-out",
                                     transform: isHaveOption("category", item.value) ? "scaleX(1)" : "scaleX(0)",
                                     borderBottom: "solid 4px black"
-                                },
-                                ":hover": {
-                                    fontWeight: "bold",
-                                    ":after": {
-                                        transform: "scaleX(1)"
-                                    },
                                 }
                             }}
+                            onClick={() => handleClickOption("category", item.value)}
                         >
                             {item.label}
                         </Typography>
@@ -145,16 +208,138 @@ function ProductListMobile({ products, options }) {
                 mountOnEnter
             >
                 <Stack
-                    direction={"row"}
-                    bgcolor={"white"}
+                    direction={"column"}
                 >
                     <ProductListFilterMobile
                         title={"Trạng thái"}
-                        options={statuses}
-                        selectedOptions={options["status"]}
+                        options={statuses} //fixed-data
+                        preselected={preselected["status"]} //selected options from redux store
+                        mapKey={"status"} //mapkey
+                        handleClickOption={handleClickOption}
                     />
+                    <ProductListFilterMobile
+                        title={"dòng sản phẩm"}
+                        options={productLines} //fixed-data
+                        preselected={preselected["productLine"]} //selected options from redux store
+                        mapKey={"productLine"} //mapkey
+                        handleClickOption={handleClickOption}
+                    />
+                    <ProductListFilterMobile
+                        title={"giá"}
+                        options={prices} //fixed-data
+                        preselected={preselected["price"]} //selected options from redux store
+                        mapKey={"price"} //mapkey
+                        handleClickOption={handleClickOption}
+                    />
+                    <ProductListFilterMobile
+                        title={"bộ sưu tập"}
+                        options={collections} //fixed-data
+                        preselected={preselected["collection"]} //selected options from redux store
+                        mapKey={"collection"} //mapkey
+                        handleClickOption={handleClickOption}
+                    />
+                    <ProductListFilterMobile
+                        title={"chất liệu"}
+                        options={materials} //fixed-data
+                        preselected={preselected["material"]} //selected options from redux store
+                        mapKey={"material"} //mapkey
+                        handleClickOption={handleClickOption}
+                    />
+                    <Stack
+                        direction={"column"}
+                        spacing={1}
+                        p={3}
+                    >
+                        <Typography
+                            variant='h4'
+                            fontWeight={"bold"}
+                            textTransform={"uppercase"}
+                            color={"primary.main"}
+                        >
+                            Màu sắc
+                        </Typography>
+
+                        <Grid container gap={3}>
+                            {fixedColors.map((item, index) =>
+                                <Grid
+                                    item
+                                    xs={2}
+                                    sx={{
+                                        width: "13.4vw",
+                                        height: "13.4vw",
+                                        border: isHaveOption("color", item.value) && '2px solid',
+                                        p: "2px",
+                                        transition: "all 0.2s",
+                                        boxShadow: isHaveOption("color", item.value) && "0 1px 6px 3px rgba(0, 0, 0, 0.3)",
+                                    }}
+                                    key={index}
+                                    onClick={() => handleClickOption("color", item.value)}
+                                >
+                                    <Box
+                                        sx={{
+                                            width: "100%",
+                                            height: "100%",
+                                            bgcolor: item.color,
+                                            border: "1px solid #e1e1e1"
+                                        }}
+                                    ></Box>
+                                </Grid>
+                            )}
+                        </Grid>
+                    </Stack>
                 </Stack>
             </Collapse>
+
+            {/* expanded filter options */}
+            {showFilterOptions &&
+                <Stack
+                    direction={"row"}
+                    position={"fixed"}
+                    bottom={0}
+                    width={"100%"}
+                    zIndex={1}
+                >
+                    <Stack
+                        direction={"row"}
+                        alignItems={"center"}
+                        bgcolor={"secondary.main"}
+                        color={"white"}
+                        width={"50%"}
+                        borderRight={"1px solid"}
+                        borderRightColor={"secondary.400"}
+                        justifyContent={"center"}
+                        onClick={handleResetOptions}
+                    >
+                        <Typography
+                            variant='h4'
+                            fontWeight="bold"
+                            textTransform={"uppercase"}
+                            p={4}
+                            textAlign={"center"}
+
+                        >
+                            xóa chọn
+                        </Typography>
+                    </Stack>
+                    <Box
+                        bgcolor={"secondary.main"}
+                        color={"white"}
+                        width={"50%"}
+                        p={4}
+                        onClick={handleFilterOptions}
+                    >
+                        <Typography
+                            fontSize={"1.8rem"}
+                            variant='h4'
+                            fontWeight="bold"
+                            textTransform={"uppercase"}
+                            textAlign={"center"}
+                        >
+                            lọc
+                        </Typography>
+                    </Box>
+                </Stack>
+            }
         </Box >
     );
 }

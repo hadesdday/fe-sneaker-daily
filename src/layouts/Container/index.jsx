@@ -18,7 +18,7 @@ function AppContainer({ children }) {
     return (
         <>
             <HeaderDesktop />
-            <HeaderMobile />
+            {/* <HeaderMobile /> */}
             <HomeTips carousels={HOME_CAROUSEL_ITEMS} />
 
             <Box component={"main"} sx={{ minHeight: "100vh" }}>

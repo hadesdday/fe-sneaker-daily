@@ -96,7 +96,9 @@ function FooterMobile(props) {
         <Stack
             direction={"column"}
             bgcolor={"secondary.100"}
-            display={{ xs: "flex", lg: "none" }}>
+            display={{ xs: "flex", lg: "none" }}
+            id='footer-mobile'
+        >
             <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
