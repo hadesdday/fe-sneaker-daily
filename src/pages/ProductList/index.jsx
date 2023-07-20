@@ -53,7 +53,7 @@ function ProductList() {
     //set store data from parsed data from url at first load
     useEffect(() => {
         dispatch(setFilterAllOptions(params));
-    }, []);
+    }, [searchParams]);
 
     //demo data only
     const fakeProducts = [

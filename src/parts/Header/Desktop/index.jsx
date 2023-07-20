@@ -222,7 +222,7 @@ function HeaderDesktop(props) {
                                         }
                                     }}
                                 >
-                                    <Link to={"/product-list?gender=men,women&category=top,bottom,accessories"}>
+                                    <Link to={"/product-list?gender=all&category=top,bottom,accessories"}>
                                         <Box component={"img"} src={AccessoriesBanner} alt="Accessories"
                                             sx={{ width: { md: "210px" } }}></Box>
                                         <Typography
@@ -244,7 +244,7 @@ function HeaderDesktop(props) {
                             </Stack>
 
                             {/* start new dropdown box */}
-                            <Link to={"/product"} className='parent-box'>
+                            <Link to={"/product-list?gender=men"} className='parent-box'>
                                 <Box sx={{
                                     py: 4,
                                     px: 2,
@@ -295,7 +295,7 @@ function HeaderDesktop(props) {
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=men"
                                                         color={"white"}
                                                         fontWeight={"bold"}
                                                         variant='h5'
@@ -457,7 +457,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="product-list?gender=men&category=top,bottom,accessories&attribute="
+                                                        to="product-list?gender=men&category=top,bottom,accessories"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -685,7 +685,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="product-list?gender=women&category=top,bottom,accessories&attribute="
+                                                        to="product-list?gender=women&category=top,bottom,accessories"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
