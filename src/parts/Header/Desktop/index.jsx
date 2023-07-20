@@ -61,7 +61,7 @@ function HeaderDesktop(props) {
 
     return (
         <Box display={{ md: "block", xs: "none" }}>
-            <Stack direction={"row"} justifyContent={"end"} bgcolor={"secondary.main"} pr={8}
+            <Stack direction={"row"} justifyContent={"end"} bgcolor={"secondary.main"} pr={8} alignItems={"center"}
                 flexDirection={"row-reverse"} display={{ xs: "none", md: "flex" }}>
                 {itemList.map(item => (
                     <Box pr={3} key={item.to}>
@@ -74,7 +74,7 @@ function HeaderDesktop(props) {
                     </Box>
                 ))}
             </Stack>
-            <Stack direction={"row"} justifyContent={"space-between"} py={2} flexGrow={1} display={{ xs: "none", md: "flex" }}>
+            <Stack direction={"row"} justifyContent={"space-between"} py={2} display={{ xs: "none", md: "flex" }}>
                 <Grid container spacing={2}>
                     <Grid item md={2}>
                         <Stack direction={"row"} justifyContent={"end"}>

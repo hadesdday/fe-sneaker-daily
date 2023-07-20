@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import ProductDetailsDesktop from './Desktop';
 import ProductDetailsMobile from './Mobile';
+import { useState } from 'react';
 
 function ProductDetailPage(props) {
     const params = useParams();
@@ -13,8 +14,8 @@ function ProductDetailPage(props) {
     const fakeProduct = {
         id,
         name: "Shoes 1",
-        category: "shoes",
-        productLine: "track-6",
+        category: { value: "shoes", name: "Giày" },
+        productLine: { value: "track-6", name: "Track 6" },
         style: "Low Top",
         status: "New Arrival",
         price: 1290000,
@@ -239,17 +240,34 @@ function ProductDetailPage(props) {
         }
     ]
 
+    const [mainImage, setMainImage] = useState(fakeProduct.images[0])
+
+    const [isZoomIn, setIsZoomIn] = useState(false);
+    const [currentColor, setCurrentColor] = useState("beige");
+
     return (
         <Box>
             <ProductDetailsDesktop
                 product={fakeProduct}
                 relevantProducts={relevantProducts}
                 seenProducts={seenProducts}
+                mainImage={mainImage}
+                setMainImage={setMainImage}
+                isZoomIn={isZoomIn}
+                setIsZoomIn={setIsZoomIn}
+                currentColor={currentColor}
+                setCurrentColor={setCurrentColor}
             />
             <ProductDetailsMobile
                 product={fakeProduct}
                 relevantProducts={relevantProducts}
                 seenProducts={seenProducts}
+                mainImage={mainImage}
+                setMainImage={setMainImage}
+                isZoomIn={isZoomIn}
+                setIsZoomIn={setIsZoomIn}
+                currentColor={currentColor}
+                setCurrentColor={setCurrentColor}
             />
         </Box>
     );
