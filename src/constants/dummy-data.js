@@ -332,6 +332,69 @@ const HOME_CATEGORIES_PACKS = [
   },
 ];
 
+const COLOR_TABLE = [
+  {
+    value: "multi-color",
+    color: "rgba(0, 0, 0, 0)",
+  },
+  {
+    value: "offwhite",
+    color: "rgb(254, 251, 239)",
+  },
+  {
+    value: "pineneedle",
+    color: "rgb(69, 88, 81)",
+  },
+  {
+    value: "beige",
+    color: "rgb(235, 208, 162)",
+  },
+  {
+    value: "grey",
+    color: "rgb(195, 195, 195)",
+  },
+  {
+    value: "navy",
+    color: "rgb(28, 72, 124)",
+  },
+  {
+    value: "brown",
+    color: "rgb(134, 84, 57)",
+  },
+  {
+    value: "white",
+    color: "rgb(255, 255, 255)",
+  },
+  {
+    value: "green",
+    color: "rgb(109, 153, 81)",
+  },
+  {
+    value: "violet",
+    color: "rgb(138, 92, 160)",
+  },
+  {
+    value: "pink",
+    color: "rgb(241, 119, 138)",
+  },
+  {
+    value: "yellow",
+    color: "rgb(245, 210, 85)",
+  },
+  {
+    value: "orange",
+    color: "rgb(233, 102, 44)",
+  },
+  {
+    value: "red",
+    color: "rgb(193, 0, 19)",
+  },
+  {
+    value: "black",
+    color: "rgb(70, 70, 70)",
+  },
+];
+
 export {
   HIGHLIGHTS,
   PRODUCTS_PACK,
@@ -351,4 +414,5 @@ export {
   HOME_CATEGORIES_MEN,
   HOME_CATEGORIES_WOMEN,
   HOME_CATEGORIES_PACKS,
+  COLOR_TABLE,
 };
