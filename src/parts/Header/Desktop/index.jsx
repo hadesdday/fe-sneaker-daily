@@ -1,4 +1,5 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Container, Grid, IconButton, InputAdornment, Link as MuiLink, OutlinedInput, Stack, Typography } from '@mui/material';
 import { useHover } from "@uidotdev/usehooks";
@@ -51,9 +52,12 @@ function HeaderDesktop(props) {
         console.log("click search");
     }
 
-    const [ref, hovering] = useHover();
+    const [productRef, productHovering] = useHover();
     const [menRef, menHovering] = useHover();
     const [womenRef, womenHovering] = useHover();
+    const [menBoxRef, menBoxHovering] = useHover();
+    const [productBoxRef, productBoxHovering] = useHover();
+    const [womenBoxRef, womenBoxHovering] = useHover();
 
     return (
         <Box display={{ md: "block", xs: "none" }}>
@@ -80,8 +84,8 @@ function HeaderDesktop(props) {
                         </Stack>
                     </Grid>
                     <Grid item md={7}>
-                        <Stack direction={"row"} justifyContent={"center"} textAlign={"center"}>
-                            <Link to={"/product-list"} className='parent-box'>
+                        <Stack direction={"row"} justifyContent={"center"} textAlign={"center"} alignItems={"center"}>
+                            <Link to={"/product-list?gender=all"} className='parent-box'>
                                 <Box sx={{
                                     py: 4,
                                     px: 2,
@@ -91,7 +95,9 @@ function HeaderDesktop(props) {
                                             color: "primary.main"
                                         },
                                     }
-                                }}>
+                                }}
+                                    ref={productBoxRef}
+                                >
                                     <Typography
                                         about="secondHeaderLink"
                                         sx={{
@@ -101,10 +107,10 @@ function HeaderDesktop(props) {
                                             borderRight: "2px solid #f1f1f1",
                                         }}
                                         id='text-link'
-                                        color={hovering ? "primary.main" : "black"}
+                                        color={productHovering ? "primary.main" : "black"}
                                     >
                                         SẢN PHẨM
-                                        <KeyboardArrowDown />
+                                        {(productHovering || productBoxHovering) ? <KeyboardArrowUpIcon /> : <KeyboardArrowDown />}
                                     </Typography>
                                 </Box>
                             </Link>
@@ -127,7 +133,7 @@ function HeaderDesktop(props) {
                                     zIndex: 2
                                 }}
                                 className='child-box'
-                                ref={ref}
+                                ref={productRef}
                             >
                                 <Box
                                     sx={{
@@ -254,7 +260,9 @@ function HeaderDesktop(props) {
                                             color: "primary.main"
                                         },
                                     }
-                                }}>
+                                }}
+                                    ref={menBoxRef}
+                                >
                                     <Typography
                                         about="secondHeaderLink"
                                         sx={{
@@ -267,7 +275,7 @@ function HeaderDesktop(props) {
                                         color={menHovering ? "primary.main" : "black"}
                                     >
                                         NAM
-                                        <KeyboardArrowDown />
+                                        {(menHovering || menBoxHovering) ? <KeyboardArrowUpIcon /> : <KeyboardArrowDown />}
                                     </Typography>
                                 </Box>
                             </Link>
@@ -482,7 +490,9 @@ function HeaderDesktop(props) {
                                             color: "primary.main"
                                         },
                                     }
-                                }}>
+                                }}
+                                    ref={womenBoxRef}
+                                >
                                     <Typography
                                         about="secondHeaderLink"
                                         sx={{
@@ -495,7 +505,8 @@ function HeaderDesktop(props) {
                                         color={womenHovering ? "primary.main" : "black"}
                                     >
                                         NỮ
-                                        <KeyboardArrowDown />
+                                        {(womenHovering || womenBoxHovering) ? <KeyboardArrowUpIcon /> : <KeyboardArrowDown />}
+
                                     </Typography>
                                 </Box>
                             </Link>
