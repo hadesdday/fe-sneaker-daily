@@ -12,15 +12,15 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 function FooterMobile(props) {
     const productsLink = [
         {
-            path: "product-list?gender=men&category=shoes&attribute=",
+            path: "product-list?gender=men&category=shoes",
             title: "Giày Nam"
         },
         {
-            path: "product-list?gender=women&category=shoes&attribute=",
+            path: "product-list?gender=women&category=shoes",
             title: "Giày Nữ"
         },
         {
-            path: "product-list?gender=men,women&category=top,bottom,accessories&attribute=",
+            path: "product-list?gender=men,women&category=top,bottom,accessories",
             title: "Thời trang & Phụ kiện"
         },
         {
