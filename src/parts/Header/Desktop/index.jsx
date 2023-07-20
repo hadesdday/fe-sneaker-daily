@@ -348,7 +348,7 @@ function HeaderDesktop(props) {
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"white"}
                                                         fontWeight={"bold"}
                                                         variant='h5'
@@ -358,7 +358,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                                 <Stack direction={"column"} py={4} alignItems={"start"}>
                                                     <MuiLink component={Link}
-                                                        to={"/product-list"}
+                                                        to={"/product-list?gender=all"}
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -545,7 +545,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Stack direction={"column"} alignItems={"start"} pb={4}>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -563,7 +563,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -576,7 +576,7 @@ function HeaderDesktop(props) {
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"white"}
                                                         fontWeight={"bold"}
                                                         variant='h5'
@@ -586,7 +586,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                                 <Stack direction={"column"} py={4} alignItems={"start"}>
                                                     <MuiLink component={Link}
-                                                        to={"/product-list"}
+                                                        to={"/product-list?gender=all"}
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -606,7 +606,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Stack direction={"column"} alignItems={"start"} pb={4}>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -624,7 +624,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -637,7 +637,7 @@ function HeaderDesktop(props) {
                                             <Stack direction={"column"} alignItems={"start"}>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"white"}
                                                         fontWeight={"bold"}
                                                         variant='h5'
@@ -647,7 +647,7 @@ function HeaderDesktop(props) {
                                                 </Box>
                                                 <Stack direction={"column"} py={4} alignItems={"start"}>
                                                     <MuiLink component={Link}
-                                                        to={"/product-list"}
+                                                        to={"/product-list?gender=all"}
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -667,7 +667,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Stack direction={"column"} alignItems={"start"} pb={4}>
                                                     <MuiLink component={Link}
-                                                        to="/product-list"
+                                                        to="/product-list?gender=all"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >
@@ -685,7 +685,7 @@ function HeaderDesktop(props) {
                                                 </Stack>
                                                 <Box>
                                                     <MuiLink component={Link}
-                                                        to="product-list?gender=women&category=top,bottom,accessories"
+                                                        to="product-list?gender=all&category=top,bottom,accessories"
                                                         color={"secondary.300"}
                                                         fontWeight={"bold"}
                                                     >

@@ -1,15 +1,16 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { setFilterAllOptions } from '../../store/filter-product-list/filter.action';
+import { selectCurrentFilterOptions } from '../../store/filter-product-list/filter.selector';
 import ProductListDesktop from './Desktop';
 import ProductListMobile from './Mobile';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentFilterOptions } from '../../store/filter-product-list/filter.selector';
-import { setFilterAllOptions, setFilterOptions } from '../../store/filter-product-list/filter.action';
-import { useEffect } from 'react';
 
 function ProductList() {
     let [searchParams, setSearchParams] = useSearchParams();
+
+    const dispatch = useDispatch();
 
     //convert search params from string to array
     function processValueFromUrl(key) {
@@ -19,6 +20,7 @@ function ProductList() {
         }
         return [];
     }
+
     //search params in array
     const params = {
         gender: [searchParams.get("gender")] || ["all"],
@@ -50,7 +52,7 @@ function ProductList() {
         setSearchParams(paramsInString);
     }
 
-    //set store data from parsed data from url at first load
+    //set store data from parsed data from url at first load ( also when change route )
     useEffect(() => {
         dispatch(setFilterAllOptions(params));
     }, [searchParams]);
@@ -124,20 +126,6 @@ function ProductList() {
         },
     ]
 
-    //demo data only
-    // const filterOptions = {
-    //     gender: ["all"],
-    //     category: ["accessories", "shoes"],
-    //     status: ["limited-edition", "online-only"],
-    //     style: ["low-top", "slip-on"],
-    //     productLine: ["basas", "vintas"],
-    //     price: ["500-599", ">600"],
-    //     collection: ["ananas-puppet-club", "track-6-2-blues"],
-    //     material: ["canvas", "cotton"],
-    //     color: ["white", "pink"]
-    // };
-
-    const dispatch = useDispatch();
     const currentFilterOptions = useSelector(
         selectCurrentFilterOptions
     );
@@ -146,11 +134,11 @@ function ProductList() {
         const foundValue = currentFilterOptions[key].find(item => item === newValue);
         if (!foundValue) {
             currentFilterOptions[key].push(newValue);
-            dispatch(setFilterOptions(key, currentFilterOptions[key]));
+            // dispatch(setFilterOptions(key, currentFilterOptions[key]));
             setSearchParamsByKey(key, currentFilterOptions[key]); //set search params in url by changes in store
         } else {
             currentFilterOptions[key] = currentFilterOptions[key].filter(item => item !== newValue);
-            dispatch(setFilterOptions(key, currentFilterOptions[key]));
+            // dispatch(setFilterOptions(key, currentFilterOptions[key]));
             setSearchParamsByKey(key, currentFilterOptions[key]); //set search params in url by changes in store
         }
     }
@@ -158,7 +146,7 @@ function ProductList() {
     function handleChangeGenderOptions(newValue) {
         const foundValue = currentFilterOptions["gender"].find(item => item === newValue);
         if (!foundValue) {
-            dispatch(setFilterOptions("gender", [newValue]));
+            // dispatch(setFilterOptions("gender", [newValue]));
             setSearchParamsByKey("gender", [newValue]);
         }
     }

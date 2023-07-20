@@ -88,7 +88,7 @@ function ProductListMobile({ products, params, paramsInString, setSearchParams, 
             };
         })(preselected);
         setPreselected(newPreselected);
-        dispatch(setFilterAllOptions(newPreselected));
+        // dispatch(setFilterAllOptions(newPreselected));
         setSearchParamsByKey("gender", newPreselected["gender"]);
     }
 
@@ -103,7 +103,7 @@ function ProductListMobile({ products, params, paramsInString, setSearchParams, 
                 }
             })(preselected);
             setPreselected(newPreselected);
-            dispatch(setFilterAllOptions(newPreselected));
+            // dispatch(setFilterAllOptions(newPreselected));
             setSearchParamsByKey("category", newPreselected["category"]);
         } else {
             const newPreselected = await (async (prev) => {
@@ -113,7 +113,7 @@ function ProductListMobile({ products, params, paramsInString, setSearchParams, 
                 }
             })(preselected);
             setPreselected(newPreselected);
-            dispatch(setFilterAllOptions(newPreselected));
+            // dispatch(setFilterAllOptions(newPreselected));
             setSearchParamsByKey("category", newPreselected["category"]);
         }
     }

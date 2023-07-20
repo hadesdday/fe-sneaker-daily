@@ -5,34 +5,34 @@ const HIGHLIGHTS = [
   //   title: "Best Seller",
   // },
   {
-    path: "/product-list?gender=men&category=&status=new-arrival",
+    path: "/product-list?gender=all&category=&status=new-arrival",
     title: "New Arrival",
   },
   {
-    path: "/product-list?gender=men&category=&status=sale-off",
+    path: "/product-list?gender=all&category=&status=sale-off",
     title: "Sale off",
   },
 ];
 
 const PRODUCTS_PACK = [
   {
-    path: "/product-list?gender=&category=&collection=living-journey",
+    path: "/product-list?gender=all&category=&collection=living-journey",
     title: "Pattas Living Journey",
   },
   {
-    path: "/product-list?gender=&category=&collection=polka-dots",
+    path: "/product-list?gender=all&category=&collection=polka-dots",
     title: "Pattas Polka Dots",
   },
   {
-    path: "/product-list?gender=&category=&collection=evergreen-pack",
+    path: "/product-list?gender=all&category=&collection=evergreen-pack",
     title: "Basas Evergreen",
   },
   {
-    path: "/product-list?gender=&category=&collection=ruler",
+    path: "/product-list?gender=all&category=&collection=ruler",
     title: "Urbas Ruler",
   },
   {
-    path: "/product-list?gender=&category=&collection=track-6-class-e",
+    path: "/product-list?gender=all&category=&collection=track-6-class-e",
     title: "Track 6 Class E",
   },
 ];
@@ -74,7 +74,7 @@ const STYLE = [
     title: "High Top",
   },
   {
-    path: "/product-list?gender=&category=&style=low-top",
+    path: "/product-list?gender=men&category=&style=low-top",
     title: "Low Top",
   },
 ];
@@ -85,15 +85,15 @@ const TOP_ACCESSORIES = [
     title: "Basic Tee",
   },
   {
-    path: "product-list?gender=&category=&productLine=graphic-tee",
+    path: "product-list?gender=men&category=&productLine=graphic-tee",
     title: "Graphic Tee",
   },
   {
-    path: "/product-list?gender=&category=&productLine=sweatshirt",
+    path: "/product-list?gender=men&category=&productLine=sweatshirt",
     title: "Sweatshirt",
   },
   {
-    path: "/product-list?gender=&category=&productLine=hoodie",
+    path: "/product-list?gender=men&category=&productLine=hoodie",
     title: "Hoodie",
   },
 ];
@@ -134,23 +134,23 @@ const WOMEN_HIGHLIGHTS = [
 
 const WOMEN_PRODUCTS_PACK = [
   {
-    path: "/product-list?gender=&category=&collection=living-journey",
+    path: "/product-list?gender=women&category=&collection=living-journey",
     title: "Pattas Living Journey",
   },
   {
-    path: "/product-list?gender=&category=&collection=polka-dots",
+    path: "/product-list?gender=women&category=&collection=polka-dots",
     title: "Pattas Polka Dots",
   },
   {
-    path: "/product-list?gender=&category=&collection=evergreen-pack",
+    path: "/product-list?gender=women&category=&collection=evergreen-pack",
     title: "Basas Evergreen",
   },
   {
-    path: "/product-list?gender=&category=&collection=ruler",
+    path: "/product-list?gender=women&category=&collection=ruler",
     title: "Urbas Ruler",
   },
   {
-    path: "/product-list?gender=&category=&collection=track-6-class-e",
+    path: "/product-list?gender=women&category=&collection=track-6-class-e",
     title: "Track 6 Class E",
   },
 ];
@@ -192,26 +192,26 @@ const WOMEN_STYLE = [
     title: "High Top",
   },
   {
-    path: "/product-list?gender=&category=&style=low-top",
+    path: "/product-list?gender=women&category=&style=low-top",
     title: "Low Top",
   },
 ];
 
 const WOMEN_TOP_ACCESSORIES = [
   {
-    path: "/product-list?gender=women&category=&collection=basic-tee-tron",
+    path: "/product-list?gender=womenwomen&category=&collection=basic-tee-tron",
     title: "Basic Tee",
   },
   {
-    path: "product-list?gender=&category=&collection=graphic-tee",
+    path: "product-list?gender=women&category=&collection=graphic-tee",
     title: "Graphic Tee",
   },
   {
-    path: "/product-list?gender=&category=&collection=sweatshirt",
+    path: "/product-list?gender=women&category=&collection=sweatshirt",
     title: "Sweatshirt",
   },
   {
-    path: "/product-list?gender=&category=&collection=hoodie",
+    path: "/product-list?gender=women&category=&collection=hoodie",
     title: "Hoodie",
   },
 ];
@@ -315,19 +315,19 @@ const HOME_CATEGORIES_PACKS = [
     title: "Dòng sản phẩm",
   },
   {
-    path: "product-list??gender=&category=&productLine=basas",
+    path: "product-list?gender=all&category=&productLine=basas",
     title: "Basas",
   },
   {
-    path: "product-list?gender=&category=&productLine=vintas",
+    path: "product-list?gender=all&category=&productLine=vintas",
     title: "Vintas",
   },
   {
-    path: "product-list?gender=&category=&productLine=urbas",
+    path: "product-list?gender=all&category=&productLine=urbas",
     title: "Urbas",
   },
   {
-    path: "product-list?gender=&category=&productLine=pattas",
+    path: "product-list?gender=all&category=&productLine=pattas",
     title: "Pattas",
   },
 ];
