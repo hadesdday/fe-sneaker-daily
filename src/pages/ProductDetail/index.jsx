@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import ProductDetailsDesktop from './Desktop';
 import ProductDetailsMobile from './Mobile';
+import { useEffect } from 'react';
 
 function ProductDetailPage(props) {
     const params = useParams();
@@ -20,61 +21,60 @@ function ProductDetailPage(props) {
         price: 1290000,
         saleOff: 0.3,
         color: [
-            COLOR_TABLE.find(color => color.value === "beige"),
-            COLOR_TABLE.find(color => color.value === "gray"),
+            COLOR_TABLE.find(color => color.value === "navy"),
+            COLOR_TABLE.find(color => color.value === "bluewash"),
         ],
-        quantity: 32,
         description: "Gender: Unisex\n" + "Size run: 35-46\n" + "Upper: Eco Nylon Fabric\n" + "Outsole: Rubber",
         liked: false,
         images: [
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T015_1.jpeg",
-                color: "beige"
+                color: "bluewash"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T015_2.jpeg",
-                color: "beige"
+                color: "bluewash"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T015_3.jpeg",
-                color: "beige"
+                color: "bluewash"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T015_4.jpeg",
-                color: "beige"
+                color: "bluewash"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T015_5.jpeg",
-                color: "beige"
+                color: "bluewash"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T015_6.jpeg",
-                color: "beige"
+                color: "bluewash"
             },
 
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T014_1.jpeg",
-                color: "gray"
+                color: "navy"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T014_2.jpeg",
-                color: "gray"
+                color: "navy"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T014_3.jpeg",
-                color: "gray"
+                color: "navy"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T014_4.jpeg",
-                color: "gray"
+                color: "navy"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T014_5.jpeg",
-                color: "gray"
+                color: "navy"
             },
             {
                 url: "https://ananas.vn/wp-content/uploads/Pro_A6T014_6.jpeg",
-                color: "gray"
+                color: "navy"
             },
         ],
     }
@@ -240,13 +240,95 @@ function ProductDetailPage(props) {
     ]
 
 
-    const [currentColor, setCurrentColor] = useState("gray");
+    const [currentColor, setCurrentColor] = useState(COLOR_TABLE.find(color => color.value === "navy"));
 
     const [isZoomIn, setIsZoomIn] = useState(false);
 
-    const imagesByColor = fakeProduct.images.filter(item => item.color === currentColor);
+    const [imagesByColor, setImagesByColor] = useState(fakeProduct.images.filter(item => item.color === currentColor.value));
 
     const [mainImage, setMainImage] = useState(imagesByColor[0])
+
+    const [selectedSize, setSelectedSize] = useState(40);
+    const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+    //quantity by color(demo data  only)
+    const [quantity, setQuantity] = useState(
+        [{
+            code: 35,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 36,
+            quantity: 0,
+            color: "navy"
+        },
+        {
+            code: 37,
+            quantity: 0,
+            color: "navy"
+        },
+        {
+            code: 38,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 39,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 40,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 41,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 42,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 43,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 44,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 45,
+            quantity: 10,
+            color: "navy"
+        },
+        {
+            code: 46,
+            quantity: 10,
+            color: "navy"
+        }]
+    );
+
+    const [availableQuantity, setAvailableQuantity] = useState(quantity.find(item =>
+        (item.code === selectedSize && item.color === currentColor.value)).quantity || 0);
+
+    useEffect(() => {
+        const filteredImages = fakeProduct.images.filter(item => item.color === currentColor.value);
+        setImagesByColor(filteredImages);
+        setMainImage(filteredImages[0]);
+        console.log("dispatch new product details here")
+    }, [currentColor])
+
+    useEffect(() => {
+        setAvailableQuantity(quantity.find(item =>
+            (item.code === selectedSize && item.color === currentColor.value)).quantity || 0)
+    }, [selectedSize]);
 
     return (
         <Box>
@@ -261,6 +343,12 @@ function ProductDetailPage(props) {
                 currentColor={currentColor}
                 setCurrentColor={setCurrentColor}
                 imagesByColor={imagesByColor}
+                selectedSize={selectedSize}
+                setSelectedSize={setSelectedSize}
+                quantity={quantity}
+                availableQuantity={availableQuantity}
+                selectedQuantity={selectedQuantity}
+                setSelectedQuantity={setSelectedQuantity}
             />
             <ProductDetailsMobile
                 product={fakeProduct}
@@ -273,6 +361,12 @@ function ProductDetailPage(props) {
                 currentColor={currentColor}
                 setCurrentColor={setCurrentColor}
                 imagesByColor={imagesByColor}
+                selectedSize={selectedSize}
+                setSelectedSize={setSelectedSize}
+                quantity={quantity}
+                availableQuantity={availableQuantity}
+                selectedQuantity={selectedQuantity}
+                setSelectedQuantity={setSelectedQuantity}
             />
         </Box>
     );

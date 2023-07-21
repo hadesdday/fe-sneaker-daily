@@ -336,62 +336,82 @@ const COLOR_TABLE = [
   {
     value: "multi-color",
     color: "rgba(0, 0, 0, 0)",
+    label: "Multi Color",
   },
   {
     value: "offwhite",
     color: "rgb(254, 251, 239)",
+    label: "Offwhite",
   },
   {
     value: "pineneedle",
     color: "rgb(69, 88, 81)",
+    label: "Pineneedle",
   },
   {
     value: "beige",
     color: "rgb(235, 208, 162)",
+    label: "Beige",
   },
   {
     value: "grey",
     color: "rgb(195, 195, 195)",
+    label: "Grey",
   },
   {
     value: "navy",
     color: "rgb(28, 72, 124)",
+    label: "Navy",
   },
   {
     value: "brown",
     color: "rgb(134, 84, 57)",
+    label: "Brown",
   },
   {
     value: "white",
     color: "rgb(255, 255, 255)",
+    label: "White",
   },
   {
     value: "green",
     color: "rgb(109, 153, 81)",
+    label: "Green",
   },
   {
     value: "violet",
     color: "rgb(138, 92, 160)",
+    label: "Violet",
   },
   {
     value: "pink",
     color: "rgb(241, 119, 138)",
+    label: "Pink",
   },
   {
     value: "yellow",
     color: "rgb(245, 210, 85)",
+    label: "Yellow",
   },
   {
     value: "orange",
     color: "rgb(233, 102, 44)",
+    label: "Orange",
   },
   {
     value: "red",
     color: "rgb(193, 0, 19)",
+    label: "Red",
   },
   {
     value: "black",
     color: "rgb(70, 70, 70)",
+    label: "Black",
+  },
+  {
+    value: "bluewash",
+    color: "rgb(0, 0, 255)",
+    label: "Bluewash",
   },
 ];
 
