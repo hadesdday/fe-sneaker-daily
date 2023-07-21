@@ -1,10 +1,9 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import ProductDetailsDesktop from './Desktop';
 import ProductDetailsMobile from './Mobile';
-import { useState } from 'react';
 
 function ProductDetailPage(props) {
     const params = useParams();
@@ -240,10 +239,14 @@ function ProductDetailPage(props) {
         }
     ]
 
-    const [mainImage, setMainImage] = useState(fakeProduct.images[0])
+
+    const [currentColor, setCurrentColor] = useState("gray");
 
     const [isZoomIn, setIsZoomIn] = useState(false);
-    const [currentColor, setCurrentColor] = useState("beige");
+
+    const imagesByColor = fakeProduct.images.filter(item => item.color === currentColor);
+
+    const [mainImage, setMainImage] = useState(imagesByColor[0])
 
     return (
         <Box>
@@ -257,6 +260,7 @@ function ProductDetailPage(props) {
                 setIsZoomIn={setIsZoomIn}
                 currentColor={currentColor}
                 setCurrentColor={setCurrentColor}
+                imagesByColor={imagesByColor}
             />
             <ProductDetailsMobile
                 product={fakeProduct}
@@ -268,6 +272,7 @@ function ProductDetailPage(props) {
                 setIsZoomIn={setIsZoomIn}
                 currentColor={currentColor}
                 setCurrentColor={setCurrentColor}
+                imagesByColor={imagesByColor}
             />
         </Box>
     );

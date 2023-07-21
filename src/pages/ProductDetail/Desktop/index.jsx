@@ -1,3 +1,4 @@
+import CloseIcon from '@mui/icons-material/Close';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import { Box, Dialog, DialogContent, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
@@ -6,13 +7,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import CloseIcon from '@mui/icons-material/Close';
 
 function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainImage, setMainImage, isZoomIn, setIsZoomIn,
-    currentColor, setCurrentColor }) {
-    const { category, productLine, name, style, images } = product;
-    const imagesByColor = images.filter(item => item.color === currentColor);
+    currentColor, setCurrentColor, imagesByColor }) {
+    const { category, productLine, name, style } = product;
 
+    function handleCloseDialog() {
+        setIsZoomIn(false);
+    }
     return (
         <Box display={{ xs: "none", md: "block" }} px={{ md: 5, lg: 23 }}>
             <Stack direction={"row"} spacing={2} pt={4} alignItems={"center"} borderBottom={"2px solid"} pb={1}>
@@ -114,7 +116,7 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                             )}
                         </Swiper>
                     </Box>
-                    <Dialog open={isZoomIn} fullScreen>
+                    <Dialog open={isZoomIn} fullScreen onClose={handleCloseDialog}>
                         <DialogContent>
                             <Stack direction={"row"} alignItems={"center"}>
                                 <Stack
