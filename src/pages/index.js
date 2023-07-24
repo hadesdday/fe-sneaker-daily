@@ -4,3 +4,4 @@ export * from "./Authentication";
 export * from "./Wishlist";
 export * from "./Cart";
 export * from "./SaleOff";
+export * from "./TrackingOrder";

@@ -32,7 +32,7 @@ export const ROUTE_LIST = [
     component: ProductList,
   },
   {
-    path: "/tracking-order/:id",
+    path: "/tracking-order",
     component: TrackingOrder,
   },
   {
