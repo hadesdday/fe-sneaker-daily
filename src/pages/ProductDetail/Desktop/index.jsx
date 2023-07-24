@@ -8,7 +8,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import { Box, Button, Collapse, Dialog, DialogContent, Grid, IconButton, Stack, Typography, Zoom } from '@mui/material';
 import { useClickAway } from '@uidotdev/usehooks';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -24,7 +24,7 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
     currentColor, setCurrentColor, imagesByColor, selectedSize, setSelectedSize, quantity, availableQuantity,
     selectedQuantity, setSelectedQuantity
 }) {
-    const { category, productLine, name, style, id, status, price, color, images, liked, description } = product;
+    const { category, productLine, name, style, id, status, price, color, images, liked, description, saleOff } = product;
 
     function handleCloseDialog() {
         setIsZoomIn(false);
@@ -273,7 +273,19 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                             color={"primary.main"}
                             fontWeight={"bold"}
                             pb={4}
-                        >{getMoneyFormat(price)} VND</Typography>
+                        >
+                            {saleOff > 0 ?
+                                <Fragment>
+                                    {getMoneyFormat(price - (price * saleOff))} VND
+                                    <Typography
+                                        component={"span"} fontWeight={"bold"} color={"secondary.400"} ml={3}
+                                        sx={{ textDecoration: "line-through" }}>
+                                        {getMoneyFormat(price)} VND</Typography>
+                                </Fragment>
+                                :
+                                getMoneyFormat(price) + "VND"
+                            }
+                        </Typography>
                     </Box>
                     <Stack
                         direction={"row"}
