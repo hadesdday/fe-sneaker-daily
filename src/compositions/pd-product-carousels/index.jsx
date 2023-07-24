@@ -42,7 +42,18 @@ function PdProductCarousels({ title, products }) {
                     <ArrowBackIosIcon sx={{ fontSize: "2rem" }} />
                 </IconButton>
                 <Swiper
-                    slidesPerView={4}
+                    // slidesPerView={4}
+                    breakpoints={{
+                        100: {
+                            slidesPerView: 2,
+                        },
+                        600: {
+                            slidesPerView: 3,
+                        },
+                        900: {
+                            slidesPerView: 4,
+                        }
+                    }}
                     navigation={false}
                     spaceBetween={7}
                     modules={[Navigation]}

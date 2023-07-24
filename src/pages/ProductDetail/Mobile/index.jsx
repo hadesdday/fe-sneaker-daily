@@ -390,7 +390,7 @@ function ProductDetailsMobile({ product, relevantProducts, seenProducts, mainIma
                 <Box py={3} borderBottom={"2px dashed"}>
                     <Typography variant='body1' dangerouslySetInnerHTML={{ __html: description }}>
                     </Typography>
-                    <Box component={"img"} src={SizeChartImage} mt={2} />
+                    <Box component={"img"} src={SizeChartImage} mt={2} width={"100%"} />
                 </Box>
             </Collapse>
             <Stack
