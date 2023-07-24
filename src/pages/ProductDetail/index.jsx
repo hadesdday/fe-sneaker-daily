@@ -331,6 +331,7 @@ function ProductDetailPage(props) {
     useEffect(() => {
         const foundQuantity = quantity.find(item => item.code === selectedSize && item.color === currentColor.value);
         setAvailableQuantity(foundQuantity ? foundQuantity.quantity : 0);
+        console.log("fetch quantity by size and color here");
     }, [selectedSize]);
 
     return (

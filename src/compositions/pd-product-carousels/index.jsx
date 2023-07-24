@@ -23,7 +23,7 @@ function PdProductCarousels({ title, products }) {
     }, []);
     return (
         <Fragment>
-            <Stack direction={"row"} justifyContent={"center"} pb={4} pt={10}>
+            <Stack direction={"row"} justifyContent={"center"} pb={4} pt={{ xs: 5, md: 10 }}>
                 <Typography
                     fontWeight={"bold"}
                     textTransform={"uppercase"}
@@ -65,7 +65,8 @@ function PdProductCarousels({ title, products }) {
                                     sx={{
                                         position: "absolute",
                                         left: 0,
-                                        width: "50%",
+                                        width: { xs: "70%", md: "60%" },
+                                        fontSize: { xs: "0.9rem", md: "1rem" },
                                         top: "5%",
                                         bgcolor: "secondary.100",
                                         color: "white",
@@ -94,14 +95,14 @@ function PdProductCarousels({ title, products }) {
                             <Typography py={"5px"}>{item.color}</Typography>
                             <Stack direction={"row"} justifyContent={"center"}>
                                 {item.saleOff > 0 ?
-                                    <Fragment>
-                                        <Typography width={"50%"} fontWeight={"bold"}>
+                                    <Stack direction={{ xs: "column", md: "row" }} justifyContent={"space-between"} spacing={{ xs: 0, md: 3 }}>
+                                        <Typography fontWeight={"bold"}>
                                             {getMoneyFormat(item.price)} VND
                                         </Typography>
-                                        <Typography width={"50%"} sx={{ textDecoration: "line-through", color: "secondary.400" }}>
+                                        <Typography sx={{ textDecoration: "line-through", color: "secondary.400" }}>
                                             {getMoneyFormat(item.price - (item.price * item.saleOff))} VND
                                         </Typography>
-                                    </Fragment>
+                                    </Stack>
                                     :
                                     <Typography fontWeight={"bold"}>{getMoneyFormat(item.price)} VND</Typography>
                                 }
@@ -113,7 +114,7 @@ function PdProductCarousels({ title, products }) {
                     <ArrowForwardIosIcon sx={{ fontSize: "2rem" }} />
                 </IconButton>
             </Stack>
-        </Fragment>
+        </Fragment >
     );
 }
 
