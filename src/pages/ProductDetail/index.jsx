@@ -24,7 +24,7 @@ function ProductDetailPage(props) {
             COLOR_TABLE.find(color => color.value === "navy"),
             COLOR_TABLE.find(color => color.value === "bluewash"),
         ],
-        description: "Gender: Unisex\n" + "Size run: 35-46\n" + "Upper: Eco Nylon Fabric\n" + "Outsole: Rubber",
+        description: "Gender: Unisex <br/>" + "Size run: 35-46 <br/>" + "Upper: Eco Nylon Fabric <br/>" + "Outsole: Rubber",
         liked: false,
         images: [
             {
@@ -77,6 +77,7 @@ function ProductDetailPage(props) {
                 color: "navy"
             },
         ],
+        detailsDescription: "Má ngoài Suede (da lộn), má trong phủ vải canvas kèm theo các chi tiết phối trộn chất da Nappa nâu trầm điềm đạm là ý đồ sắp xếp làm nên Vintas Temperate Pack. Với tông màu cảm hứng từ cỏ cây cùng khí hậu dịu mát rõ nét của vùng Ôn Đới. Điểm chốt hạ thuyết phục cho những con người sâu sắc, mang tâm hồn yêu thiên nhiên vô bờ bến."
     }
 
     //demo data only

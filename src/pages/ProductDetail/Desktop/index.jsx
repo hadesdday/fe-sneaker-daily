@@ -24,7 +24,7 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
     currentColor, setCurrentColor, imagesByColor, selectedSize, setSelectedSize, quantity, availableQuantity,
     selectedQuantity, setSelectedQuantity
 }) {
-    const { category, productLine, name, style, id, status, price, color, images, liked, description, saleOff } = product;
+    const { category, productLine, name, style, id, status, price, color, images, liked, description, saleOff, detailsDescription } = product;
 
     function handleCloseDialog() {
         setIsZoomIn(false);
@@ -287,6 +287,13 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                             }
                         </Typography>
                     </Box>
+                    <Box
+                        borderBottom={"2px dashed"}
+                        borderColor={"secondary.300"}
+                    >
+                        <Typography variant='body1' py={4} dangerouslySetInnerHTML={{ __html: detailsDescription }}>
+                        </Typography>
+                    </Box>
                     <Stack
                         direction={"row"}
                         spacing={3}
@@ -519,7 +526,8 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                     </Stack>
                     <Collapse in={showDescription} mountOnEnter unmountOnExit>
                         <Box py={3} borderBottom={"2px dashed"}>
-                            {description}
+                            <Typography variant='body1' dangerouslySetInnerHTML={{ __html: description }}>
+                            </Typography>
                             <Box component={"img"} src={SizeChartImage} mt={2} />
                         </Box>
                     </Collapse>
