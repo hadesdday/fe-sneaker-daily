@@ -251,7 +251,7 @@ function ProductDetailPage(props) {
     const [selectedSize, setSelectedSize] = useState(40);
     const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-    //quantity by color(demo data  only)
+    //fixed quantity by color(demo data  only)
     const [quantity, setQuantity] = useState(
         [{
             code: 35,
@@ -315,10 +315,12 @@ function ProductDetailPage(props) {
         }]
     );
 
-    const [availableQuantity, setAvailableQuantity] = useState(quantity.find(item =>
-        (item.code === selectedSize && item.color === currentColor.value)).quantity || 0);
+    //demo only (when api is implemented, call api and set quantity here)
+    const foundQuantity = quantity.find(item => item.code === selectedSize && item.color === currentColor.value);
+    const [availableQuantity, setAvailableQuantity] = useState(foundQuantity ? foundQuantity.quantity : 0);
 
     useEffect(() => {
+        //demo only (when api is implemented, call api and set quantity here)
         const filteredImages = fakeProduct.images.filter(item => item.color === currentColor.value);
         setImagesByColor(filteredImages);
         setMainImage(filteredImages[0]);
@@ -326,8 +328,8 @@ function ProductDetailPage(props) {
     }, [currentColor])
 
     useEffect(() => {
-        setAvailableQuantity(quantity.find(item =>
-            (item.code === selectedSize && item.color === currentColor.value)).quantity || 0)
+        const foundQuantity = quantity.find(item => item.code === selectedSize && item.color === currentColor.value);
+        setAvailableQuantity(foundQuantity ? foundQuantity.quantity : 0);
     }, [selectedSize]);
 
     return (

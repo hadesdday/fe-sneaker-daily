@@ -1,23 +1,32 @@
+import { Circle } from '@mui/icons-material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CloseIcon from '@mui/icons-material/Close';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
-import { Box, Button, Dialog, DialogContent, Grid, IconButton, Stack, Typography, Zoom } from '@mui/material';
-import React from 'react';
+import { Box, Button, Collapse, Dialog, DialogContent, Grid, IconButton, Stack, Typography, Zoom } from '@mui/material';
+import { useClickAway } from '@uidotdev/usehooks';
+import React, { Fragment, useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { getMoneyFormat } from '../../../utils/currency';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import SizeChartImage from "../../../assets/common/SizeChart.jpg";
+import { POLICIES, WARRANTY_CONTENT } from '../../../constants/dummy-data';
 import { generateArrayByMax } from '../../../utils/array';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { getMoneyFormat } from '../../../utils/currency';
+import { PdProductCarousels } from '../../../compositions';
 
 function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainImage, setMainImage, isZoomIn, setIsZoomIn,
     currentColor, setCurrentColor, imagesByColor, selectedSize, setSelectedSize, quantity, availableQuantity,
     selectedQuantity, setSelectedQuantity
 }) {
-    const { category, productLine, name, style, id, status, price, color, images, liked } = product;
+    const { category, productLine, name, style, id, status, price, color, images, liked, description } = product;
 
     function handleCloseDialog() {
         setIsZoomIn(false);
@@ -47,9 +56,45 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
         toggleShowQuantityTable();
     }
 
+    const quantityBoxRef = useClickAway(() => {
+        setShowQuantityTable(false);
+    })
+
+    const sizeBoxRef = useClickAway(() => {
+        setShowSizeTable(false);
+    })
+
+    const [showDescription, setShowDescription] = useState(false);
+    const [showPolicy, setShowPolicy] = useState(false);
+    const [showWarranty, setShowWarranty] = useState(false);
+
+    function toggleShowDescription() {
+        setShowDescription(!showDescription);
+    }
+
+    function toggleShowPolicy() {
+        setShowPolicy(!showPolicy);
+    }
+
+    function toggleShowWarranty() {
+        setShowWarranty(!showWarranty);
+    }
+
+    const sliderRef = useRef(null);
+
+    const handlePrev = useCallback(() => {
+        if (!sliderRef.current) return;
+        sliderRef.current.swiper.slidePrev();
+    }, []);
+
+    const handleNext = useCallback(() => {
+        if (!sliderRef.current) return;
+        sliderRef.current.swiper.slideNext();
+    }, []);
+
 
     return (
-        <Box display={{ xs: "none", md: "block" }} px={{ md: 5, lg: 23 }}>
+        <Box display={{ xs: "none", md: "block" }} px={{ md: 5, lg: 23 }} position={"relative"}>
             <Stack direction={"row"} spacing={2} pt={4} alignItems={"center"} borderBottom={"2px solid"} pb={1}>
                 <Box
                     component={Link}
@@ -291,8 +336,14 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                                     in={showSizeTable}
                                     unmountOnExit
                                     mountOnEnter
+                                    ref={sizeBoxRef}
                                 >
-                                    <Box position={"absolute"} top={"100%"} left={0} border={"1px solid"}>
+                                    <Box
+                                        position={"absolute"}
+                                        top={"100%"}
+                                        left={0} border={"1px solid"}
+                                        zIndex={1}
+                                        bgcolor={"white"}>
                                         <Grid container p={1}>
                                             {quantity.map((item, index) =>
                                                 <Grid item md={3}
@@ -353,8 +404,15 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                                     in={showQuantityTable}
                                     unmountOnExit
                                     mountOnEnter
+                                    ref={quantityBoxRef}
                                 >
-                                    <Box position={"absolute"} top={"100%"} left={0} border={"1px solid"}>
+                                    <Box
+                                        position={"absolute"}
+                                        top={"100%"}
+                                        left={0}
+                                        border={"1px solid"}
+                                        zIndex={1}
+                                        bgcolor={"white"}>
                                         <Grid container p={1}>
                                             {generateArrayByMax(12).map((item, index) =>
                                                 <Grid item md={3}
@@ -441,8 +499,98 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                         >thanh toán</Button>
                     </Stack>
 
+                    <Stack
+                        direction={"row"}
+                        sx={{ cursor: "pointer" }}
+                        color={showDescription ? "primary.main" : "black"}
+                        onClick={toggleShowDescription}
+                    >
+                        <Typography
+                            variant='h5'
+                            fontWeight={"bold"}
+                            textTransform={"uppercase"}
+                            py={4}
+                            borderBottom={"2px dashed"}
+                            borderColor={"black"}
+                            width={"100%"}
+                        >
+                            thông tin sản phẩm
+                            {showDescription ?
+                                <ExpandLessIcon />
+                                : <ExpandMoreIcon />}
+                        </Typography>
+                    </Stack>
+                    <Collapse in={showDescription} mountOnEnter unmountOnExit>
+                        <Box py={3} borderBottom={"2px dashed"}>
+                            {description}
+                            <Box component={"img"} src={SizeChartImage} mt={2} />
+                        </Box>
+                    </Collapse>
+                    <Stack
+                        direction={"row"}
+                        sx={{ cursor: "pointer" }}
+                        color={showPolicy ? "primary.main" : "black"}
+                        onClick={toggleShowPolicy}
+                    >
+                        <Typography
+                            variant='h5'
+                            fontWeight={"bold"}
+                            textTransform={"uppercase"}
+                            py={4}
+                            borderBottom={"2px dashed"}
+                            borderColor={"black"}
+                            width={"100%"}
+                        >
+                            quy định đổi sản phẩm
+                            {showDescription ?
+                                <ExpandLessIcon />
+                                : <ExpandMoreIcon />}
+                        </Typography>
+                    </Stack>
+                    <Collapse in={showPolicy} mountOnEnter unmountOnExit>
+                        <Box py={3} borderBottom={"2px dashed"}>
+                            {POLICIES.map((item, index) =>
+                                <Stack direction={"row"} key={index}>
+                                    <Circle sx={{ fontSize: "10px", mr: 1, mt: 1 }} />
+                                    <Typography variant='body1' dangerouslySetInnerHTML={{ __html: item }}>
+                                    </Typography>
+                                </Stack>
+                            )}
+                        </Box>
+                    </Collapse>
+                    <Stack
+                        direction={"row"}
+                        sx={{ cursor: "pointer" }}
+                        color={showWarranty ? "primary.main" : "black"}
+                        onClick={toggleShowWarranty}
+                    >
+                        <Typography
+                            variant='h5'
+                            fontWeight={"bold"}
+                            textTransform={"uppercase"}
+                            py={4}
+                            borderBottom={"2px dashed"}
+                            borderColor={"black"}
+                            width={"100%"}
+                        >
+                            bảo hành thế nào ?
+                            {showWarranty ?
+                                <ExpandLessIcon />
+                                : <ExpandMoreIcon />}
+                        </Typography>
+                    </Stack>
+                    <Collapse in={showWarranty} mountOnEnter unmountOnExit>
+                        <Box py={3} borderBottom={"2px dashed"}>
+                            <Stack direction={"row"}>
+                                <Typography variant='body1' dangerouslySetInnerHTML={{ __html: WARRANTY_CONTENT }}>
+                                </Typography>
+                            </Stack>
+                        </Box>
+                    </Collapse>
                 </Grid>
             </Grid>
+            <PdProductCarousels title={"sản phẩm liên quan"} products={relevantProducts} />
+            <PdProductCarousels title={"sản phẩm đã xem"} products={seenProducts} />
         </Box>
     );
 }
