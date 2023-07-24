@@ -29,7 +29,7 @@ function TrackingOrder(props) {
     return (
         <Container sx={{ textAlign: "center", mt: 5 }}>
             <Typography variant='h4' fontWeight={"bold"} textTransform={"uppercase"} pb={6}>tra cứu đơn hàng</Typography>
-            <Stack direction={"column"} spacing={6} component={"form"} onSubmit={handleSubmit(handleSubmitForm)}>
+            <Stack direction={"column"} spacing={5} component={"form"} onSubmit={handleSubmit(handleSubmitForm)}>
                 <CustomTextField
                     name='orderId'
                     control={control}
