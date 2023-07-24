@@ -1,6 +1,4 @@
 import { Circle } from '@mui/icons-material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -10,17 +8,17 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import { Box, Button, Collapse, Dialog, DialogContent, Grid, IconButton, Stack, Typography, Zoom } from '@mui/material';
 import { useClickAway } from '@uidotdev/usehooks';
-import React, { Fragment, useCallback, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SizeChartImage from "../../../assets/common/SizeChart.jpg";
+import { PdProductCarousels } from '../../../compositions';
 import { POLICIES, WARRANTY_CONTENT } from '../../../constants/dummy-data';
 import { generateArrayByMax } from '../../../utils/array';
 import { getMoneyFormat } from '../../../utils/currency';
-import { PdProductCarousels } from '../../../compositions';
 
 function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainImage, setMainImage, isZoomIn, setIsZoomIn,
     currentColor, setCurrentColor, imagesByColor, selectedSize, setSelectedSize, quantity, availableQuantity,
@@ -79,19 +77,6 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
     function toggleShowWarranty() {
         setShowWarranty(!showWarranty);
     }
-
-    const sliderRef = useRef(null);
-
-    const handlePrev = useCallback(() => {
-        if (!sliderRef.current) return;
-        sliderRef.current.swiper.slidePrev();
-    }, []);
-
-    const handleNext = useCallback(() => {
-        if (!sliderRef.current) return;
-        sliderRef.current.swiper.slideNext();
-    }, []);
-
 
     return (
         <Box display={{ xs: "none", md: "block" }} px={{ md: 5, lg: 23 }} position={"relative"}>
