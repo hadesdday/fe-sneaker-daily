@@ -57,8 +57,25 @@ function TestComponent(props) {
     //     })
     // }
 
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        fetch("https://jsonplaceholder.typicode.com/todos/1", { signal })
+            .then(response => response.json())
+            .then((data) => {
+                console.log("call render", data);
+            });
+        return () => {
+            controller.abort();
+        }
+    }, [count]);
+
     return (
         <Stack direction={"column"} spacing={2}>
+            {count}
             {/* <Typography>
                 {JSON.stringify(currentFilterOptions)}
             </Typography>
@@ -67,6 +84,7 @@ function TestComponent(props) {
             {/* <TextField value={state.id} name='id' onChange={(e) => handleChange(e)} />
             <TextField value={state.name} name='name' onChange={(e) => handleChange(e)} />
             <Button variant='contained' onClick={handleSetNewState}>Set new value</Button> */}
+            <Button variant='contained' onClick={() => setCount(count + 1)}>on</Button>
         </Stack>
     );
 }

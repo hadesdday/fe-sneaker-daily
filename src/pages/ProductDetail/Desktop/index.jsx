@@ -276,14 +276,14 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                         >
                             {saleOff > 0 ?
                                 <Fragment>
-                                    {getMoneyFormat(price - (price * saleOff))} VND
+                                    {getMoneyFormat(price - (price * saleOff))}
                                     <Typography
                                         component={"span"} fontWeight={"bold"} color={"secondary.400"} ml={3}
                                         sx={{ textDecoration: "line-through" }}>
-                                        {getMoneyFormat(price)} VND</Typography>
+                                        {getMoneyFormat(price)}</Typography>
                                 </Fragment>
                                 :
-                                getMoneyFormat(price) + "VND"
+                                getMoneyFormat(price)
                             }
                         </Typography>
                     </Box>

@@ -466,7 +466,7 @@ function ProductListMobile({ products, params, paramsInString, setSearchParams, 
                             </Box>
                             <Typography py={1}>{item.color}</Typography>
                             <Typography fontWeight={"bold"}>
-                                {item.saleOff > 0 ? getMoneyFormat(item.price * item.saleOff) : getMoneyFormat(item.price)} VND
+                                {item.saleOff > 0 ? getMoneyFormat(item.price * item.saleOff) : getMoneyFormat(item.price)}
                             </Typography>
                             {item.saleOff > 0 &&
                                 <Typography
@@ -474,7 +474,7 @@ function ProductListMobile({ products, params, paramsInString, setSearchParams, 
                                         textDecoration: "line-through",
                                         color: "secondary.400"
                                     }}>
-                                    {getMoneyFormat(item.price)} VND
+                                    {getMoneyFormat(item.price)}
                                 </Typography>
                             }
                         </Box>

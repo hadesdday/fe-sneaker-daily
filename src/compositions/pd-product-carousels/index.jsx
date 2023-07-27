@@ -108,14 +108,14 @@ function PdProductCarousels({ title, products }) {
                                 {item.saleOff > 0 ?
                                     <Stack direction={{ xs: "column", md: "row" }} justifyContent={"space-between"} spacing={{ xs: 0, md: 3 }}>
                                         <Typography fontWeight={"bold"}>
-                                            {getMoneyFormat(item.price)} VND
+                                            {getMoneyFormat(item.price)}
                                         </Typography>
                                         <Typography sx={{ textDecoration: "line-through", color: "secondary.400" }}>
-                                            {getMoneyFormat(item.price - (item.price * item.saleOff))} VND
+                                            {getMoneyFormat(item.price - (item.price * item.saleOff))}
                                         </Typography>
                                     </Stack>
                                     :
-                                    <Typography fontWeight={"bold"}>{getMoneyFormat(item.price)} VND</Typography>
+                                    <Typography fontWeight={"bold"}>{getMoneyFormat(item.price)}</Typography>
                                 }
                             </Stack>
                         </SwiperSlide>

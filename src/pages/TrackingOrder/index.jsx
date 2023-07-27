@@ -2,8 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, CircularProgress, Container, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useTrackingOrderFormSchema } from '../../../hooks';
 import CustomTextField from '../../components/textfield';
+import { useTrackingOrderFormSchema } from "../../hooks/useTrackingOrderFormSchema";
 
 function TrackingOrder(props) {
     const schema = useTrackingOrderFormSchema();

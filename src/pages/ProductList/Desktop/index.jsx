@@ -295,7 +295,7 @@ function ProductListDesktop({ products, options, handleChangeFilterOptions, hand
                                                     <Typography
                                                         variant='body1'
                                                         fontWeight={"bold"}>
-                                                        {getMoneyFormat(item.price - (item.price * item.saleOff))} VND
+                                                        {getMoneyFormat(item.price - (item.price * item.saleOff))}
                                                     </Typography>
                                                     <Typography
                                                         variant='body1'
@@ -303,10 +303,10 @@ function ProductListDesktop({ products, options, handleChangeFilterOptions, hand
                                                             textDecoration: "line-through",
                                                             color: "secondary.400",
                                                         }}>
-                                                        {getMoneyFormat(item.price)} VND
+                                                        {getMoneyFormat(item.price)}
                                                     </Typography>
                                                 </Stack> :
-                                                <Typography variant='body1' fontWeight={"bold"}>{getMoneyFormat(item.price)} VND</Typography>
+                                                <Typography variant='body1' fontWeight={"bold"}>{getMoneyFormat(item.price)}</Typography>
                                         }
                                     </Box>
                                 </Stack>
