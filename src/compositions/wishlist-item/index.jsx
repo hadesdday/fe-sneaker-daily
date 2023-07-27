@@ -147,6 +147,7 @@ function WishListItem({ item, isLastIndex, index }) {
     const currentCartItems = useSelector(selectCartItems);
 
     function handleAddToCart() {
+        //demo only (add the whole item with specific schema to cart then (productId, color, size, quantity))
         dispatch(addToCartStart(item.productId));
     }
 
