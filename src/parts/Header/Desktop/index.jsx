@@ -16,15 +16,17 @@ import TrackingOrderIcon from "../../../assets/icon/tracking-order.svg";
 import Logo from "../../../assets/logo.svg";
 import { ACCESSORIES, CATEGORIES, HIGHLIGHTS, PRODUCTS_PACK, STYLE, TOP_ACCESSORIES, WOMEN_ACCESSORIES, WOMEN_CATEGORIES, WOMEN_HIGHLIGHTS, WOMEN_PRODUCTS_PACK, WOMEN_STYLE, WOMEN_TOP_ACCESSORIES } from '../../../constants/dummy-data';
 import "../style.scss";
+import { useSelector } from 'react-redux';
+import { selectCartCount } from '../../../store/cart/cart.selector';
 
-function HeaderDesktop(props) {
+function HeaderDesktop() {
 
-    const cartItems = [];
+    const cartCount = useSelector(selectCartCount);
 
     let itemList = [
         {
             iconSrc: CartIcon,
-            text: `Giỏ hàng (${cartItems.length})`,
+            text: `Giỏ hàng (${cartCount})`,
             alt: "Giỏ hàng",
             to: "/cart"
         },

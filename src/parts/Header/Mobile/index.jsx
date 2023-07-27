@@ -11,9 +11,12 @@ import TrackingOrderIcon from "../../../assets/icon/tracking-order.svg";
 import Logo from "../../../assets/logo.svg";
 import TogglerMenu from '../../../components/toggler-menu';
 import { ACCESSORIES, CATEGORIES, GENERAL_CATEGORY, HIGHLIGHTS, PRODUCTS_MOBILE, PRODUCTS_PACK, STYLE, TOP_ACCESSORIES, WOMEN_ACCESSORIES, WOMEN_CATEGORIES, WOMEN_HIGHLIGHTS, WOMEN_PRODUCTS_PACK, WOMEN_STYLE, WOMEN_TOP_ACCESSORIES } from '../../../constants/dummy-data';
+import { useSelector } from 'react-redux';
+import { selectCartCount } from '../../../store/cart/cart.selector';
 
 function HeaderMobile() {
-    const cartItems = [];
+    const cartCount = useSelector(selectCartCount);
+
     const navigate = useNavigate();
 
     const [showSearchDialog, setShowSearchDialog] = useState(false);
@@ -183,7 +186,7 @@ function HeaderMobile() {
                         <Stack direction={"row"} alignItems={"flex-end"} onClick={hideHeaderList}>
                             <Box component={Link} to="/cart">
                                 <Box component={"img"} src={CartIcon} alt="Cart"></Box>
-                                ({cartItems.length})
+                                ({cartCount})
                             </Box>
                         </Stack>
                     </Stack>

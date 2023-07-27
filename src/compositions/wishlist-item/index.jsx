@@ -3,15 +3,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, Button, Grid, Stack, Typography, Zoom } from '@mui/material';
 import { useClickAway } from '@uidotdev/usehooks';
 import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CartIcon from "../../assets/icon/cart_ana.png";
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import { generateArrayByMax, getMoneyFormat } from '../../utils';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCartItems } from '../../store/cart/cart.selector';
-import { addToCartStart } from '../../store/cart/cart.action';
 
-function WishListItem({ item, isLastIndex, index }) {
+function WishListItem({ item, isLastIndex, handleAddToCart }) {
     const [currentColor, setCurrentColor] = useState(COLOR_TABLE.find(color => color.value === "navy"));
 
     //fixed quantity by color(demo data  only)
@@ -118,6 +115,8 @@ function WishListItem({ item, isLastIndex, index }) {
     const foundQuantity = quantity.find(item => item.code === selectedSize && item.color === currentColor.value);
     const [availableQuantity, setAvailableQuantity] = useState(foundQuantity ? foundQuantity.quantity : 0);
 
+    const [count, setCount] = useState(0);
+
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
@@ -141,14 +140,6 @@ function WishListItem({ item, isLastIndex, index }) {
             return item.price - (item.price * item.saleOff);
         }
         return item.price;
-    }
-
-    const dispatch = useDispatch();
-    const currentCartItems = useSelector(selectCartItems);
-
-    function handleAddToCart() {
-        //demo only (add the whole item with specific schema to cart then (productId, color, size, quantity))
-        dispatch(addToCartStart(item.productId));
     }
 
     return (

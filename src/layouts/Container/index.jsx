@@ -7,6 +7,7 @@ import HeaderDesktop from '../../parts/Header/Desktop';
 import HeaderMobile from '../../parts/Header/Mobile';
 import { HomeTips } from '../../compositions';
 import { HOME_CAROUSEL_ITEMS } from '../../constants/dummy-data';
+import { Toaster } from 'react-hot-toast';
 
 function AppContainer({ children }) {
     const [{ x, y }, scrollTo] = useWindowScroll();
@@ -17,6 +18,10 @@ function AppContainer({ children }) {
 
     return (
         <>
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
             <HeaderDesktop />
             <HeaderMobile />
             <HomeTips carousels={HOME_CAROUSEL_ITEMS} />
