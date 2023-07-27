@@ -7,6 +7,9 @@ import CartIcon from "../../assets/icon/cart_ana.png";
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import { generateArrayByMax, getMoneyFormat } from '../../utils';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
+import { addToCartStart } from '../../store/cart/cart.action';
 
 function WishListItem({ item, isLastIndex, index }) {
     const [currentColor, setCurrentColor] = useState(COLOR_TABLE.find(color => color.value === "navy"));
@@ -138,6 +141,13 @@ function WishListItem({ item, isLastIndex, index }) {
             return item.price - (item.price * item.saleOff);
         }
         return item.price;
+    }
+
+    const dispatch = useDispatch();
+    const currentCartItems = useSelector(selectCartItems);
+
+    function handleAddToCart() {
+        dispatch(addToCartStart(item.productId));
     }
 
     return (
@@ -369,7 +379,9 @@ function WishListItem({ item, isLastIndex, index }) {
                             borderColor: "black",
                             opacity: 0.8
                         }
-                    }}>
+                    }}
+                        onClick={handleAddToCart}
+                    >
                         <Box component={"img"} src={CartIcon} alt='Cart' />
                     </Button>
                     <Button variant='outlined' sx={{
