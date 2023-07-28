@@ -142,6 +142,16 @@ function WishListItem({ item, isLastIndex, handleAddToCart }) {
         return item.price;
     }
 
+    function onAddToCart() {
+        const product = {
+            productId: item.productId,
+            color: currentColor.value,
+            size: selectedSize,
+            quantity: selectedQuantity,
+        };
+        handleAddToCart(product);
+    }
+
     return (
         <Grid container borderBottom={!isLastIndex ? "2px dashed" : "2px solid"} py={4}>
             <Grid item xs={5} sm={3} md={3} width={{ xs: "28vw", sm: "100%" }} height={{ xs: "28vw", sm: "100%" }}>
@@ -372,7 +382,7 @@ function WishListItem({ item, isLastIndex, handleAddToCart }) {
                             opacity: 0.8
                         }
                     }}
-                        onClick={handleAddToCart}
+                        onClick={onAddToCart}
                     >
                         <Box component={"img"} src={CartIcon} alt='Cart' />
                     </Button>

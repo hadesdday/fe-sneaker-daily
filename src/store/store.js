@@ -9,8 +9,7 @@ import { rootSaga } from "./root-saga";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["filter"],
-  whitelist: ["cart"],
+  blacklist: ["filter", "cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
