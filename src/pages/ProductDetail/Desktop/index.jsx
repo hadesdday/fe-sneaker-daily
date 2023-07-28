@@ -360,7 +360,9 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                                                         cursor: "pointer",
                                                         ":hover": {
                                                             bgcolor: "secondary.500"
-                                                        }
+                                                        },
+                                                        opacity: item.quantity > 0 ? 1 : 0.5,
+                                                        pointerEvents: item.quantity > 0 ? "all" : "none"
                                                     }}
                                                     onClick={() => handleChangeSize(item.code)}
                                                     key={index}

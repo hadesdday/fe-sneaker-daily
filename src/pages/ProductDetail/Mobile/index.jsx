@@ -1,18 +1,15 @@
 import { Circle } from '@mui/icons-material';
-import CloseIcon from '@mui/icons-material/Close';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
-import { Box, Button, Collapse, Dialog, DialogContent, Grid, IconButton, Stack, Typography, Zoom } from '@mui/material';
+import { Box, Button, Collapse, Grid, Stack, Typography, Zoom } from '@mui/material';
 import { useClickAway } from '@uidotdev/usehooks';
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { FreeMode, Mousewheel, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SizeChartImage from "../../../assets/common/SizeChart.jpg";
 import { PdProductCarousels } from '../../../compositions';
@@ -224,7 +221,9 @@ function ProductDetailsMobile({ product, relevantProducts, seenProducts, mainIma
                                                 cursor: "pointer",
                                                 ":hover": {
                                                     bgcolor: "secondary.500"
-                                                }
+                                                },
+                                                opacity: item.quantity > 0 ? 1 : 0.5,
+                                                pointerEvents: item.quantity > 0 ? "all" : "none"
                                             }}
                                             onClick={() => handleChangeSize(item.code)}
                                             key={index}

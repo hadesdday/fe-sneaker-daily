@@ -728,6 +728,7 @@ function HeaderDesktop() {
                             }
                             size='small'
                             sx={{ m: 3 }}
+                            onKeyDown={(e) => { if (e.key === 'Enter') handleClickSearch() }}
                         />
                     </Grid>
                 </Grid>
