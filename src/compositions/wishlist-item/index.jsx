@@ -115,8 +115,6 @@ function WishListItem({ item, isLastIndex, handleAddToCart }) {
     const foundQuantity = quantity.find(item => item.code === selectedSize && item.color === currentColor.value);
     const [availableQuantity, setAvailableQuantity] = useState(foundQuantity ? foundQuantity.quantity : 0);
 
-    const [count, setCount] = useState(0);
-
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
