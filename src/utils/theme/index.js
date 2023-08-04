@@ -15,6 +15,7 @@ let theme = createTheme({
       400: "#808080",
       500: "#f1f1f1",
       600: "#8b8b8b",
+      700: "#808080",
     },
     error: {
       main: red.A400,

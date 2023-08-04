@@ -223,6 +223,7 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked }) {
                                 position={"relative"}
                                 sx={{ cursor: "pointer" }}
                                 onClick={toggleShowSizeTable}
+
                             >
                                 <Typography p={1} ml={1} fontWeight={"bold"}>{selectedSize}</Typography>
                                 <KeyboardArrowDownIcon sx={{ mt: 1, mr: 1, fontWeight: "bold" }} />
@@ -311,9 +312,10 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked }) {
                                 <Box
                                     position={"absolute"}
                                     top={"100%"}
-                                    left={0}
                                     border={"1px solid"}
                                     zIndex={1}
+                                    left={{ sm: 0 }}
+                                    right={{ xs: "1%" }}
                                     bgcolor={"white"}
                                     width={{ xs: 185, md: 200 }}
                                 >
