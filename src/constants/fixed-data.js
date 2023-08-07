@@ -1,0 +1,2 @@
+const MAX_QUANTITY_ALLOWED = 12;
+export { MAX_QUANTITY_ALLOWED };

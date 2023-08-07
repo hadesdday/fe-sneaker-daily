@@ -19,4 +19,13 @@ export const removeFromCartSuccess = (productId) =>
 export const removeFromCartFailed = (error) =>
   createAction(CART_ACTION_TYPES.REMOVE_FROM_CART_FAILED, { error });
 
+export const updateCartStart = (item) =>
+  createAction(CART_ACTION_TYPES.UPDATE_CART_START, { item });
+
+export const updateCartSuccess = (item) =>
+  createAction(CART_ACTION_TYPES.UPDATE_CART_SUCCESS, { item });
+
+export const updateCartFailed = (error) =>
+  createAction(CART_ACTION_TYPES.UPDATE_CART_FAILED, { error });
+
 export const clearCartAction = () => createAction(CART_ACTION_TYPES.CLEAR_CART);

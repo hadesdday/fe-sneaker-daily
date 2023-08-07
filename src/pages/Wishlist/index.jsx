@@ -4,8 +4,9 @@ import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import WishListItem from '../../compositions/wishlist-item';
 import { COLOR_TABLE } from '../../constants/dummy-data';
-import { addToCartStart } from '../../store/cart/cart.action';
+import { addToCartStart, updateCartStart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
+import { MAX_QUANTITY_ALLOWED } from '../../constants';
 
 function Wishlist(props) {
     //demo data only
@@ -65,8 +66,17 @@ function Wishlist(props) {
 
     function handleAddToCart(item) {
         //demo only (add the whole item with specific schema to cart then (productId, color, size, quantity))
-        if (currentCartItems.find(cartItem => cartItem.productId === item.productId)) {
-            toast.error("Sản phẩm đã có trong giỏ hàng !");
+        const foundItem = currentCartItems.find(cartItem => (cartItem.productId === item.productId
+            && cartItem.color === item.color && cartItem.size === item.size));
+        if (foundItem) {
+            const quantityAfterChanged = foundItem.quantity + item.quantity;
+            if (quantityAfterChanged > MAX_QUANTITY_ALLOWED) {
+                toast.error(`Số lượng sản phẩm vượt quá số lượng cho phép !`);
+            } else {
+                foundItem.quantity += item.quantity;
+                dispatch(updateCartStart(foundItem));
+                toast.success("Cập nhật số lượng thành công !");
+            }
         } else {
             dispatch(addToCartStart(item));
             toast.success("Thêm vào giỏ hàng thành công !");
