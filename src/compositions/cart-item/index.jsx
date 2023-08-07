@@ -158,7 +158,7 @@ function CartItem({ item, isLastIndex, indexing, handleAddToWishlist, liked, han
     }
 
     function onDeleteCartItem() {
-        handleDeleteCartItem(productId);
+        handleDeleteCartItem(indexing);
         toast.success("Xóa sản phẩm thành công !");
     }
 

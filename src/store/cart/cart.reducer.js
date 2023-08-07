@@ -30,7 +30,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (item) => item.productId !== payload.productId
+          (item, index) => index !== payload.indexing
         ),
         isLoading: false,
       };

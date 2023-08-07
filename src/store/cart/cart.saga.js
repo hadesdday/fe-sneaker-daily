@@ -51,9 +51,9 @@ export function* onAddToCartStart() {
   yield takeLatest(CART_ACTION_TYPES.ADD_TO_CART_START, addToCart);
 }
 
-export function* removeFromCart({ payload: { productId } }) {
+export function* removeFromCart({ payload: { indexing } }) {
   try {
-    yield put(removeFromCartSuccess(productId));
+    yield put(removeFromCartSuccess(indexing));
   } catch (error) {
     yield put(removeFromCartFailed(error));
   }

@@ -10,11 +10,11 @@ export const addToCartSuccess = (item) =>
 export const addToCartFailed = (error) =>
   createAction(CART_ACTION_TYPES.ADD_TO_CART_FAILED, { error });
 
-export const removeFromCartStart = (productId) =>
-  createAction(CART_ACTION_TYPES.REMOVE_FROM_CART_START, { productId });
+export const removeFromCartStart = (indexing) =>
+  createAction(CART_ACTION_TYPES.REMOVE_FROM_CART_START, { indexing });
 
-export const removeFromCartSuccess = (productId) =>
-  createAction(CART_ACTION_TYPES.REMOVE_FROM_CART_SUCCESS, { productId });
+export const removeFromCartSuccess = (indexing) =>
+  createAction(CART_ACTION_TYPES.REMOVE_FROM_CART_SUCCESS, { indexing });
 
 export const removeFromCartFailed = (error) =>
   createAction(CART_ACTION_TYPES.REMOVE_FROM_CART_FAILED, { error });

@@ -76,8 +76,8 @@ function CartPage(props) {
         console.log("add to wishlist", productId);
     }
 
-    function handleDeleteCartItem(productId) {
-        dispatch(removeFromCartStart(productId));
+    function handleDeleteCartItem(indexing) {
+        dispatch(removeFromCartStart(indexing));
     }
 
     const { control, handleSubmit, formState: { isSubmitting } } = useForm({
