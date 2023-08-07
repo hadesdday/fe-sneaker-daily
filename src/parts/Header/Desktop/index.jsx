@@ -308,7 +308,7 @@ function HeaderDesktop() {
                                                         to="/product-list?gender=men"
                                                         color={"white"}
                                                         fontWeight={"bold"}
-                                                        variant='h5'
+                                                        variant='h6'
                                                     >
                                                         NỔI BẬT
                                                     </MuiLink>
@@ -361,7 +361,7 @@ function HeaderDesktop() {
                                                         to="/product-list?gender=all"
                                                         color={"white"}
                                                         fontWeight={"bold"}
-                                                        variant='h5'
+                                                        variant='h6'
                                                     >
                                                         GIÀY
                                                     </MuiLink>
@@ -422,7 +422,7 @@ function HeaderDesktop() {
                                                         to="/product-list"
                                                         color={"white"}
                                                         fontWeight={"bold"}
-                                                        variant='h5'
+                                                        variant='h6'
                                                     >
                                                         THỜI TRANG & PHỤ KIỆN
                                                     </MuiLink>
@@ -539,7 +539,7 @@ function HeaderDesktop() {
                                                         to="/product-list"
                                                         color={"white"}
                                                         fontWeight={"bold"}
-                                                        variant='h5'
+                                                        variant='h6'
                                                     >
                                                         NỔI BẬT
                                                     </MuiLink>
@@ -592,7 +592,7 @@ function HeaderDesktop() {
                                                         to="/product-list?gender=all"
                                                         color={"white"}
                                                         fontWeight={"bold"}
-                                                        variant='h5'
+                                                        variant='h6'
                                                     >
                                                         GIÀY
                                                     </MuiLink>
@@ -653,7 +653,7 @@ function HeaderDesktop() {
                                                         to="/product-list?gender=all"
                                                         color={"white"}
                                                         fontWeight={"bold"}
-                                                        variant='h5'
+                                                        variant='h6'
                                                     >
                                                         THỜI TRANG & PHỤ KIỆN
                                                     </MuiLink>
