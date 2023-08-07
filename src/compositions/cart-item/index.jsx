@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import { generateArrayByMax, getMoneyFormat } from '../../utils';
+import { toast } from 'react-hot-toast';
 
 function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDeleteCartItem }) {
     const { productId, color, size, quantity } = item;
@@ -149,6 +150,7 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDel
 
     function onDeleteCartItem() {
         handleDeleteCartItem(productId);
+        toast.success("Xóa sản phẩm thành công !");
     }
 
     const colors = [
