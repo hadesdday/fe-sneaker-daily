@@ -13,6 +13,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case CART_ACTION_TYPES.REMOVE_FROM_CART_START:
     case CART_ACTION_TYPES.ADD_TO_CART_START:
     case CART_ACTION_TYPES.UPDATE_CART_START:
+    case CART_ACTION_TYPES.UPDATE_CART_AT_INDEX:
       return {
         ...state,
         isLoading: true,
@@ -47,9 +48,19 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
       };
 
+    case CART_ACTION_TYPES.UPDATE_CART_AT_INDEX_SUCCESS:
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item, index) =>
+          index === payload.index ? payload.item : item
+        ),
+        isLoading: false,
+      };
+
     case CART_ACTION_TYPES.ADD_TO_CART_FAILED:
     case CART_ACTION_TYPES.REMOVE_FROM_CART_FAILED:
     case CART_ACTION_TYPES.UPDATE_CART_FAILED:
+    case CART_ACTION_TYPES.UPDATE_CART_AT_INDEX_FAILED:
       return {
         ...state,
         isLoading: false,

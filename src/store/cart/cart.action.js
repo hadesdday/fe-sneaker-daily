@@ -28,4 +28,13 @@ export const updateCartSuccess = (item) =>
 export const updateCartFailed = (error) =>
   createAction(CART_ACTION_TYPES.UPDATE_CART_FAILED, { error });
 
+export const updateCartAtIndexStart = (item, index) =>
+  createAction(CART_ACTION_TYPES.UPDATE_CART_AT_INDEX, { item, index });
+
+export const updateCartAtIndexSuccess = (item, index) =>
+  createAction(CART_ACTION_TYPES.UPDATE_CART_AT_INDEX_SUCCESS, { item, index });
+
+export const updateCartAtIndexFailed = (error) =>
+  createAction(CART_ACTION_TYPES.UPDATE_CART_AT_INDEX_FAILED, { error });
+
 export const clearCartAction = () => createAction(CART_ACTION_TYPES.CLEAR_CART);

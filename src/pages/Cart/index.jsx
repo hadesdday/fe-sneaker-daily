@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import CustomTextField from '../../components/textfield';
 import { CartItem } from '../../compositions';
 import { COLOR_TABLE } from '../../constants/dummy-data';
-import { removeFromCartStart } from '../../store/cart/cart.action';
+import { removeFromCartStart, updateCartAtIndexStart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { getMoneyFormat } from '../../utils';
 
@@ -94,6 +94,10 @@ function CartPage(props) {
                 resolve(data);
             }, 1000);
         })
+    }
+
+    function handleUpdateCartItemInfo(item, index) {
+        dispatch(updateCartAtIndexStart(item, index));
     }
 
     return (
@@ -202,6 +206,8 @@ function CartPage(props) {
                                         handleAddToWishlist={handleAddToWishlist}
                                         handleDeleteCartItem={handleDeleteCartItem}
                                         isLastIndex={index === cartItems.length - 1}
+                                        indexing={index}
+                                        handleUpdateCartItemInfo={handleUpdateCartItemInfo}
                                         //demo only
                                         liked={index % 2 === 0}
                                     />

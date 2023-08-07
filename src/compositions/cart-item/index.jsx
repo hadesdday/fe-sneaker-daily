@@ -5,12 +5,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, Button, Grid, Stack, Typography, Zoom } from '@mui/material';
 import { useClickAway } from '@uidotdev/usehooks';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import { generateArrayByMax, getMoneyFormat } from '../../utils';
-import { toast } from 'react-hot-toast';
 
-function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDeleteCartItem }) {
+function CartItem({ item, isLastIndex, indexing, handleAddToWishlist, liked, handleDeleteCartItem, handleUpdateCartItemInfo }) {
     const { productId, color, size, quantity } = item;
 
     const [currentColor, setCurrentColor] = useState(COLOR_TABLE.find(colorItem => colorItem.value === color));
@@ -132,10 +132,19 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDel
         const controller = new AbortController();
         const signal = controller.signal;
         console.log("fetch available size by color here");
+
         return () => {
             controller.abort();
         }
     }, [currentColor]);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        handleChangeInfo();
+        return () => {
+            controller.abort();
+        }
+    }, [selectedSize, currentColor, selectedQuantity])
 
     function getFinalPrice() {
         if (item.saleOff > 0) {
@@ -157,6 +166,16 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDel
         COLOR_TABLE.find(color => color.value === "navy"),
         COLOR_TABLE.find(color => color.value === "bluewash"),
     ];
+
+    function handleChangeInfo() {
+        const updatedItem = {
+            productId: productId,
+            color: currentColor.value,
+            size: selectedSize,
+            quantity: selectedQuantity
+        };
+        handleUpdateCartItemInfo(updatedItem, indexing);
+    }
 
     return (
         <Grid container borderBottom={!isLastIndex ? "2px dashed" : "2px solid"} py={4}>
@@ -433,4 +452,4 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDel
     );
 }
 
-export default WishListItem;
+export default CartItem;

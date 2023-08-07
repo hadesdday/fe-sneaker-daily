@@ -5,10 +5,24 @@ import {
   clearCartAction,
   removeFromCartFailed,
   removeFromCartSuccess,
+  updateCartAtIndexFailed,
+  updateCartAtIndexSuccess,
   updateCartFailed,
   updateCartSuccess,
 } from "./cart.action";
 import { CART_ACTION_TYPES } from "./cart.types";
+
+export function* updateCartAtIndex({ payload: { item, index } }) {
+  try {
+    yield put(updateCartAtIndexSuccess(item, index));
+  } catch (error) {
+    yield put(updateCartAtIndexFailed(error));
+  }
+}
+
+export function* onUpdateCartAtIndexStart() {
+  yield takeLatest(CART_ACTION_TYPES.UPDATE_CART_AT_INDEX, updateCartAtIndex);
+}
 
 export function* updateCart({ payload: { item } }) {
   try {
@@ -63,5 +77,6 @@ export function* cartSaga() {
     call(onRemoveFromCartStart),
     call(onClearCart),
     call(onUpdateCartStart),
+    call(onUpdateCartAtIndexStart),
   ]);
 }
