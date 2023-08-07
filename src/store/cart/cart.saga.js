@@ -3,7 +3,8 @@ import {
   addToCartFailed,
   addToCartSuccess,
   clearCartAction,
-  removeFromCartAction,
+  removeFromCartFailed,
+  removeFromCartSuccess,
 } from "./cart.action";
 import { CART_ACTION_TYPES } from "./cart.types";
 
@@ -23,11 +24,15 @@ export function* onAddToCartStart() {
 }
 
 export function* removeFromCart({ payload: { productId } }) {
-  yield put(removeFromCartAction(productId));
+  try {
+    yield put(removeFromCartSuccess(productId));
+  } catch (error) {
+    yield put(removeFromCartFailed(error));
+  }
 }
 
-export function* onRemoveFromCart() {
-  yield takeLatest(CART_ACTION_TYPES.REMOVE_FROM_CART_ACTION, removeFromCart);
+export function* onRemoveFromCartStart() {
+  yield takeLatest(CART_ACTION_TYPES.REMOVE_FROM_CART_START, removeFromCart);
 }
 
 export function* clearCart() {
@@ -41,7 +46,7 @@ export function* onClearCart() {
 export function* cartSaga() {
   yield all([
     call(onAddToCartStart),
-    call(onRemoveFromCart),
+    call(onRemoveFromCartStart),
     call(onClearCart),
   ]);
 }

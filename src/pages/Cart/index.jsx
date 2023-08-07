@@ -1,7 +1,7 @@
 import { Box, Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,10 +11,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import CustomTextField from '../../components/textfield';
 import { CartItem } from '../../compositions';
 import { COLOR_TABLE } from '../../constants/dummy-data';
+import { removeFromCartStart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { getMoneyFormat } from '../../utils';
 
 function CartPage(props) {
+    const dispatch = useDispatch();
+
     //demo data only ( get from api when backend implemented )
     const recommendedItems = [
         {
@@ -71,6 +74,10 @@ function CartPage(props) {
 
     function handleAddToWishlist(productId) {
         console.log("add to wishlist", productId);
+    }
+
+    function handleDeleteCartItem(productId) {
+        dispatch(removeFromCartStart(productId));
     }
 
     const { control, handleSubmit, formState: { isSubmitting } } = useForm({
@@ -189,6 +196,7 @@ function CartPage(props) {
                         key={index}
                         item={item}
                         handleAddToWishlist={handleAddToWishlist}
+                        handleDeleteCartItem={handleDeleteCartItem}
                         isLastIndex={index === cartItems.length - 1}
                         //demo only
                         liked={index % 2 === 0}

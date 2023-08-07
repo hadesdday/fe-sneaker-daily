@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import { generateArrayByMax, getMoneyFormat } from '../../utils';
 
-function WishListItem({ item, isLastIndex, handleAddToWishlist, liked }) {
+function WishListItem({ item, isLastIndex, handleAddToWishlist, liked, handleDeleteCartItem }) {
     const { productId, color, size, quantity } = item;
 
     const [currentColor, setCurrentColor] = useState(COLOR_TABLE.find(colorItem => colorItem.value === color));
@@ -145,6 +145,10 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked }) {
 
     function onAddToWishlist() {
         handleAddToWishlist(productId);
+    }
+
+    function onDeleteCartItem() {
+        handleDeleteCartItem(productId);
     }
 
     const colors = [
@@ -415,7 +419,9 @@ function WishListItem({ item, isLastIndex, handleAddToWishlist, liked }) {
                             opacity: 0.8,
                             border: "none",
                         }
-                    }}>
+                    }}
+                        onClick={onDeleteCartItem}
+                    >
                         <DeleteOutlineIcon fontSize='medium' />
                     </Button>
                 </Stack>

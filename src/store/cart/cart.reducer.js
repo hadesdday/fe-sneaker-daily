@@ -30,13 +30,28 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         error: payload.error,
       };
 
-    case CART_ACTION_TYPES.REMOVE_FROM_CART:
+    case CART_ACTION_TYPES.REMOVE_FROM_CART_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case CART_ACTION_TYPES.REMOVE_FROM_CART_SUCCESS:
       return {
         ...state,
         cartItems: state.cartItems.filter(
           (item) => item.productId !== payload.productId
         ),
+        isLoading: false,
       };
+
+    case CART_ACTION_TYPES.REMOVE_FROM_CART_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.error,
+      };
+
     case CART_ACTION_TYPES.CLEAR_CART:
       return {
         ...state,
