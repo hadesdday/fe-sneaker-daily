@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Box, Button, Card, CardContent, CircularProgress, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CircularProgress, IconButton, InputAdornment, Link as MuiLink, Stack, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -102,8 +102,8 @@ function SigninPage(props) {
                             <Box component={Link} to={"/forgot-password"}>
                                 <Typography variant={"body2"} about="typographyLink">Quên mật khẩu?</Typography>
                             </Box>
-                            <Box component={Link} to={"/signup"}>
-                                <Typography variant={"body2"} about="typographyLink">Chưa có tài khoản?</Typography>
+                            <Box component={Link} to={"/signin-otp"}>
+                                <Typography variant={"body2"} about="typographyLink">Đăng nhập với OTP</Typography>
                             </Box>
                         </Stack>
                         <Stack
@@ -132,7 +132,6 @@ function SigninPage(props) {
                         </Stack>
                         <Stack direction={"row"} justifyContent={"center"} spacing={1} pt={2} pb={4}>
                             <Box flexGrow={1}>
-
                                 <LoginSocialGoogle
                                     client_id={import.meta.env.VITE_GOOGLE_APP_ID || ''}
                                     onLoginStart={onLoginStart}
@@ -151,7 +150,6 @@ function SigninPage(props) {
                                 </LoginSocialGoogle>
                             </Box>
                             <Box flexGrow={1}>
-
                                 <LoginSocialFacebook
                                     appId={import.meta.env.VITE_FACEBOOK_APP_ID || ''}
                                     fieldsProfile={
@@ -171,10 +169,13 @@ function SigninPage(props) {
                                 </LoginSocialFacebook>
                             </Box>
                         </Stack>
+                        <Typography textAlign={"center"}>Chưa có tài khoản?
+                            <MuiLink component={Link} to={"/signup"} color={"primary.main"}> Đăng ký</MuiLink>
+                        </Typography>
                     </CardContent>
                 </Card>
             </Box>
-        </Stack >
+        </Stack>
     );
 }
 

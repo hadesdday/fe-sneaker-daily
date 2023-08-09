@@ -19,4 +19,24 @@ const useSigninFormSchema = () => {
   });
 };
 
-export { useSigninFormSchema };
+const useSigninOtpFormSchema = () => {
+  return yup.object().shape({
+    email: yup
+      .string()
+      .required("Vui lòng nhập Email")
+      .email("Vui lòng nhập Email hợp lệ"),
+  });
+};
+
+const useClientOtpFormSchema = () => {
+  return yup.object().shape({
+    code1: yup.number().required(),
+    code2: yup.number().required(),
+    code3: yup.number().required(),
+    code4: yup.number().required(),
+    code5: yup.number().required(),
+    code6: yup.number().required(),
+  });
+};
+
+export { useSigninFormSchema, useSigninOtpFormSchema, useClientOtpFormSchema };

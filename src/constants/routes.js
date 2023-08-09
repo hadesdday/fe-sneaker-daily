@@ -1,6 +1,7 @@
 import TestComponent from "../compositions/test-component";
 import { ForgotPasswordPage } from "../pages/Authentication";
 import SigninPage from "../pages/Authentication/Signin";
+import SigninOtpPage from "../pages/Authentication/SigninOTP";
 import SignupPage from "../pages/Authentication/Signup";
 import CartPage from "../pages/Cart";
 import ProductDetailPage from "../pages/ProductDetail";
@@ -18,6 +19,10 @@ export const ROUTE_LIST = [
   {
     path: "/signin",
     component: SigninPage,
+  },
+  {
+    path: "/signin-otp",
+    component: SigninOtpPage,
   },
   {
     path: "/signup",
