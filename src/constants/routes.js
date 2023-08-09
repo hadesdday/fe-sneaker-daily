@@ -1,4 +1,5 @@
 import TestComponent from "../compositions/test-component";
+import { ForgotPasswordPage } from "../pages/Authentication";
 import SigninPage from "../pages/Authentication/Signin";
 import SignupPage from "../pages/Authentication/Signup";
 import CartPage from "../pages/Cart";
@@ -21,6 +22,10 @@ export const ROUTE_LIST = [
   {
     path: "/signup",
     component: SignupPage,
+  },
+  {
+    path: "/forgot-password",
+    component: ForgotPasswordPage,
   },
   {
     path: "/wishlist",

@@ -1,11 +1,14 @@
-import { Box, Button, Card, CardContent, CircularProgress, Container, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
-import React, { useRef, useState } from 'react';
-import Banner from "../../../assets/banner/banner-1.jpg";
-import { useSigninFormSchema } from '../../../hooks';
-import { useForm } from 'react-hook-form';
-import CustomTextField from '../../../components/textfield';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, Button, Card, CardContent, CircularProgress, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import React, { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+import Banner from "../../../assets/banner/banner-1.jpg";
+import { LoginFacebookButton, LoginGoogleButton } from '../../../components';
+import CustomTextField from '../../../components/textfield';
+import { useSigninFormSchema } from '../../../hooks';
 
 function SigninPage(props) {
     const schema = useSigninFormSchema();
@@ -33,10 +36,9 @@ function SigninPage(props) {
         setShowPassword((show) => !show);
     };
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
+    const onLoginStart = useCallback(() => {
+        alert('login start');
+    }, []);
 
     return (
         <Stack
@@ -73,7 +75,6 @@ function SigninPage(props) {
                                             <IconButton
                                                 aria-label="toggle password visibility"
                                                 onClick={handleClickShowPassword}
-                                                // onMouseDown={handleMouseDownPassword}
                                                 edge="end"
                                             >
                                                 {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -97,10 +98,83 @@ function SigninPage(props) {
                                 đăng nhập
                             </Button>
                         </Stack>
+                        <Stack direction={"row"} justifyContent={"space-between"} pt={1} pb={2}>
+                            <Box component={Link} to={"/forgot-password"}>
+                                <Typography variant={"body2"} about="typographyLink">Quên mật khẩu?</Typography>
+                            </Box>
+                            <Box component={Link} to={"/signup"}>
+                                <Typography variant={"body2"} about="typographyLink">Chưa có tài khoản?</Typography>
+                            </Box>
+                        </Stack>
+                        <Stack
+                            direction={"row"}
+                            alignItems={"center"}
+                        >
+                            <Box sx={{
+                                height: "1px",
+                                width: "100%",
+                                bgcolor: "secondary.800"
+                            }} />
+                            <Typography
+                                variant={"body2"}
+                                sx={{
+                                    px: 3,
+                                    textTransform: "uppercase",
+                                    color: "secondary.300"
+                                }}>
+                                Hoặc
+                            </Typography>
+                            <Box sx={{
+                                height: "1px",
+                                width: "100%",
+                                bgcolor: "secondary.800"
+                            }} />
+                        </Stack>
+                        <Stack direction={"row"} justifyContent={"center"} spacing={1} pt={2} pb={4}>
+                            <Box flexGrow={1}>
+
+                                <LoginSocialGoogle
+                                    client_id={import.meta.env.VITE_GOOGLE_APP_ID || ''}
+                                    onLoginStart={onLoginStart}
+                                    redirect_uri={import.meta.env.VITE_REDIRECT_URI || ''}
+                                    scope="openid profile email"
+                                    discoveryDocs="claims_supported"
+                                    access_type="offline"
+                                    onResolve={({ provider, data }) => {
+                                        console.log(`login ${provider} success`, data);
+                                    }}
+                                    onReject={err => {
+                                        console.log(err);
+                                    }}
+                                >
+                                    <LoginGoogleButton />
+                                </LoginSocialGoogle>
+                            </Box>
+                            <Box flexGrow={1}>
+
+                                <LoginSocialFacebook
+                                    appId={import.meta.env.VITE_FACEBOOK_APP_ID || ''}
+                                    fieldsProfile={
+                                        'id,first_name,last_name,middle_name,name,name_format,picture,short_name,email,gender'
+                                    }
+                                    onLoginStart={onLoginStart}
+                                    // onLogoutSuccess={onLogoutSuccess}
+                                    redirect_uri={import.meta.env.VITE_REDIRECT_URI || ''}
+                                    onResolve={({ provider, data }) => {
+                                        console.log(`login ${provider} success`, data);
+                                    }}
+                                    onReject={err => {
+                                        console.log(err);
+                                    }}
+                                >
+                                    <LoginFacebookButton />
+                                </LoginSocialFacebook>
+                            </Box>
+                        </Stack>
                     </CardContent>
                 </Card>
             </Box>
-        </Stack>
+        </Stack >
     );
 }
 
