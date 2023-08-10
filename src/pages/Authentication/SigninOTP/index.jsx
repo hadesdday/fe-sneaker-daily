@@ -25,7 +25,7 @@ function SigninOtpPage(props) {
     async function handleSubmitForm(data) {
         await new Promise((resolve) => {
             setTimeout(() => {
-                console.log("call api here");
+                console.log("call api check if called send otp over 6 time => block 24 hours + not send otp");
                 console.log(data);
                 resolve(data);
             }, 1000);
