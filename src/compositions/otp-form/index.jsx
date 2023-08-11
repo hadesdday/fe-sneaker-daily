@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OtpField } from '../../components';
 import { useClientOtpFormSchema } from '../../hooks';
@@ -19,7 +19,6 @@ function OtpForm({ submittedEmail }) {
             code5: "",
             code6: ""
         },
-        mode: "onBlur",
         resolver: yupResolver(schema)
     });
 
@@ -72,10 +71,9 @@ function OtpForm({ submittedEmail }) {
     }
 
     function handleOnKeyDown(e) {
-        //prevent default backspace (if not, it will remove the previous input value + the current focused input for case input at the end)
-        e.preventDefault();
-
         if (e.key === "Backspace") {
+            //prevent default backspace (if not, it will remove the previous input value + the current focused input for case input at the end)
+            e.preventDefault();
             const currentValues = getValues();
             const currentKey = e.target.name;
 
@@ -101,10 +99,14 @@ function OtpForm({ submittedEmail }) {
             if (currentKey !== "code1")
                 setFocus(`code${parseInt(currentKey.replace("code", "")) - 1}`);
         } else if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(parseInt(e.key))) {
+            //prevent default backspace (if not, it will remove the previous input value + the current focused input for case input at the end)
+            e.preventDefault();
             let key = e.target.name;
             setValue(key, e.key);
             if (key !== `code${MAX_CODE_LENGTH}`) {
                 setFocus(`code${parseInt(key.replace("code", "")) + 1}`);
+            } else if (key === `code${MAX_CODE_LENGTH}`) {
+                setFocus(`code1`);
             }
         }
     }
