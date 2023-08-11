@@ -23,8 +23,8 @@ const useSigninOtpFormSchema = () => {
   return yup.object().shape({
     email: yup
       .string()
-      .required("Vui lòng nhập Email")
-      .email("Vui lòng nhập Email hợp lệ"),
+      .required("Vui lòng nhập email")
+      .email("Vui lòng nhập email hợp lệ"),
   });
 };
 
@@ -39,4 +39,29 @@ const useClientOtpFormSchema = () => {
   });
 };
 
-export { useSigninFormSchema, useSigninOtpFormSchema, useClientOtpFormSchema };
+const useSignupFormSchema = () => {
+  return yup.object().shape({
+    username: yup
+      .string()
+      .required("Vui lòng nhập Email")
+      .email("Vui lòng nhập email hợp lệ"),
+    password: yup
+      .string()
+      .required("Vui lòng nhập mật khẩu")
+      .matches(
+        /^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*?])[A-Za-z0-9!@#$%^&*?]{8,}$/,
+        "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt"
+      ),
+    repassword: yup
+      .string()
+      .required("Vui lòng nhập mật khẩu")
+      .equals([yup.ref("password")], "Mật khẩu không khớp"),
+  });
+};
+
+export {
+  useSigninFormSchema,
+  useSigninOtpFormSchema,
+  useClientOtpFormSchema,
+  useSignupFormSchema,
+};
