@@ -72,10 +72,10 @@ function OtpForm({ submittedEmail }) {
     }
 
     function handleOnKeyDown(e) {
+        //prevent default backspace (if not, it will remove the previous input value + the current focused input for case input at the end)
         e.preventDefault();
-        if (e.key === "Backspace") {
-            //prevent default backspace (if not, it will remove the previous input value + the current focused input for case input at the end)
 
+        if (e.key === "Backspace") {
             const currentValues = getValues();
             const currentKey = e.target.name;
 
