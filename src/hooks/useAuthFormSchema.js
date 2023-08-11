@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { MAX_CODE_LENGTH } from "../constants/fixed-data";
 
 const useSigninFormSchema = () => {
   return yup.object().shape({
@@ -59,9 +60,41 @@ const useSignupFormSchema = () => {
   });
 };
 
+const useForgotPasswordFormSchema = () => {
+  return yup.object().shape({
+    email: yup
+      .string()
+      .required("Vui lòng nhập Email")
+      .email("Vui lòng nhập email hợp lệ"),
+  });
+};
+
+const useResetPasswordFormSchema = () => {
+  return yup.object().shape({
+    username: yup
+      .string()
+      .required("Vui lòng nhập Email")
+      .email("Vui lòng nhập email hợp lệ"),
+    code: yup.string().required("Vui lòng nhập mã OTP").length(MAX_CODE_LENGTH),
+    password: yup
+      .string()
+      .required("Vui lòng nhập mật khẩu")
+      .matches(
+        /^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*?])[A-Za-z0-9!@#$%^&*?]{8,}$/,
+        "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt"
+      ),
+    repassword: yup
+      .string()
+      .required("Vui lòng nhập mật khẩu")
+      .equals([yup.ref("password")], "Mật khẩu không khớp"),
+  });
+};
+
 export {
   useSigninFormSchema,
   useSigninOtpFormSchema,
   useClientOtpFormSchema,
   useSignupFormSchema,
+  useForgotPasswordFormSchema,
+  useResetPasswordFormSchema,
 };

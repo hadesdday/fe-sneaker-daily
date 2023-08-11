@@ -5,3 +5,4 @@ export * from "./home-categories";
 export * from "./pd-product-carousels";
 export { default as CartItem } from "./cart-item";
 export { default as OtpForm } from "./otp-form";
+export { default as ResetPasswordForm } from "./reset-password-form";

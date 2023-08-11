@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OtpField } from '../../components';
+import { FORGOT_PASSWORD_FORM_TYPE, MAX_CODE_LENGTH, MAX_COUNTER_TIME } from '../../constants/fixed-data';
 import { useClientOtpFormSchema } from '../../hooks';
 import { generateArrayByMax } from '../../utils';
-import { MAX_CODE_LENGTH, MAX_COUNTER_TIME } from '../../constants/fixed-data';
 
-function OtpForm({ submittedEmail }) {
+function OtpForm({ submittedEmail, type, setValidCode }) {
     const schema = useClientOtpFormSchema();
 
     const { control, handleSubmit, formState: { isSubmitting, isValid }, setValue, reset, getValues, setFocus } = useForm({
@@ -33,6 +33,11 @@ function OtpForm({ submittedEmail }) {
                 }, "").split("").join("");
 
                 console.log("code", { finalCode });
+                //demo only
+                if (type === FORGOT_PASSWORD_FORM_TYPE && finalCode === "123456") {
+                    console.log("ok");
+                    setValidCode(true);
+                }
                 resolve(data);
             }, 1000);
         })

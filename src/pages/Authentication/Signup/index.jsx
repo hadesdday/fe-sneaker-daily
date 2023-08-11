@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box, Button, Card, CardContent, CircularProgress, IconButton, InputAdornment, Link as MuiLink, Stack, Typography } from '@mui/material';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import Banner from "../../../assets/banner/banner-1.jpg";
 import { LoginFacebookButton, LoginGoogleButton } from '../../../components';
 import CustomTextField from '../../../components/textfield';
-import { useSignupFormSchema } from '../../../hooks';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { OtpForm } from '../../../compositions';
+import { useSignupFormSchema } from '../../../hooks';
 
 function SignupPage(props) {
     const schema = useSignupFormSchema();
@@ -207,7 +207,7 @@ function SignupPage(props) {
                                     <ArrowBackIcon sx={{ color: "primary.main" }} />
                                 </IconButton>
                                 <Box width={"80%"}>
-                                    <Typography variant='h5' textAlign={"center"}>Xác thực tài khoảng</Typography>
+                                    <Typography variant='h5' textAlign={"center"}>Xác thực tài khoản</Typography>
                                 </Box>
                             </Stack>
                             <Typography textAlign={"center"} pt={3}>Mã xác thực đã được gửi đến mail của bạn. Vui lòng kiểm tra hòm thư của bạn.</Typography>
