@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Card, CardContent, CircularProgress, Link as MuiLink, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CircularProgress, IconButton, Link as MuiLink, Stack, Typography } from '@mui/material';
 import React, { Fragment, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -9,11 +9,12 @@ import { LoginFacebookButton, LoginGoogleButton } from '../../../components';
 import CustomTextField from '../../../components/textfield';
 import { OtpForm } from '../../../compositions';
 import { useSigninOtpFormSchema } from '../../../hooks';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function SigninOtpPage(props) {
     const schema = useSigninOtpFormSchema();
 
-    const { control, handleSubmit, formState: { isSubmitting, isSubmitSuccessful }, getValues } = useForm({
+    const { control, handleSubmit, formState: { isSubmitting, isSubmitSuccessful }, getValues, reset } = useForm({
         defaultValues: {
             email: ""
         },
@@ -35,6 +36,10 @@ function SigninOtpPage(props) {
     const onLoginStart = useCallback(() => {
         alert('login start');
     }, []);
+
+    function onResetForm() {
+        reset();
+    }
 
     return (
         <Stack
@@ -157,7 +162,14 @@ function SigninOtpPage(props) {
                             //if first form submitted show otp form
                             :
                             <Fragment>
-                                <Typography variant='h5' textAlign={"center"}>Nhập mã xác nhận</Typography>
+                                <Stack direction={"row"} alignItems={"center"}>
+                                    <IconButton onClick={onResetForm}>
+                                        <ArrowBackIcon sx={{ color: "primary.main" }} />
+                                    </IconButton>
+                                    <Box width={"80%"}>
+                                        <Typography variant='h5' textAlign={"center"}>Nhập mã xác nhận</Typography>
+                                    </Box>
+                                </Stack>
                                 <Typography textAlign={"center"} pt={3}>Mã xác nhận đã được gửi đến mail của bạn. Vui lòng kiểm tra hòm thư của bạn.</Typography>
                                 {/* otp form here */}
                                 <OtpForm submittedEmail={submittedEmail} />
