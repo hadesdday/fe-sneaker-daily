@@ -15,7 +15,8 @@ function ScrollToTop(props) {
                     alignItems: "center",
                     justifyContent: "center",
                     bgcolor: "secondary.400",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    zIndex: 2,
                 }}
                 onClick={props.scrollToTop}
             >
