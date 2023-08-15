@@ -1,20 +1,16 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import { ROUTE_LIST } from "./constants/routes";
 import AppContainer from "./layouts/Container";
 import Home from "./pages/Home";
 import { Box } from "@mui/material";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "./store/user/user.selector";
 
 function App() {
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(checkUserSession());
-  // }, []);
-
-  // const currentUser = useSelector(selectCurrentUser);
-  // console.log("user", currentUser)
+  const currentUser = useSelector(selectCurrentUser);
 
   const { pathname } = useLocation();
   useEffect(() => {
@@ -31,14 +27,18 @@ function App() {
             {
               ROUTE_LIST.map((route) => {
                 const Page = route.component;
-                return (
-                  <Route path={route.path} key={route.path} element={
-                    <Box component={"section"}>
-                      <Page />
-                    </Box>
-                  }
-                  />
-                )
+                if (route.path)
+                  return (
+                    <Route path={route.path} key={route.path} element={
+                      <Box component={"section"}>
+                        {(route.redirectIfLoggedIn && currentUser) ? <Navigate to="/" replace /> :
+                          (route.requireLogin && !currentUser) ? <Navigate to="/signin" replace /> :
+                            <Page />
+                        }
+                      </Box>
+                    }
+                    />
+                  )
               }
               )
             }

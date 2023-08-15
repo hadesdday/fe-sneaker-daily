@@ -19,6 +19,7 @@ function SignupPage(props) {
         defaultValues: {
             username: "",
             password: "",
+            fullname: "",
             repassword: ""
         },
         resolver: yupResolver(schema)
@@ -78,6 +79,11 @@ function SignupPage(props) {
                                     name='username'
                                     control={control}
                                     label='Email'
+                                />
+                                <CustomTextField
+                                    name='fullname'
+                                    control={control}
+                                    label='Họ và Tên'
                                 />
                                 <CustomTextField
                                     name='password'

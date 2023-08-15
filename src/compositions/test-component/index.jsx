@@ -1,7 +1,8 @@
-import { Button, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Button, Stack } from '@mui/material';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../store/user/user.selector';
+import { emailSignInStart, logOutSuccess, signInFailed, signInSuccess } from '../../store/user/user.action';
 
 function TestComponent(props) {
     // const dispatch = useDispatch();
@@ -57,25 +58,46 @@ function TestComponent(props) {
     //     })
     // }
 
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
+    // useEffect(() => {
+    //     const controller = new AbortController();
+    //     const signal = controller.signal;
 
-        fetch("https://jsonplaceholder.typicode.com/todos/1", { signal })
-            .then(response => response.json())
-            .then((data) => {
-                console.log("call render", data);
-            });
-        return () => {
-            controller.abort();
-        }
-    }, [count]);
+    //     fetch("https://jsonplaceholder.typicode.com/todos/1", { signal })
+    //         .then(response => response.json())
+    //         .then((data) => {
+    //             console.log("call render", data);
+    //         });
+    //     return () => {
+    //         controller.abort();
+    //     }
+    // }, [count]);
+
+    const user = useSelector(selectCurrentUser);
+
+    const dispatch = useDispatch();
+
+    function signinstart() {
+        dispatch(emailSignInStart({
+            email: "hello@gmail.com",
+            password: "123456"
+        }))
+    }
+
+    function signinfailed() {
+        dispatch(signInFailed({
+            error: "test error"
+        }))
+    }
+
+    function setToDefault() {
+        dispatch(logOutSuccess());
+    }
 
     return (
         <Stack direction={"column"} spacing={2}>
-            {count}
+            {/* {count} */}
             {/* <Typography>
                 {JSON.stringify(currentFilterOptions)}
             </Typography>
@@ -84,7 +106,10 @@ function TestComponent(props) {
             {/* <TextField value={state.id} name='id' onChange={(e) => handleChange(e)} />
             <TextField value={state.name} name='name' onChange={(e) => handleChange(e)} />
             <Button variant='contained' onClick={handleSetNewState}>Set new value</Button> */}
-            <Button variant='contained' onClick={() => setCount(count + 1)}>on</Button>
+            {/* <Button variant='contained' onClick={() => setCount(count + 1)}>on</Button> */}
+            <Button variant='contained' onClick={setToDefault}>reset</Button>
+            <Button variant='contained' onClick={signinstart}>signin start</Button>
+            <Button variant='contained' onClick={signinfailed}>signin failed</Button>
         </Stack>
     );
 }

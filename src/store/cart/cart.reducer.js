@@ -24,6 +24,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: [...state.cartItems, payload.item],
         isLoading: false,
+        error: null,
       };
 
     case CART_ACTION_TYPES.REMOVE_FROM_CART_SUCCESS:
@@ -33,6 +34,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
           (item, index) => index !== payload.indexing
         ),
         isLoading: false,
+        error: null,
       };
 
     case CART_ACTION_TYPES.UPDATE_CART_SUCCESS:
@@ -46,6 +48,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
             : item
         ),
         isLoading: false,
+        error: null,
       };
 
     case CART_ACTION_TYPES.UPDATE_CART_AT_INDEX_SUCCESS:
@@ -55,6 +58,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
           index === payload.index ? payload.item : item
         ),
         isLoading: false,
+        error: null,
       };
 
     case CART_ACTION_TYPES.ADD_TO_CART_FAILED:
@@ -71,6 +75,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: [],
+        error: null,
       };
     default:
       return state;

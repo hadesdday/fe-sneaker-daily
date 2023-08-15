@@ -1,9 +1,10 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Container, Grid, IconButton, InputAdornment, Link as MuiLink, OutlinedInput, Stack, Typography } from '@mui/material';
+import { Box, Container, Grid, IconButton, InputAdornment, Menu, MenuItem, Link as MuiLink, OutlinedInput, Stack, Typography } from '@mui/material';
 import { useHover } from "@uidotdev/usehooks";
-import React from 'react';
+import React, { Fragment, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MenMenuBanner from "../../../assets/banner/Menu_Nam.jpg";
 import WomenMenuBanner from "../../../assets/banner/Menu_Nu.jpg";
@@ -15,13 +16,16 @@ import ProfileIcon from "../../../assets/icon/profile.svg";
 import TrackingOrderIcon from "../../../assets/icon/tracking-order.svg";
 import Logo from "../../../assets/logo.svg";
 import { ACCESSORIES, CATEGORIES, HIGHLIGHTS, PRODUCTS_PACK, STYLE, TOP_ACCESSORIES, WOMEN_ACCESSORIES, WOMEN_CATEGORIES, WOMEN_HIGHLIGHTS, WOMEN_PRODUCTS_PACK, WOMEN_STYLE, WOMEN_TOP_ACCESSORIES } from '../../../constants/dummy-data';
-import "../style.scss";
-import { useSelector } from 'react-redux';
 import { selectCartCount } from '../../../store/cart/cart.selector';
+import { selectCurrentUser } from '../../../store/user/user.selector';
+import "../style.scss";
+import { logOutStart } from '../../../store/user/user.action';
 
 function HeaderDesktop() {
+    const currentUser = useSelector(selectCurrentUser);
 
     const cartCount = useSelector(selectCartCount);
+    const dispatch = useDispatch();
 
     let itemList = [
         {
@@ -29,12 +33,6 @@ function HeaderDesktop() {
             text: `Giỏ hàng (${cartCount})`,
             alt: "Giỏ hàng",
             to: "/cart"
-        },
-        {
-            iconSrc: ProfileIcon,
-            text: `Đăng nhập`,
-            alt: "Đăng nhập",
-            to: "/signin"
         },
         {
             iconSrc: LoveIcon,
@@ -61,10 +59,67 @@ function HeaderDesktop() {
     const [productBoxRef, productBoxHovering] = useHover();
     const [womenBoxRef, womenBoxHovering] = useHover();
 
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    function handleHoverProfileList(event) {
+        if (anchorEl !== event.currentTarget) {
+            setAnchorEl(event.currentTarget);
+        }
+    }
+
+    function handleCloseProfileList() {
+        setAnchorEl(null);
+    }
+
+    function handleLogout() {
+        setAnchorEl(null);
+        dispatch(logOutStart());
+    }
+
     return (
         <Box display={{ md: "block", xs: "none" }}>
             <Stack direction={"row"} justifyContent={"end"} bgcolor={"secondary.main"} pr={8} alignItems={"center"}
                 flexDirection={"row-reverse"} display={{ xs: "none", md: "flex" }}>
+                {currentUser ?
+                    <Fragment>
+                        <Box pr={3} position={"relative"}>
+                            <Typography
+                                variant='body2'
+                                about='firstHeaderLink'
+                                display={"flex"}
+                                alignItems={"center"}
+                                sx={{ cursor: "pointer" }}
+                                onMouseOver={handleHoverProfileList}
+                            >
+                                <Box component={"img"} src={ProfileIcon} alt={"Profile"} pr={1}></Box>
+                                Chào, {currentUser.name}
+                            </Typography>
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleCloseProfileList}
+                                MenuListProps={{ onMouseLeave: handleCloseProfileList }}
+                            >
+                                <MenuItem onClick={handleCloseProfileList}>
+                                    <MuiLink component={Link} to={"/user/account/profile"}>Tài khoản của tôi</MuiLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseProfileList}>
+                                    <MuiLink component={Link} to={"/user/purchase"}>Đơn mua</MuiLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
+                            </Menu>
+                        </Box>
+                    </Fragment> :
+                    <Box pr={3}>
+                        <Link to={"/signin"}>
+                            <Typography variant='body2' about='firstHeaderLink' display={"flex"} alignItems={"center"}>
+                                <Box component={"img"} src={ProfileIcon} alt={"Đăng nhập"} pr={1}></Box>
+                                Đăng nhập
+                            </Typography>
+                        </Link>
+                    </Box>
+                }
                 {itemList.map(item => (
                     <Box pr={3} key={item.to}>
                         <Link to={item.to}>

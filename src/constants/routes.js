@@ -19,18 +19,22 @@ export const ROUTE_LIST = [
   {
     path: "/signin",
     component: SigninPage,
+    redirectIfLoggedIn: true,
   },
   {
     path: "/signin-otp",
     component: SigninOtpPage,
+    redirectIfLoggedIn: true,
   },
   {
     path: "/signup",
     component: SignupPage,
+    redirectIfLoggedIn: true,
   },
   {
     path: "/forgot-password",
     component: ForgotPasswordPage,
+    redirectIfLoggedIn: true,
   },
   {
     path: "/wishlist",

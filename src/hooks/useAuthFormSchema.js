@@ -46,6 +46,7 @@ const useSignupFormSchema = () => {
       .string()
       .required("Vui lòng nhập Email")
       .email("Vui lòng nhập email hợp lệ"),
+    fullname: yup.string().required("Vui lòng nhập họ và tên"),
     password: yup
       .string()
       .required("Vui lòng nhập mật khẩu")
