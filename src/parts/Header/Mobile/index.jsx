@@ -1,8 +1,9 @@
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Dialog, Grid, IconButton, InputAdornment, OutlinedInput, Slide, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Box, Dialog, Grid, IconButton, InputAdornment, Link as MuiLink, OutlinedInput, Slide, Stack, Typography } from '@mui/material';
+import React, { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LoveIcon from "../../../assets/icon/love.svg";
 import CartIcon from "../../../assets/icon/mb_cart.png";
@@ -11,8 +12,8 @@ import TrackingOrderIcon from "../../../assets/icon/tracking-order.svg";
 import Logo from "../../../assets/logo.svg";
 import TogglerMenu from '../../../components/toggler-menu';
 import { ACCESSORIES, CATEGORIES, GENERAL_CATEGORY, HIGHLIGHTS, PRODUCTS_MOBILE, PRODUCTS_PACK, STYLE, TOP_ACCESSORIES, WOMEN_ACCESSORIES, WOMEN_CATEGORIES, WOMEN_HIGHLIGHTS, WOMEN_PRODUCTS_PACK, WOMEN_STYLE, WOMEN_TOP_ACCESSORIES } from '../../../constants/dummy-data';
-import { useSelector } from 'react-redux';
 import { selectCartCount } from '../../../store/cart/cart.selector';
+import { selectCurrentUser } from '../../../store/user/user.selector';
 
 function HeaderMobile() {
     const cartCount = useSelector(selectCartCount);
@@ -21,6 +22,12 @@ function HeaderMobile() {
 
     const [showSearchDialog, setShowSearchDialog] = useState(false);
     const [showMenuItems, setShowMenuItems] = useState(false);
+
+
+    const [showAccountList, setShowAccountList] = useState(false);
+    function toggleShowAccountList() {
+        setShowAccountList(!showAccountList);
+    }
 
     function onToggleSearchDialog() {
         setShowSearchDialog(!showSearchDialog);
@@ -52,6 +59,7 @@ function HeaderMobile() {
         setShowProductLink(false);
         setShowMenItem(false);
         setShowWomenItem(false);
+        setShowAccountList(false);
     }
 
     function hideHeaderList() {
@@ -152,6 +160,8 @@ function HeaderMobile() {
             }
         }
     }
+
+    const currentUser = useSelector(selectCurrentUser);
 
     return (
         <Box sx={{ display: { xs: "block", md: "none" }, width: "100%" }}>
@@ -1009,42 +1019,7 @@ function HeaderMobile() {
                     </Box>
                 </Box>
                 {/* end link  item */}
-                {/* start link item */}
-                <Box component={Link} to="/signin" color={"white"}>
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"start"}
-                        p={3}
-                        borderBottom={"2px solid"}
-                        borderColor={"secondary.200"}
-                        onClick={toggleOpenHeaderList}
-                        alignItems={"center"}
-                    >
-                        <Box component={"img"} src={ProfileIcon} width={50} height={83} />
-                        <Typography variant='h3' fontWeight={"bold"} pl={2}>
-                            Đăng nhập
-                        </Typography>
-                    </Stack>
-                </Box>
-                {/* end link  item */}
-                {/* start link item */}
-                <Box component={Link} to="/wishlist" color={"white"}>
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"start"}
-                        p={3}
-                        borderBottom={"2px solid"}
-                        borderColor={"secondary.200"}
-                        onClick={toggleOpenHeaderList}
-                        alignItems={"center"}
-                    >
-                        <Box component={"img"} src={LoveIcon} width={50} height={83} />
-                        <Typography variant='h3' fontWeight={"bold"} pl={2}>
-                            Yêu thích
-                        </Typography>
-                    </Stack>
-                </Box>
-                {/* end link  item */}
+
                 {/* start link item */}
                 <Box component={Link} to="/tracking-order/1" color={"white"}>
                     <Stack
@@ -1056,13 +1031,133 @@ function HeaderMobile() {
                         onClick={toggleOpenHeaderList}
                         alignItems={"center"}
                     >
-                        <Box component={"img"} src={TrackingOrderIcon} width={50} height={83} />
-                        <Typography variant='h3' fontWeight={"bold"} pl={2}>
+                        <Box component={"img"} src={TrackingOrderIcon} width={30} />
+                        <Typography variant='h4' fontWeight={"bold"} pl={2}>
                             Tra cứu đơn hàng
                         </Typography>
                     </Stack>
                 </Box>
                 {/* end link  item */}
+
+                {/* start link item */}
+                <Box component={Link} to="/wishlist" color={"white"}>
+                    <Stack
+                        direction={"row"}
+                        justifyContent={"start"}
+                        p={3}
+                        borderBottom={"2px solid"}
+                        borderColor={"secondary.200"}
+                        onClick={toggleOpenHeaderList}
+                        alignItems={"center"}
+                    >
+                        <Box component={"img"} src={LoveIcon} width={30} />
+                        <Typography variant='h4' fontWeight={"bold"} pl={2}>
+                            Yêu thích
+                        </Typography>
+                    </Stack>
+                </Box>
+                {/* end link  item */}
+
+                {!currentUser ?
+                    <Box component={Link} to="/signin" color={"white"}>
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"start"}
+                            p={3}
+                            borderBottom={"2px solid"}
+                            borderColor={"secondary.200"}
+                            onClick={toggleOpenHeaderList}
+                            alignItems={"center"}
+                        >
+                            <Box component={"img"} src={ProfileIcon} width={30} />
+                            <Typography variant='h4' fontWeight={"bold"} pl={2}>
+                                Đăng nhập
+                            </Typography>
+                        </Stack>
+                    </Box>
+                    :
+                    <Fragment>
+                        {/* start link item */}
+                        <Box>
+                            <Stack
+                                direction={"row"}
+                                p={3}
+                                borderBottom={"1px dashed"}
+                                borderColor={"secondary.200"}
+                                onClick={toggleShowAccountList}>
+                                <Box component={"img"} src={ProfileIcon} width={30} />
+                                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} pl={2} width={1}>
+                                    <Typography variant='h4' fontWeight={"bold"}>Tài khoản</Typography>
+                                    <NavigateNextIcon sx={{ fontSize: "3em" }} />
+                                </Stack>
+                            </Stack>
+                            <Slide
+                                direction='left'
+                                in={showAccountList}
+                                orientation='horizontal'
+                                mountOnEnter
+                                unmountOnExit
+                                timeout={450}
+                                sx={{
+                                    bgcolor: "secondary.100",
+                                    color: "white",
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    minHeight: "100%"
+                                }}
+                            >
+                                <Box>
+                                    <Stack
+                                        direction={"row"}
+                                        p={3}
+                                        borderBottom={"3px solid white"}
+                                        onClick={toggleShowAccountList}
+                                    >
+                                        <ArrowBackIosIcon sx={{ fontSize: "3em" }} />
+                                        <Box textAlign={"center"} width={"100%"}>
+                                            <Typography variant='h3' fontWeight={"bold"} textTransform={"uppercase"}>tài khoản</Typography>
+                                        </Box>
+                                    </Stack>
+                                    <Stack
+                                        direction={"row"}
+                                        justifyContent={"space-between"}
+                                        p={3}
+                                        borderBottom={"1px dashed"}
+                                        borderColor={"secondary.200"}
+                                    >
+                                        <MuiLink
+                                            component={Link}
+                                            to={"/user/profile"}
+                                            variant='h4'
+                                            color={"white"}
+                                            onClick={toggleOpenHeaderList}>
+                                            Tài khoản của tôi
+                                        </MuiLink>
+                                    </Stack>
+                                    <Stack
+                                        direction={"row"}
+                                        justifyContent={"space-between"}
+                                        p={3}
+                                        borderBottom={"1px dashed"}
+                                        borderColor={"secondary.200"}
+                                    >
+                                        <MuiLink
+                                            component={Link}
+                                            to={"/user/purchase"}
+                                            variant='h4'
+                                            color={"white"}
+                                            onClick={toggleOpenHeaderList}>
+                                            Đơn mua
+                                        </MuiLink>
+                                    </Stack>
+                                </Box>
+                            </Slide>
+                        </Box>
+                        {/* end link  item */}
+                    </Fragment>
+                }
             </Box>
 
         </Box >
