@@ -102,7 +102,7 @@ function HeaderDesktop() {
                                 MenuListProps={{ onMouseLeave: handleCloseProfileList }}
                             >
                                 <MenuItem onClick={handleCloseProfileList}>
-                                    <MuiLink component={Link} to={"/user/account/profile"}>Tài khoản của tôi</MuiLink>
+                                    <MuiLink component={Link} to={"/user/profile"}>Tài khoản của tôi</MuiLink>
                                 </MenuItem>
                                 <MenuItem onClick={handleCloseProfileList}>
                                     <MuiLink component={Link} to={"/user/purchase"}>Đơn mua</MuiLink>

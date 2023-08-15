@@ -8,6 +8,7 @@ import ProductDetailPage from "../pages/ProductDetail";
 import ProductList from "../pages/ProductList";
 import SaleOffPage from "../pages/SaleOff";
 import TrackingOrder from "../pages/TrackingOrder";
+import { ProfilePage, PurchaseHistoryPage } from "../pages/User";
 import Wishlist from "../pages/Wishlist";
 
 export const ROUTE_LIST = [
@@ -56,6 +57,16 @@ export const ROUTE_LIST = [
   {
     path: "/product-detail/:id",
     component: ProductDetailPage,
+  },
+  {
+    path: "/user/profile",
+    component: ProfilePage,
+    requireLogin: true,
+  },
+  {
+    path: "/user/purchase",
+    component: PurchaseHistoryPage,
+    requireLogin: true,
   },
   {
     path: "/test",
