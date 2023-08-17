@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, CircularProgress, Dialog, DialogContent, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Dialog, DialogContent, Grid, IconButton, Stack, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import React, { useState } from 'react';
@@ -149,7 +149,11 @@ function ProfilePage(props) {
                         </Dialog>
                     </Grid>
                 </Grid>
-                <RecentlyOrderTable />
+                <Box borderBottom={"1px solid"} borderColor={"secondary.100"} py={2}></Box>
+                <Box>
+                    <Typography textTransform={"uppercase"} py={3} fontWeight={"bold"}>Danh sách đơn hàng gần đây</Typography>
+                    <RecentlyOrderTable />
+                </Box>
             </Grid>
         </Grid>
     );

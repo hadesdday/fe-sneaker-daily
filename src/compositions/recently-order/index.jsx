@@ -101,13 +101,14 @@ function EnhancedTableHead(props) {
     };
 
     return (
-        <TableHead>
+        <TableHead sx={{ bgcolor: "primary.light" }}>
             <TableRow>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
                         align={"center"}
                         sortDirection={orderBy === headCell.id ? order : false}
+                        sx={{ fontWeight: "bold" }}
                     >
                         <TableSortLabel
                             active={orderBy === headCell.id}
@@ -188,8 +189,6 @@ export default function EnhancedTable() {
         setPage(0);
     };
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
-
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -258,6 +257,9 @@ export default function EnhancedTable() {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
+                    labelRowsPerPage={'Số hàng hiển thị:'}
+                    labelDisplayedRows={({ from, to, count }) =>
+                        `${from}-${to} của ${count !== -1 ? count : `Nhiều hơn ${to}`}`}
                 />
             </Paper>
         </Box>
