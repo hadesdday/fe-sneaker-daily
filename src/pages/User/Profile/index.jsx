@@ -1,15 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, CircularProgress, Dialog, DialogContent, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CustomDatepicker } from '../../../components';
 import CustomTextField from '../../../components/textfield';
-import { AccountSidebar } from '../../../compositions';
+import { AccountSidebar, RecentlyOrderTable } from '../../../compositions';
 import { useAccountInformationFormSchema } from '../../../hooks';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import EnhancedTable from '../../../compositions/recently-order';
 
 function ProfilePage(props) {
     const [showDialog, setShowDialog] = useState(false);
@@ -150,7 +149,7 @@ function ProfilePage(props) {
                         </Dialog>
                     </Grid>
                 </Grid>
-                <EnhancedTable />
+                <RecentlyOrderTable />
             </Grid>
         </Grid>
     );
