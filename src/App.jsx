@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./store/user/user.selector";
-import { inject } from "@vercel/analytics/*";
+import { inject } from '@vercel/analytics';
 
 function App() {
 
