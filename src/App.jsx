@@ -14,8 +14,7 @@ function App() {
 
   const { pathname } = useLocation();
   useEffect(() => {
-    if (!pathname.includes("/product-list"))
-      window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [pathname])
 
   return (
