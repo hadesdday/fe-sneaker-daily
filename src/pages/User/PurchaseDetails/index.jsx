@@ -145,7 +145,7 @@ function PurchaseDetailsPage(props) {
                                         <Box component={"img"} src="https://picsum.photos/300/300" width={100} />
                                     </TableCell>
                                     <TableCell>
-                                        <MuiLink component={Link} to={`/product-details/1`}>Giày thể thao ABCXYZ Autumn Collection High Purple DSLKASJLKAJ ( Tím )</MuiLink>
+                                        <MuiLink component={Link} to={`/product-detail/1`}>Giày thể thao ABCXYZ Autumn Collection High Purple DSLKASJLKAJ ( Tím )</MuiLink>
                                         <Typography>Tím / 40</Typography>
                                     </TableCell>
                                     <TableCell>DSMH06200TIM40</TableCell>
