@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./store/user/user.selector";
+import { inject } from "@vercel/analytics/*";
 
 function App() {
 
@@ -17,6 +18,8 @@ function App() {
     if (!pathname.includes("/product-list"))
       window.scrollTo(0, 0);
   }, [pathname])
+
+  inject();
 
   return (
     <>
