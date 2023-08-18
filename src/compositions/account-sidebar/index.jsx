@@ -33,7 +33,7 @@ function AccountSidebar(props) {
             </Typography>
             <Stack direction={"column"} justifyContent={"center"}>
                 <Stack direction={"row"} alignItems={"center"} py={"3px"}>
-                    <AccountCircleIcon fontSize='small' sx={{ mr: 1 }} />
+                    <AccountCircleIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/profile") && "primary.main" }} />
                     <MuiLink component={Link} to={"/user/profile"}
                         color={path.includes("/user/profile") && "primary.main"}
                     >
@@ -41,7 +41,7 @@ function AccountSidebar(props) {
                     </MuiLink>
                 </Stack>
                 <Stack direction={"row"} alignItems={"center"} py={"3px"}>
-                    <AssignmentIcon fontSize='small' sx={{ mr: 1 }} />
+                    <AssignmentIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/purchase") && "primary.main" }} />
                     <MuiLink component={Link} to={"/user/purchase"}
                         color={path.includes("/user/purchase") && "primary.main"}
                     >
@@ -49,7 +49,7 @@ function AccountSidebar(props) {
                     </MuiLink>
                 </Stack>
                 <Stack direction={"row"} alignItems={"center"} py={"3px"}>
-                    <LocationOnIcon fontSize='small' sx={{ mr: 1 }} />
+                    <LocationOnIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/addresses") && "primary.main" }} />
                     <MuiLink component={Link} to={"/user/addresses"}
                         color={path.includes("/user/addresses") && "primary.main"}
                     >

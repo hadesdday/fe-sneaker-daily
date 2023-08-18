@@ -1,17 +1,8 @@
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Link as MuiLink } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
-import PropTypes from 'prop-types';
 import * as React from 'react';
-
+import CircleIcon from '@mui/icons-material/Circle';
+import { Link } from 'react-router-dom';
 function createData(id, date, price, paymentStatus, deliveryStatus) {
     return {
         id, date, price, paymentStatus, deliveryStatus
@@ -129,15 +120,6 @@ function EnhancedTableHead(props) {
     );
 }
 
-EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
-};
-
 export default function EnhancedTable() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('id');
@@ -229,11 +211,21 @@ export default function EnhancedTable() {
                                         key={index}
                                         sx={{ cursor: 'pointer' }}
                                     >
-                                        <TableCell align="center">{row.id}</TableCell>
+                                        <TableCell align="center">
+                                            <MuiLink component={Link} to={`/user/purchase/${row.id}`}>
+                                                #{row.id}
+                                            </MuiLink>
+                                        </TableCell>
                                         <TableCell align="center">{row.date}</TableCell>
                                         <TableCell align="center">{row.price}</TableCell>
-                                        <TableCell align="center">{row.paymentStatus}</TableCell>
-                                        <TableCell align="center">{row.deliveryStatus}</TableCell>
+                                        <TableCell align="center">
+                                            <CircleIcon sx={{ color: "success.light", fontSize: 15, mr: 1 }} />
+                                            {row.paymentStatus}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <CircleIcon sx={{ color: "success.light", fontSize: 15, mr: 1 }} />
+                                            {row.deliveryStatus}
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}

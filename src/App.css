@@ -1,3 +1,7 @@
+:root {
+  --primary-main: #ff5f17;
+}
+
 a {
   text-decoration: none;
 }
