@@ -8,7 +8,6 @@ import HeaderMobile from '../../parts/Header/Mobile';
 import { HomeTips } from '../../compositions';
 import { HOME_CAROUSEL_ITEMS } from '../../constants/dummy-data';
 import { Toaster } from 'react-hot-toast';
-import { Analytics } from "@vercel/analytics/react";
 
 function AppContainer({ children }) {
     const [{ x, y }, scrollTo] = useWindowScroll();
@@ -32,7 +31,6 @@ function AppContainer({ children }) {
             </Box>
             <Footer />
             <ScrollToTop scrollToTop={scrollToTop} visible={y > 100} />
-            <Analytics />
         </>
     );
 }
