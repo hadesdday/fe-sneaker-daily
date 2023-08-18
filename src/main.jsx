@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/store.js'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import theme from './utils/theme/index.js'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <App />
+          <VercelAnalytics />
         </BrowserRouter>
       </PersistGate>
     </Provider>
