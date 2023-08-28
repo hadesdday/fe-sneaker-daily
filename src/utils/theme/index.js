@@ -1,5 +1,5 @@
+import { lightBlue, red } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
 
 let theme = createTheme({
   palette: {
@@ -21,6 +21,9 @@ let theme = createTheme({
     },
     grey: {
       100: "#e6a474",
+    },
+    lightBlue: {
+      main: lightBlue[500],
     },
     error: {
       main: red.A400,

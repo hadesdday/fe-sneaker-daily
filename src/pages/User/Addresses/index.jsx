@@ -1,7 +1,7 @@
 import { Add } from '@mui/icons-material';
 import { Button, Dialog, DialogContent, DialogTitle, Grid, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { AccountSidebar, AddAddressForm } from '../../../compositions';
+import { AccountSidebar, AddAddressForm, AddressItem } from '../../../compositions';
 
 function AddressesPage(props) {
     const [showAddressForm, setShowAddressForm] = useState(false);
@@ -9,6 +9,51 @@ function AddressesPage(props) {
     function toggleShowAddressForm() {
         setShowAddressForm(!showAddressForm);
     }
+
+    //test data only
+    const tempList = [
+        {
+            id: 1,
+            fullName: "Nguyễn Văn A",
+            phoneNumber: "0123456789",
+            city: {
+                code: 1,
+                name: "Hồ Chí Minh"
+            },
+            district: {
+                code: 1,
+                name: "Quận 1"
+            },
+            ward: {
+                code: 1,
+                name: "Phường 1"
+            },
+            specificAddress: "123 đường 123",
+            isDefault: false
+        },
+        {
+            id: 2,
+            fullName: "Nguyễn Văn A",
+            phoneNumber: "0123456789",
+            city: {
+                code: 1,
+                name: "Hồ Chí Minh"
+            },
+            district: {
+                code: 1,
+                name: "Quận 1"
+            },
+            ward: {
+                code: 1,
+                name: "Phường 1"
+            },
+            specificAddress: "123 đường 123",
+            isDefault: true
+        },
+    ];
+
+    //test data only
+    const sortedTempList = tempList.sort((a, b) => b.isDefault - a.isDefault);
 
     return (
         <Grid container px={{ xs: 2, sm: 7, md: 12, lg: 23 }} mt={7} columnSpacing={3}>
@@ -22,7 +67,7 @@ function AddressesPage(props) {
                     borderBottom={"1px solid"}
                     borderColor={"secondary.300"}
                     pb={3}
-                    mb={5}
+                    mb={3}
                     mt={{ xs: 4 }}
                 >
                     <Typography variant='h4'
@@ -50,6 +95,10 @@ function AddressesPage(props) {
                         </DialogContent>
                     </Dialog>
                 </Stack>
+                <Typography variant='h6' mb={3}>Địa chỉ</Typography>
+                {sortedTempList.map((item) =>
+                    <AddressItem key={item.id} item={item} />
+                )}
             </Grid>
         </Grid >
     );
