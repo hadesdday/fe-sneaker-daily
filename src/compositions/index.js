@@ -8,3 +8,4 @@ export { default as OtpForm } from "./otp-form";
 export { default as ResetPasswordForm } from "./reset-password-form";
 export { default as AccountSidebar } from "./account-sidebar";
 export { default as RecentlyOrderTable } from "./recently-order";
+export { default as AddAddressForm } from "./add-address-form";
