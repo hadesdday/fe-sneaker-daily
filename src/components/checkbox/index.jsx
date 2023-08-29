@@ -18,6 +18,7 @@ function CustomLabelCheckbox({
         <FormControlLabel
             control={
                 <Checkbox
+                    checked={value}
                     value={value}
                     onChange={(event) => {
                         onChange(event)
