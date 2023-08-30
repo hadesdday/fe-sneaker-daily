@@ -1,14 +1,20 @@
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { MAX_QUANTITY_ALLOWED } from '../../constants';
 import { COLOR_TABLE } from '../../constants/dummy-data';
+import { addToCartStart, updateCartStart } from '../../store/cart/cart.action';
+import { selectCartItems } from '../../store/cart/cart.selector';
 import ProductDetailsDesktop from './Desktop';
 import ProductDetailsMobile from './Mobile';
-import { useEffect } from 'react';
 
 function ProductDetailPage(props) {
     const params = useParams();
-    const id = params.id;
+    const id = parseInt(params.id);
+
+    const dispatch = useDispatch();
 
     //demo data only
     const fakeProduct = {
@@ -240,7 +246,6 @@ function ProductDetailPage(props) {
         }
     ]
 
-
     const [currentColor, setCurrentColor] = useState(COLOR_TABLE.find(color => color.value === "navy"));
 
     const [isZoomIn, setIsZoomIn] = useState(false);
@@ -334,6 +339,33 @@ function ProductDetailPage(props) {
         console.log("fetch quantity by size and color here");
     }, [selectedSize]);
 
+    const currentCartItems = useSelector(selectCartItems);
+
+    function handleAddToCart() {
+        //demo only (add the whole item with specific schema to cart then (productId, color, size, quantity))
+        const foundItem = currentCartItems.find(cartItem => (cartItem.productId === id
+            && cartItem.color === currentColor.value && cartItem.size === selectedSize));
+
+        if (foundItem) {
+            const quantityAfterChanged = foundItem.quantity + selectedQuantity;
+            if (quantityAfterChanged > MAX_QUANTITY_ALLOWED) {
+                toast.error(`Số lượng sản phẩm vượt quá số lượng cho phép !`);
+            } else {
+                foundItem.quantity += selectedQuantity;
+                dispatch(updateCartStart(foundItem));
+                toast.success("Cập nhật số lượng thành công !");
+            }
+        } else {
+            dispatch(addToCartStart({
+                productId: parseInt(id),
+                color: currentColor.value,
+                size: selectedSize,
+                quantity: selectedQuantity
+            }));
+            toast.success("Thêm vào giỏ hàng thành công !");
+        }
+    }
+
     return (
         <Box>
             <ProductDetailsDesktop
@@ -353,6 +385,7 @@ function ProductDetailPage(props) {
                 availableQuantity={availableQuantity}
                 selectedQuantity={selectedQuantity}
                 setSelectedQuantity={setSelectedQuantity}
+                handleAddToCart={handleAddToCart}
             />
             <ProductDetailsMobile
                 product={fakeProduct}
@@ -371,6 +404,7 @@ function ProductDetailPage(props) {
                 availableQuantity={availableQuantity}
                 selectedQuantity={selectedQuantity}
                 setSelectedQuantity={setSelectedQuantity}
+                handleAddToCart={handleAddToCart}
             />
         </Box>
     );

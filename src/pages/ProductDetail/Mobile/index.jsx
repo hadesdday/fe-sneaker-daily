@@ -19,7 +19,7 @@ import { getMoneyFormat } from '../../../utils/currency';
 
 function ProductDetailsMobile({ product, relevantProducts, seenProducts, mainImage, setMainImage, isZoomIn, setIsZoomIn,
     currentColor, setCurrentColor, imagesByColor, selectedSize, setSelectedSize, quantity, availableQuantity,
-    selectedQuantity, setSelectedQuantity
+    selectedQuantity, setSelectedQuantity, handleAddToCart
 }) {
     const { category, productLine, name, style, id, status, price, color, images, liked, description, detailsDescription, saleOff } = product;
     function handleCloseDialog() {
@@ -332,6 +332,7 @@ function ProductDetailsMobile({ product, relevantProducts, seenProducts, mainIma
                             opacity: 0.6
                         }
                     }}
+                    onClick={handleAddToCart}
                 >
                     thêm vào giỏ hàng
                 </Button>

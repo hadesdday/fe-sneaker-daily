@@ -1,6 +1,6 @@
+import { Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { AccountSidebar, ChangePasswordForm } from '../../../compositions';
-import { Grid, Stack, Typography } from '@mui/material';
 
 function ChangePasswordPage(props) {
     return (

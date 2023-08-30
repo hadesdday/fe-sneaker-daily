@@ -22,7 +22,7 @@ import { getMoneyFormat } from '../../../utils/currency';
 
 function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainImage, setMainImage, isZoomIn, setIsZoomIn,
     currentColor, setCurrentColor, imagesByColor, selectedSize, setSelectedSize, quantity, availableQuantity,
-    selectedQuantity, setSelectedQuantity
+    selectedQuantity, setSelectedQuantity, handleAddToCart
 }) {
     const { category, productLine, name, style, id, status, price, color, images, liked, description, saleOff, detailsDescription } = product;
 
@@ -472,6 +472,7 @@ function ProductDetailsDesktop({ product, relevantProducts, seenProducts, mainIm
                                     opacity: 0.6
                                 }
                             }}
+                            onClick={handleAddToCart}
                         >
                             thêm vào giỏ hàng
                         </Button>
