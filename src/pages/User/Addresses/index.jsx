@@ -68,7 +68,7 @@ function AddressesPage(props) {
                     borderColor={"secondary.300"}
                     pb={3}
                     mb={3}
-                    mt={{ xs: 4 }}
+                    mt={{ xs: 4, sm: 0 }}
                 >
                     <Typography variant='h4'
                         textTransform={"uppercase"}
@@ -100,7 +100,7 @@ function AddressesPage(props) {
                     <AddressItem key={item.id} item={item} />
                 )}
             </Grid>
-        </Grid >
+        </Grid>
     );
 }
 

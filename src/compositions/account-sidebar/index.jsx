@@ -1,11 +1,12 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import { Link as MuiLink, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { selectCurrentUser } from '../../store/user/user.selector';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 function AccountSidebar(props) {
     const user = useSelector(selectCurrentUser);
@@ -32,28 +33,64 @@ function AccountSidebar(props) {
             <Typography>Xin chào <Typography color={"primary.main"} component={"span"} fontWeight={"bold"}>{user.name}</Typography>
             </Typography>
             <Stack direction={"column"} justifyContent={"center"}>
-                <Stack direction={"row"} alignItems={"center"} py={"3px"}>
-                    <AccountCircleIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/profile") && "primary.main" }} />
+                <Stack direction={"row"} py={"3px"}>
                     <MuiLink component={Link} to={"/user/profile"}
                         color={path.includes("/user/profile") && "primary.main"}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            ":hover": {
+                                color: "primary.main"
+                            },
+                        }}
                     >
+                        <AccountCircleIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/profile") && "primary.main" }} />
                         Thông tin tài khoản
                     </MuiLink>
                 </Stack>
-                <Stack direction={"row"} alignItems={"center"} py={"3px"}>
-                    <AssignmentIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/purchase") && "primary.main" }} />
+                <Stack direction={"row"} py={"3px"}>
                     <MuiLink component={Link} to={"/user/purchase"}
                         color={path.includes("/user/purchase") && "primary.main"}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            ":hover": {
+                                color: "primary.main"
+                            },
+                        }}
                     >
+                        <AssignmentIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/purchase") && "primary.main" }} />
                         Đơn mua
                     </MuiLink>
                 </Stack>
-                <Stack direction={"row"} alignItems={"center"} py={"3px"}>
-                    <LocationOnIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/addresses") && "primary.main" }} />
+                <Stack direction={"row"} py={"3px"}>
                     <MuiLink component={Link} to={"/user/addresses"}
                         color={path.includes("/user/addresses") && "primary.main"}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            ":hover": {
+                                color: "primary.main"
+                            },
+                        }}
                     >
+                        <LocationOnIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/addresses") && "primary.main" }} />
                         Danh sách địa chỉ
+                    </MuiLink>
+                </Stack>
+                <Stack direction={"row"} py={"3px"}>
+                    <MuiLink component={Link} to={"/user/change-password"}
+                        color={path.includes("/user/change-password") && "primary.main"}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            ":hover": {
+                                color: "primary.main"
+                            },
+                        }}
+                    >
+                        <PasswordOutlinedIcon fontSize='small' sx={{ mr: 1, color: path.includes("/user/change-password") && "primary.main" }} />
+                        Đổi mật khẩu
                     </MuiLink>
                 </Stack>
             </Stack>

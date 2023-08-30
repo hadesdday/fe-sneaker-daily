@@ -11,3 +11,4 @@ export { default as RecentlyOrderTable } from "./recently-order";
 export { default as AddAddressForm } from "./add-address-form";
 export { default as AddressItem } from "./address-item";
 export { default as EditAddressForm } from "./edit-address-form";
+export { default as ChangePasswordForm } from "./change-password-form";

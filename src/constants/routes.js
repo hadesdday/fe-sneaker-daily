@@ -10,6 +10,7 @@ import SaleOffPage from "../pages/SaleOff";
 import TrackingOrder from "../pages/TrackingOrder";
 import {
   AddressesPage,
+  ChangePasswordPage,
   ProfilePage,
   PurchaseDetailsPage,
   PurchaseHistoryPage,
@@ -81,6 +82,11 @@ export const ROUTE_LIST = [
   {
     path: "/user/purchase/:orderId",
     component: PurchaseDetailsPage,
+    requireLogin: true,
+  },
+  {
+    path: "/user/change-password",
+    component: ChangePasswordPage,
     requireLogin: true,
   },
   {
