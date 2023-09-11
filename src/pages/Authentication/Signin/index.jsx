@@ -7,8 +7,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import Banner from "../../../assets/banner/banner-1.jpg";
-import { LoginFacebookButton, LoginGoogleButton } from '../../../components';
-import CustomTextField from '../../../components/textfield';
+import { CustomTextField, LoginFacebookButton, LoginGoogleButton } from '../../../components';
 import { useSigninFormSchema } from '../../../hooks';
 import { logOutStart, signInFailed, signInSuccess } from '../../../store/user/user.action';
 

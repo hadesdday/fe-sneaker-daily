@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Stack, Typography, Link as MuiLink } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,12 +8,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import CustomTextField from '../../components/textfield';
 import { CartItem } from '../../compositions';
 import { COLOR_TABLE } from '../../constants/dummy-data';
 import { removeFromCartStart, updateCartAtIndexStart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { getMoneyFormat } from '../../utils';
+import { CustomTextField } from '../../components';
 
 function CartPage(props) {
     const dispatch = useDispatch();
@@ -91,6 +91,8 @@ function CartPage(props) {
             setTimeout(() => {
                 console.log("call api here");
                 console.log(data);
+                //check here if discount code is valid => save to local storage
+                localStorage.setItem("discountCode", data.discountCode);
                 resolve(data);
             }, 1000);
         })
@@ -318,7 +320,9 @@ function CartPage(props) {
                                         {getMoneyFormat(222222)}
                                     </Typography>
                                 </Stack>
-                                <Button variant='contained' fullWidth>tiếp tục thanh toán</Button>
+                                <MuiLink component={Link} to={"/shipping-information"}>
+                                    <Button variant='contained' fullWidth>tiếp tục thanh toán</Button>
+                                </MuiLink>
                             </Box>
                         </Grid>
                     </Grid>

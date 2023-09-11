@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useChangePasswordFormSchema } from '../../hooks';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomTextField from '../../components/textfield';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { CustomTextField } from '../../components';
 
 function ChangePasswordForm(props) {
     const schema = useChangePasswordFormSchema();

@@ -1,9 +1,11 @@
 import TestComponent from "../compositions/test-component";
+import { WishList } from "../pages";
 import { ForgotPasswordPage } from "../pages/Authentication";
 import SigninPage from "../pages/Authentication/Signin";
 import SigninOtpPage from "../pages/Authentication/SigninOTP";
 import SignupPage from "../pages/Authentication/Signup";
 import CartPage from "../pages/Cart";
+import { ShippingInformationPage } from "../pages/Checkout";
 import ProductDetailPage from "../pages/ProductDetail";
 import ProductList from "../pages/ProductList";
 import SaleOffPage from "../pages/SaleOff";
@@ -15,7 +17,6 @@ import {
   PurchaseDetailsPage,
   PurchaseHistoryPage,
 } from "../pages/User";
-import Wishlist from "../pages/Wishlist";
 
 export const ROUTE_LIST = [
   {
@@ -45,7 +46,7 @@ export const ROUTE_LIST = [
   },
   {
     path: "/wishlist",
-    component: Wishlist,
+    component: WishList,
     requireLogin: true,
   },
   {
@@ -88,6 +89,10 @@ export const ROUTE_LIST = [
     path: "/user/change-password",
     component: ChangePasswordPage,
     requireLogin: true,
+  },
+  {
+    path: "/shipping-information",
+    component: ShippingInformationPage,
   },
   {
     path: "/test",

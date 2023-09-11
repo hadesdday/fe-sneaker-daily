@@ -4,9 +4,9 @@ import { Box, Button, Card, CardContent, CircularProgress, IconButton, Stack, Ty
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Banner from "../../../assets/banner/banner-1.jpg";
-import CustomTextField from '../../../components/textfield';
 import { OtpForm, ResetPasswordForm } from '../../../compositions';
 import { useForgotPasswordFormSchema } from '../../../hooks';
+import { CustomTextField } from '../../../components';
 
 function ForgotPasswordPage(props) {
     const schema = useForgotPasswordFormSchema();

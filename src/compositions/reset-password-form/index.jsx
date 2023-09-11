@@ -6,7 +6,7 @@ import { useResetPasswordFormSchema } from '../../hooks';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import CustomTextField from '../../components/textfield';
+import { CustomTextField } from '../../components';
 
 function ResetPasswordForm(props) {
     const navigate = useNavigate();

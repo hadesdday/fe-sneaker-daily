@@ -1,7 +1,7 @@
 export * from "./Home";
 export * from "./ProductList";
 export * from "./Authentication";
-export * from "./Wishlist";
+export { default as WishList } from "./Wishlist";
 export * from "./Cart";
 export * from "./SaleOff";
 export * from "./TrackingOrder";

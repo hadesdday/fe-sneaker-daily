@@ -2,9 +2,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, CircularProgress, MenuItem, Stack } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { CustomLabelCheckbox, CustomSelect } from '../../components';
-import CustomTextField from '../../components/textfield';
-import { useAddAddressFormSchema } from '../../hooks/useAddressFormSchema';
+import { CustomLabelCheckbox, CustomSelect, CustomTextField } from '../../components';
+import { useAddAddressFormSchema } from '../../hooks/';
 
 function AddAddressForm({ toggleShowAddressForm }) {
     const schema = useAddAddressFormSchema();
