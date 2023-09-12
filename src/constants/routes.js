@@ -5,7 +5,10 @@ import SigninPage from "../pages/Authentication/Signin";
 import SigninOtpPage from "../pages/Authentication/SigninOTP";
 import SignupPage from "../pages/Authentication/Signup";
 import CartPage from "../pages/Cart";
-import { ShippingInformationPage } from "../pages/Checkout";
+import {
+  CheckoutSuccessPage,
+  ShippingInformationPage,
+} from "../pages/Checkout";
 import ProductDetailPage from "../pages/ProductDetail";
 import ProductList from "../pages/ProductList";
 import SaleOffPage from "../pages/SaleOff";
@@ -93,6 +96,10 @@ export const ROUTE_LIST = [
   {
     path: "/shipping-information",
     component: ShippingInformationPage,
+  },
+  {
+    path: "/checkout/success",
+    component: CheckoutSuccessPage,
   },
   {
     path: "/test",

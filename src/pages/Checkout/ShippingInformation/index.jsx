@@ -184,8 +184,11 @@ function ShippingInformationPage(props) {
                                 console.log("fetch payment status here");
                                 console.log(data);
                                 setPaymentDetails(data[0]);
-                                if (getRandomNumber(1, 10) % 2 === 0) {
-                                    console.log("ok");
+                                const number = getRandomNumber(1, 10);
+                                if (number % 2 === 0) {
+                                    localStorage.setItem("orderId", number);
+                                    localStorage.removeItem("discountCode");
+                                    navigate("/checkout/success");
                                 } else {
                                     toast.error("Thanh toán thất bại vui lòng thực hiện lại");
                                 }
