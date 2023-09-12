@@ -29,6 +29,12 @@ function SigninPage(props) {
             setTimeout(() => {
                 console.log("call api here");
                 console.log(data);
+
+                //demo only
+                dispatch(signInSuccess({
+                    email: "email@gmail.com",
+                    name: "Example Name"
+                }));
                 resolve(data);
             }, 1000);
         })

@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useShippingInformationFormSchema } from '../../../hooks/useCheckoutFormSchema';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Box, Button, CircularProgress, Dialog, FormControlLabel, Grid, MenuItem, Radio, Stack, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-import { selectCartItems } from '../../../store/cart/cart.selector';
-import { DELIVERY_FEE } from '../../../constants/fixed-data';
-import { Box, Button, CircularProgress, FormControlLabel, Grid, MenuItem, Radio, Stack, Typography } from '@mui/material';
 import { CustomLabelCheckbox, CustomRadioGroup, CustomSelect, CustomTextField } from '../../../components';
-import { getMoneyFormat } from "../../../utils";
 import { PAYMENT_API } from "../../../constants/api-endpoints";
+import { DELIVERY_FEE } from '../../../constants/fixed-data';
+import { useShippingInformationFormSchema } from '../../../hooks/useCheckoutFormSchema';
+import { selectCartItems } from '../../../store/cart/cart.selector';
+import { getMoneyFormat } from "../../../utils";
+import { useNavigate } from 'react-router-dom';
 
 function ShippingInformationPage(props) {
+    const navigate = useNavigate();
+
     const schema = useShippingInformationFormSchema();
 
     const { control, handleSubmit, formState: { isSubmitting, isSubmitSuccessful, isValid }, reset, getValues, setValue } = useForm({
@@ -26,7 +30,7 @@ function ShippingInformationPage(props) {
             deliveryMethod: 1,
             paymentMethod: 1
         },
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
     });
 
     const cartItems = useSelector(selectCartItems);
@@ -140,16 +144,56 @@ function ShippingInformationPage(props) {
         return total - getDiscountAmount();
     }
 
+    //get random number in range
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    const [paymentDetails, setPaymentDetails] = useState({
+        id: "ZZZ",
+        status: "PENDING"
+    });
+
+    const [showBackdrop, setShowBackdrop] = useState(false);
+
+    function handleOnCloseBackdrop(event, reason) {
+        if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+            setShowBackdrop(false);
+        }
+    }
+
     function handleProceedToPayment() {
         if (isValid) {
+            setShowBackdrop(true);
             var leftPosition, topPosition;
             leftPosition = (window.screen.width / 2) - ((500 / 2) + 10);
             topPosition = (window.screen.height / 2) - ((600 / 2) + 50);
-            window.open(PAYMENT_API, "",
+            var paymentWindow = window.open(PAYMENT_API, "",
                 "status=no,height=" + 600 + ",width=" + 500 + ",resizable=yes,left="
                 + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
                 + topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
 
+            var paymentWindowTimer = window.setInterval(function () {
+                if (paymentWindow.closed !== false) {
+                    window.clearInterval(paymentWindowTimer);
+                    //for demo only (all the code below)
+                    setTimeout(() => {
+                        fetch("https://jsonplaceholder.typicode.com/users")
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log("fetch payment status here");
+                                console.log(data);
+                                setPaymentDetails(data[0]);
+                                if (getRandomNumber(1, 10) % 2 === 0) {
+                                    console.log("ok");
+                                } else {
+                                    toast.error("Thanh toán thất bại vui lòng thực hiện lại");
+                                }
+                            });
+                        setShowBackdrop(false);
+                    }, 1000);
+                }
+            }, 200);
         }
     }
 
@@ -167,8 +211,35 @@ function ShippingInformationPage(props) {
         })
     }
 
+    async function handleSubmitFormWithPayment(data) {
+        await new Promise((resolve) => {
+            const newData = {
+                ...data,
+                total: getFinalPrice()
+            }
+            setTimeout(() => {
+                console.log("call payment api here");
+                console.log(newData);
+                handleProceedToPayment();
+                resolve(newData);
+            }, 1000);
+        })
+    }
+
     return (
-        <Box component={"form"} onSubmit={handleSubmit(handleSubmitForm)} spacing={2}>
+        <Box
+            component={"form"}
+            onSubmit={
+                paymentMethod === 1 ?
+                    handleSubmit(handleSubmitForm) :
+                    handleSubmit(handleSubmitFormWithPayment)
+            }
+            spacing={2}
+        >
+            <Dialog
+                open={showBackdrop}
+                onClose={handleOnCloseBackdrop}
+            />
             <Grid container px={{ xs: 1, lg: 24 }}>
                 <Grid item xs={12} sm={12} md={8} pt={5} pr={{ xs: 0, md: 5 }}>
                     <Box
@@ -418,42 +489,28 @@ function ShippingInformationPage(props) {
                                 {getMoneyFormat(getFinalPrice())}
                             </Typography>
                         </Stack>
-                        {paymentMethod === 1 ?
-                            <Button
-                                variant="contained"
-                                type="submit"
-                                disabled={isSubmitting}
-                                startIcon={
-                                    isSubmitting && (
-                                        <CircularProgress color="inherit" size={"1em"} />
-                                    )
-                                }
-                                sx={{
-                                    fontWeight: "bold",
-                                    p: 2,
-                                    fontSize: "larger",
-                                    mb: 3
-                                }}
-                                fullWidth
-                            >
-                                hoàn tất đặt hàng
-                            </Button>
-                            :
-                            <Button
-                                variant="contained"
-                                type="button"
-                                sx={{
-                                    fontWeight: "bold",
-                                    p: 2,
-                                    fontSize: "larger",
-                                    mb: 3
-                                }}
-                                fullWidth
-                                onClick={handleProceedToPayment}
-                            >
-                                tiến hành thanh toán
-                            </Button>
-                        }
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            disabled={isSubmitting}
+                            startIcon={
+                                isSubmitting && (
+                                    <CircularProgress color="inherit" size={"1em"} />
+                                )
+                            }
+                            sx={{
+                                fontWeight: "bold",
+                                p: 2,
+                                fontSize: "larger",
+                                mb: 3
+                            }}
+                            fullWidth
+                        >
+                            {paymentMethod === 1 ?
+                                "hoàn tất đặt hàng" :
+                                "tiến hành thanh toán"
+                            }
+                        </Button>
                     </Box>
                 </Grid>
             </Grid>

@@ -1,3 +1,3 @@
-const PAYMENT_API = "https://google.com"; //demo only
+const PAYMENT_API = "/"; //demo only
 
 export { PAYMENT_API };
